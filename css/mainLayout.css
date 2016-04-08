@@ -66,48 +66,6 @@ p, a {
 
 
 
-#content {
-	position:fixed;
-	margin-top:100px;
-	left:0px;
-	right:0px;
-	top:0px;
-	bottom:0px;
-	display:flex;
-	flex-flow: row wrap;
-	justify-content:space-around;
-	align-content:space-around;
-	margin-right:320px;
-	margin-bottom:50px;
-}
-
-.row {
-	display:flex;
-	flex-flow:row nowrap;
-	justify-content:space-around;
-	height: 48%;
-	width: 100%;
-}
-
-.big-button {
-	display:flex;
-	flex-flow:column nowrap;
-/*	height: 200px;
-	width: 200px;*/
-	/*height: calc(50% - 100px);*/
-	/*max-height:100%;*/
-	width: calc(50% - 100px);
-	max-width:230px;
-	background:white;
-	justify-content:center;
-}
-.big-button-text {
-	font-size:30px;
-	text-align:center;
-}
-
-
-
 
 
 
