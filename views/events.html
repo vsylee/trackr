@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+
+<!--
+  GR4 - Trackr
+  Czarina Lao, Veronica Lee, Jing Lin, Sam Song
+-->
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>Trackr - My Profile</title>
+
+<!-- Load style sheets -->
+<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="./../css/mainLayout.css" />
+</head>
+
+<body>
+
+<header class="header">
+	<p style="float:left;"><a id="home" href="./index.html">Trackr</a></p>
+	<div id="header-buttons">
+		<div id="event-updates" class="header-button"><p>Event Updates</p></div>
+		<div id="feedback-updates" class="header-button"><p>Feedback Updates</p></div>
+		<div id="drop-down-menu" class="header-button">
+			<p>▼</p>
+	<!-- 		<ul class="drop-down">
+				<li><a href="#">Account</a></li>
+				<li><a href="#">Settings</a></li>
+				<li><a href="#">Log Out</a></li>
+			</ul> -->
+		</div>
+	</div>
+</header>
+
+<div id="content">
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Right Panel -->
+<div id="right-panel">
+	<div id="right-panel-button" class="open">
+		<span id="right-panel-triangle">
+	</div>
+	<div id="player-list">
+		<ul>
+			<li>Player A</li>
+			<li>Player B</li>
+			<li>Player C</li>
+		</ul>
+	</div>
+</div>
+
+<script type="text/javascript" src="./../external_js/jquery-1.9.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+
+
+
+
+
+
+
+	var right_panel_width = 300;
+	$("#right-panel-triangle").html("▶");
+	$("#right-panel-button").click(function (e) {
+		if ($(this).hasClass('open')) {
+			$("#right-panel").animate({
+				right: "-=" + right_panel_width
+			}, 700, function(){
+				// animation complete
+			});
+
+			// I tried to make the buttons resize here, but it does something weird
+
+			// attempt #1, without animations
+			// $("#content").css("margin-right", "-=" + right_panel_width + 20);
+
+			// attempt #2, with animations
+			// $("#content").animate({
+			// 	"margin-right": "-=" + right_panel_width + 20
+			// }, 700, function(){
+			// 	// animation complete
+			// });
+			$(this).html("◀").removeClass('open').addClass('closed');
+		} else {
+			$("#right-panel").animate({
+				right: "+=" + right_panel_width
+			}, 700, function(){
+				// animation complete
+			});
+
+			// $("#content").animate({
+			// 	"margin-right": "+=" + right_panel_width + 20
+			// }, 700, function(){
+			// 	// animation complete
+			// });
+			$(this).html("▶").removeClass('closed').addClass('open');
+		}
+
+	});
+
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>
