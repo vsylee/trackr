@@ -24,9 +24,10 @@
 	<div id="header-buttons">
 		<div id="event-updates" class="header-button"><p>Event Updates</p></div>
 		<div id="feedback-updates" class="header-button"><p>Feedback Updates</p></div>
-		<div id="drop-down-menu" class="header-button">
-			<p>▼</p>
-	<!-- 		<ul class="drop-down">
+		<div id="triangle-menu" class="header-button closed">
+			<p id="triangle">▼</p>
+			<!-- I tried making a drop down menu but I failed -->
+<!-- 			<ul id="triangle-menu-content" class="dropdown-content">
 				<li><a href="#">Account</a></li>
 				<li><a href="#">Settings</a></li>
 				<li><a href="#">Log Out</a></li>
@@ -89,7 +90,22 @@
 <script type="text/javascript">
 $(document).ready(function() {
 
-
+	// $("#triangle-menu").click(function (e) {
+	// 	if ($(this).hasClass('closed')) {
+	// 		$("#triangle-menu-content").css({
+	// 			'left':'auto',
+	// 			'right':'0',
+	// 		});
+	// 		$(this).removeClass('closed').addClass('open');
+	// 		$("#triangle").html("▲")
+	// 	} else {
+	// 		$("#triangle-menu-content").css({
+	// 			'left':'-9999px',
+	// 		});
+	// 		$(this).removeClass('open').addClass('closed');
+	// 		$("#triangle").html("▼")
+	// 	}
+	// });
 
 
 

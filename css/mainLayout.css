@@ -57,15 +57,25 @@ p, a {
 	width:125px;
 }
 
-#drop-down-menu {
+#triangle-menu {
 	width: 35px;
 	height: 32px;
 	padding-bottom:0px;
 }
 
-
-
-
+/*.dropdown-content {
+	background: white;
+	list-style: none;
+	position:absolute;
+	left:-9999px;
+}
+.dropdown-content li {
+	padding-top:1px;
+	float: none;
+}
+.dropdown-content a {
+	white-space:nowrap;
+}*/
 
 
 
