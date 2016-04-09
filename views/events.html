@@ -60,83 +60,11 @@
 </div>
 
 <script type="text/javascript" src="./../external_js/jquery-1.9.0.min.js"></script>
+<script type="text/javascript" src="./../js/header.js"></script>
 
 <script type="text/javascript">
-$(document).ready(function() {
 
-
-
-
-
-
-
-
-
-
-
-
-
-	$("#search-bar").click( function (e) {
-		if ($(this).val() == "🔍 Search...") {
-			$(this).val("");
-		}
-	});
-	$(document).click( function (e) {
-		if (!$(e.target).closest("#search-bar").length &&
-			!$(e.target).is("#search-bar")) {
-			if ($("#search-bar").val() == "") {
-				$("#search-bar").val("🔍 Search...");
-			}
-		}
-	});
-
-	var right_panel_width = 300;
-	var animation_time = 500;
-	$("#right-panel-triangle").html("▶");
-	$("#right-panel-button").click(function (e) {
-		if ($(this).hasClass('open')) {
-			$("#right-panel").animate({
-				right: "-=" + right_panel_width
-			}, animation_time, function(){
-				// animation complete
-			});
-
-			$("#content").animate({
-				"margin-right": "-=" + right_panel_width
-			}, animation_time, function(){
-				// animation complete
-			});
-			$(this).html("◀").removeClass('open').addClass('closed');
-		} else {
-			$("#right-panel").animate({
-				right: "+=" + right_panel_width
-			}, animation_time, function(){
-				// animation complete
-			});
-
-			$("#content").animate({
-				"margin-right": "+=" + right_panel_width
-			}, animation_time, function(){
-				// animation complete
-			});
-			$(this).html("▶").removeClass('closed').addClass('open');
-		}
-
-	});
-});
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
 
 </body>
 
