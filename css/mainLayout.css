@@ -19,7 +19,8 @@ p, a {
 	background: #d5d5d5;
 	align-items:center;
 	justify-content:space-between;
-	height:100px;
+	height:95px;
+	border-bottom: 5px solid #BDBDBD;
 }
 
 #home {

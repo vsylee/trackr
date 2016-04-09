@@ -120,17 +120,11 @@ $(document).ready(function() {
 				// animation complete
 			});
 
-			// I tried to make the buttons resize here, but it does something weird
-
-			// attempt #1, without animations
-			$("#content").css("margin-right", '20px');
-
-			// attempt #2, with animations
-			// $("#content").animate({
-			// 	"margin-right": "-=" + right_panel_width + 20
-			// }, 700, function(){
-			// 	// animation complete
-			// });
+			$("#content").animate({
+				"margin-right": "-=" + right_panel_width
+			}, 700, function(){
+				// animation complete
+			});
 			$(this).html("◀").removeClass('open').addClass('closed');
 		} else {
 			$("#right-panel").animate({
@@ -139,13 +133,11 @@ $(document).ready(function() {
 				// animation complete
 			});
 
-			$("#content").css("margin-right", right_panel_width + 20 + 'px');
-
-			// $("#content").animate({
-			// 	"margin-right": "+=" + right_panel_width + 20
-			// }, 700, function(){
-			// 	// animation complete
-			// });
+			$("#content").animate({
+				"margin-right": "+=" + right_panel_width
+			}, 700, function(){
+				// animation complete
+			});
 			$(this).html("▶").removeClass('closed').addClass('open');
 		}
 
