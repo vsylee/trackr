@@ -53,6 +53,8 @@ p, a {
 	border-radius:4px;
 }*/
 
+
+/* some code for dropdown menus adapted from w3school.com */
 .header-button-list {
 	list-style-type: none;
 	margin:0;
