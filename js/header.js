@@ -31,7 +31,21 @@ $(document).ready(function() {
 		}
 	});
 
+	var tennis = ['Tennis A', 'Tennis B', 'Tennis C', 'Tennis D'];
+	var gymnastics = ['Gymnastics A', 'Gymnastics B', 'Gymnastics C', 'Gymnastics D'];
+	var teams = {"tennis":tennis, "gymnastics":gymnastics}
 
+	$("#team-select").on('change', function (e) {
+		var selected_team = $(this).val();
+		var team_members = teams[selected_team];
+		console.log(selected_team);
+		console.log(team_members);
+		$("#team-members").empty();
+		for (i=0; i < team_members.length; i++) {
+			$("#team-members").append(
+				"<li>" + team_members[i] + "</li>");
+		}
+	});
 
 
 	var right_panel_width = 300;
