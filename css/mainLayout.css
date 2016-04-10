@@ -112,7 +112,7 @@ p, a {
 
 #search-bar {
 	width:254px;
-	height:35px;
+	min-height:32px;
 	font-size:20px;
 	color:gray;
 	border-radius:5px;
@@ -142,11 +142,13 @@ select#team-select {
    text-overflow: ellipsis;
    white-space: nowrap;
    width: 260px;
+   min-height: 31px;
 }
 
 #team-members {
+	margin-top:10px;
 	bottom:0px;
-	margin-bottom:50px;
+	margin-bottom:20px;
 	width:256px;
 	border:2px solid #AAA;
 	padding:0;

@@ -31,7 +31,7 @@ $(document).ready(function() {
 		}
 	});
 
-	var tennis = ['Tennis A', 'Tennis B', 'Tennis C', 'Tennis D'];
+	var tennis = ['Tennis A', 'Tennis B', 'Tennis C', 'Tennis D', 'Tennis E', 'Tennis F', 'Tennis G', 'Tennis H', 'Tennis I', 'Tennis J', 'Tennis K', 'Tennis L', 'Tennis M', 'Tennis N', 'Tennis O', 'Tennis P', 'Tennis Q', 'Tennis R', 'Tennis S', 'Tennis T', 'Tennis U', 'Tennis V', 'Tennis W', 'Tennis X', 'Tennis Y', 'Tennis Z'];
 	var gymnastics = ['Gymnastics A', 'Gymnastics B', 'Gymnastics C', 'Gymnastics D'];
 	var teams = {"tennis":tennis, "gymnastics":gymnastics}
 
@@ -40,8 +40,11 @@ $(document).ready(function() {
 		var team_members = teams[selected_team];
 		$("#team-members").empty();
 		for (i=0; i < team_members.length; i++) {
+			if (i != 0) {
+				$("#team-members").append("<hr>");
+			}
 			$("#team-members").append(
-				"<li>" + team_members[i] + "</li><hr>");
+				"<li>" + team_members[i] + "</li>");
 		}
 	});
 
