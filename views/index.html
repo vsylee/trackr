@@ -22,17 +22,32 @@
 <header class="header">
 	<p style="float:left;"><a id="home" href="./index.html">Trackr</a></p>
 	<div id="header-buttons">
-		<div id="event-updates" class="header-button"><p>Event Updates</p></div>
-		<div id="feedback-updates" class="header-button"><p>Feedback Updates</p></div>
-		<div id="triangle-menu" class="header-button closed">
-			<p id="triangle">▼</p>
-			<!-- I tried making a drop down menu but I failed -->
-<!-- 			<ul id="triangle-menu-content" class="dropdown-content">
-				<li><a href="#">Account</a></li>
-				<li><a href="#">Settings</a></li>
-				<li><a href="#">Log Out</a></li>
-			</ul> -->
-		</div>
+		<ul class="header-button-list">
+			<li class="dropdown">
+				<a href="javascript:void(0)" class="dropbtn" id="event-button" onclick="dropdown('event-updates')">Event<br>Updates</a>
+				<div class="dropdown-content" id="event-updates">
+					<a href="#">Event 1</a>
+					<a href="#">Event 2</a>
+					<a href="#">Event 3</a>
+				</div>
+			</li>
+			<li class="dropdown">
+				<a href="javascript:void(0)" class="dropbtn" id="feedback-button" onclick="dropdown('feedback-updates')">Feedback<br>Updates</a>
+				<div class="dropdown-content" id="feedback-updates">
+					<a href="#">Feedback 1</a>
+					<a href="#">Feedback 2</a>
+					<a href="#">Feedback 3</a>
+				</div>
+			</li>
+			<li class="dropdown">
+				<a href="javascript:void(0)" class="dropbtn" id="triangle-button" onclick="dropdown('triangle-menu')">▼</a>
+				<div class="dropdown-content" id="triangle-menu">
+					<a href="#">Account</a>
+					<a href="#">Settings</a>
+					<a href="#">Log Out</a>
+				</div>
+			</li>
+		</ul>
 	</div>
 </header>
 
@@ -58,12 +73,6 @@
 		</a>
 	</div>
 </div>
-
-
-
-
-
-
 
 <!-- Right Panel -->
 <div id="right-panel">
