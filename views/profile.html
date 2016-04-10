@@ -50,10 +50,14 @@
 	<div id="player-list">
 		<input type="text" id="search-bar" value="🔍 Search..."></input>
 		
-		<ul>
-			<li>Player A</li>
-			<li>Player B</li>
-			<li>Player C</li>
+		<select required id="team-select">
+			<option class="placeholder" selected disabled value="">Team:</option>
+			<option value="tennis">Tennis</option>
+			<option value="gymnastics">Gymnastics</option>
+		</select>
+		
+		<ul id="team-members">
+
 		</ul>
 	</div>
 </div>
