@@ -38,12 +38,10 @@ $(document).ready(function() {
 	$("#team-select").on('change', function (e) {
 		var selected_team = $(this).val();
 		var team_members = teams[selected_team];
-		console.log(selected_team);
-		console.log(team_members);
 		$("#team-members").empty();
 		for (i=0; i < team_members.length; i++) {
 			$("#team-members").append(
-				"<li>" + team_members[i] + "</li>");
+				"<li>" + team_members[i] + "</li><hr>");
 		}
 	});
 

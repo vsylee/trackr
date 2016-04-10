@@ -102,6 +102,8 @@ p, a {
 }
 
 #player-list {
+	display:flex;
+	flex-flow: column nowrap;
 	background:#E0E0E0;
 	width:260px;
 	overflow-y:scroll;
@@ -142,7 +144,32 @@ select#team-select {
    width: 260px;
 }
 
+#team-members {
+	bottom:0px;
+	margin-bottom:50px;
+	width:256px;
+	border:2px solid #AAA;
+	padding:0;
+	overflow:hidden;
+	overflow-y:scroll;
+	flex-grow:10;
+	background-color:#EEEEEE;
+}
 
+#team-members li {
+	padding-left:10px;
+	padding-top:5px;
+	padding-bottom:7px;
+}
+
+hr {
+	height:2px;
+	color: #AAA;
+	background-color: #AAA;
+	padding:0;
+	margin:0;
+	border:0px;
+}
 
 
 
