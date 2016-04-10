@@ -82,8 +82,8 @@ p, a {
 .dropdown-content {
 	display:none;
 	position: absolute;
-	background-color:#f9f9f9;
-	min-width:160px;
+	background-color:#f1f1f1;
+	min-width:190px;
 	z-index:99999999999999;
 }
 .dropdown-content a {
@@ -91,8 +91,9 @@ p, a {
 	text-decoration:none;
 	display: block;
 	text-align:left;
+	padding:8px;
 }
-.dropdown-content a:hover {background-color:#f1f1f1;}
+/*.dropdown-content a:hover {background-color:#f1f1f1;}*/
 .show {display:block;}
 
 
@@ -111,6 +112,7 @@ p, a {
 /*	width: 35px;
 	height: 32px;
 	padding-bottom:0px;*/
+	min-width:auto;
 	left:auto;
 	right:0;
 }
