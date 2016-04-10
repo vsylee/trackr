@@ -34,6 +34,14 @@ $(document).ready(function() {
 	var tennis = ['Tennis A', 'Tennis B', 'Tennis C', 'Tennis D', 'Tennis E', 'Tennis F', 'Tennis G', 'Tennis H', 'Tennis I', 'Tennis J', 'Tennis K', 'Tennis L', 'Tennis M', 'Tennis N', 'Tennis O', 'Tennis P', 'Tennis Q', 'Tennis R', 'Tennis S', 'Tennis T', 'Tennis U', 'Tennis V', 'Tennis W', 'Tennis X', 'Tennis Y', 'Tennis Z'];
 	var gymnastics = ['Gymnastics A', 'Gymnastics B', 'Gymnastics C', 'Gymnastics D'];
 	var teams = {"tennis":tennis, "gymnastics":gymnastics}
+	// populate team list
+	for (i=0; i < Object.keys(teams).length; i++) {
+		var team = Object.keys(teams)[i];
+		$("#team-select").append(
+			"<option value='" + team + "'>" +
+			team.substr(0,1).toUpperCase() + team.substr(1).toLowerCase() +
+			"</option>");
+	}
 
 	$("#team-select").on('change', function (e) {
 		var selected_team = $(this).val();
