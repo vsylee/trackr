@@ -1,21 +1,16 @@
+function dropdown(id) {
+	document.getElementById(id).classList.toggle("show");
+	// close all menus that aren't the menu just clicked
+	var ids = ['event-updates', 'feedback-updates', 'triangle-menu'];
+	for (var i = 0; i < ids.length; i++) {
+		if (id != ids[i]) {
+			document.getElementById(ids[i]).classList.remove('show');
+		}
+	}
+};
+
 $(document).ready(function() {
 
-	// $("#triangle-menu").click(function (e) {
-	// 	if ($(this).hasClass('closed')) {
-	// 		$("#triangle-menu-content").css({
-	// 			'left':'auto',
-	// 			'right':'0',
-	// 		});
-	// 		$(this).removeClass('closed').addClass('open');
-	// 		$("#triangle").html("▲")
-	// 	} else {
-	// 		$("#triangle-menu-content").css({
-	// 			'left':'-9999px',
-	// 		});
-	// 		$(this).removeClass('open').addClass('closed');
-	// 		$("#triangle").html("▼")
-	// 	}
-	// });
 
 	$("#search-bar").click( function (e) {
 		if ($(this).val() == "🔍 Search...") {
@@ -23,10 +18,21 @@ $(document).ready(function() {
 		}
 	});
 	$(document).click( function (e) {
+		// if not search bar, return the "Search" text
 		if (!$(e.target).closest("#search-bar").length &&
 			!$(e.target).is("#search-bar")) {
 			if ($("#search-bar").val() == "") {
 				$("#search-bar").val("🔍 Search...");
+			}
+		}
+		// if not a menu, close menu
+		if (!$(e.target).is(".dropbtn")) {
+			var dropdowns = document.getElementsByClassName("dropdown-content");
+			for (var d = 0; d < dropdowns.length; d++) {
+				var openDropdown = dropdowns[d];
+				if (openDropdown.classList.contains('show')) {
+					openDropdown.classList.remove('show');
+				}
 			}
 		}
 	});
@@ -35,7 +41,7 @@ $(document).ready(function() {
 	var gymnastics = ['Gymnastics A', 'Gymnastics B', 'Gymnastics C', 'Gymnastics D'];
 	var teams = {"tennis":tennis, "gymnastics":gymnastics}
 	// populate team list
-	for (i=0; i < Object.keys(teams).length; i++) {
+	for (var i=0; i < Object.keys(teams).length; i++) {
 		var team = Object.keys(teams)[i];
 		$("#team-select").append(
 			"<option value='" + team + "'>" +
@@ -47,7 +53,7 @@ $(document).ready(function() {
 		var selected_team = $(this).val();
 		var team_members = teams[selected_team];
 		$("#team-members").empty();
-		for (i=0; i < team_members.length; i++) {
+		for (var i=0; i < team_members.length; i++) {
 			if (i != 0) {
 				$("#team-members").append("<hr>");
 			}
