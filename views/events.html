@@ -44,25 +44,6 @@
 <div id="content">
 	<div id="calendar">
 	</div>
-	<div class="addEvent-dialog" id="addEvent-dialog-text">
-		<form id="add_event" action="javascript:addEvent();" class="addEvent-form">
-			<label for="name">Event Name: </label><input type="text" name="name" id="name" required/><br>
-			<label for="startDate">Start Date: </label><input type="text" name="date" id="date" required/><br> 
-			<label for="startTime">Start Time: </label><input type="time" name="startTime" id="textbox" required/><br>
-			<label for="endDate">End Date: </label><input type="text" name="date" id="date"/><br>  
-			<label for="endTime">End Time: </label><input type="time" name="endTime" id="endTime"/><br> 
-			<label for="location">Location: </label><input type="text" name="location" id="location"/><br> 
-			<label for="share">Share with: </label>
-				<select name="teams" value:"Select Team/s">
-					<option value="">Gymnastics</option>
-					<option value="">Soccer</option>
-					<option value="">Tennis</option>
-				  <!-- <option value="">generate list of teams</option> -->
-				</select><br>
-			<label for="request">Request Feedback: </label><input type="checkbox" name="request" id="request"/><br> 
-			<input type="submit" value="Save and Share"/>
-		</form>
-	</div>
 </div>
 
 
@@ -96,23 +77,11 @@
 <script type='text/javascript' src='./../fullcalendar-2.6.1/gcal.js'></script>
 
 <script type="text/javascript" src="./../js/index.js"></script>
+<script type="text/javascript" src="./../js/events.js"></script>
 <script type="text/javascript">
 
-		$( "#startTime" ).bind('change keyup input',function() {
-		  alert( "Handler for .change() called." );
-		});
 	$(document).ready(function() {
-		$("#textbox").keyup(function() {alert("Keyup detected!");});
-		$("#textbox").change(function() {alert("Change detected!");});
-		$("#textbox").bind('paste',function() {alert("paste detected!");});
 
-		// $('#startTime').on('input propertychange paste', function() {
-		// 	console.log('here');
-	 //        if ($('#endTime').val() === '') {
-	 //        	console.log('h');
-	 //        	$('#endTime').val($('#startTime').val());
-	 //        }
-	 //    });
 
 	    $('#calendar').fullCalendar({
 	    	timezone: "local",
@@ -130,6 +99,7 @@
 	        },
 
 	        dayClick: function(event) {
+	        	// showAddEventPopover($(this));
 	        	// TODO: call function that brings out the week schedule?
 	        },
 
@@ -163,25 +133,20 @@
             		id: 'test',
 	            	text: 'Add Event',
 	            	click: function(e) {
-
-						var top = $(this).position().top + $(this).outerHeight();
-						var left = $(this).position().left;
 						showAddEventPopover($(this));
-						
-						// $(document).on('mousedown', 'documentMousedown');
 
 
-						var options = {
-							className: 'addEvent-popover',
-							content: '<div class="fc-header fc-widget-header"> <span class="fc-close fc-icon fc-icon-x"></span><span class="fc-title">Add Event</span><div class="fc-clear"></div>'
-	    									+ '</div>'
-	    									+ '<div class="fc-body fc-widget-content"><div class="fc-content">' + $(".addEvent-dialog").html() +'</div>'
-	    									+ '</div>',
-	    					top: top,
-	    					left: left,
-	    					autoHide: true
+						// var options = {
+						// 	className: 'addEvent-popover',
+						// 	content: '<div class="fc-header fc-widget-header"> <span class="fc-close fc-icon fc-icon-x"></span><span class="fc-title">Add Event</span><div class="fc-clear"></div>'
+	    	// 								+ '</div>'
+	    	// 								+ '<div class="fc-body fc-widget-content"><div class="fc-content">' + $(".addEvent-dialog").html() +'</div>'
+	    	// 								+ '</div>',
+	    	// 				top: top,
+	    	// 				left: left,
+	    	// 				autoHide: true
 
-						}
+						// }
 
     					return false;
 
@@ -190,67 +155,13 @@
             }
 	        
 	    });
-
+	    $(".fc-addEvent-button").attr('id', 'addEvent-button');
 	    $(".fc-addEvent-button").css({'background-color': '#990000', 'background-image': 'none', 'color': 'white'});
-	    // $(".fc-addEvent-button").after('<div id="addEvent-popover" class="fc-popover">' +
-	    // 									'<div class="fc-header fc-widget-header"> <span class="fc-close fc-icon fc-icon-x"></span><span class="fc-title">Add Event</span><div class="fc-clear"></div>'
-	    // 									+ '</div>'
-	    // 									+ '<div class="fc-body fc-widget-content"><div class="fc-content">' + $(".addEvent-dialog").html() +'</div>'
-	    // 									+ '</div>'
-	    // 								+ '</div>');
-	    // $("#addEvent-popover").css({'color': 'black', 'z-index': '1000','display': 'none'});
 
-	    $(function() {
-			$( "#date" ).datepicker();
-			
-		});
 
-		var inputs = $('#add_event');
-		inputs.on('click', function() {
-			console.log("Are you even clicked?");
-		});
 
 	});
 
-	function addEvent() {
-		var date = $('#startDate').val();
-		var startTime = $('#startTime').val();
-		var startDateTime = new Date(date+' '+startTime);
-		var endTime = $('#endTime').val();
-
-		var event = {
-			title: $('#name').val(),
-			start: startDateTime.toISOString(),
-		}
-		$('#calendar').fullCalendar('renderEvent', event);
-		$("#addEvent-popover").css({'display':'none'});
-	}
-
-	function showAddEventPopover(jQueryObj) {
-		var id = jQueryObj.attr('id') + '-popover';
-		jQueryObj.after('<div id="' + id + '" class="fc-popover">' +
-	    					'<div class="fc-header fc-widget-header"> <span class="fc-close fc-icon fc-icon-x"></span><span class="fc-title">Add Event</span><div class="fc-clear"></div>'
-	    					+ '</div>'
-	    					+ '<div class="fc-body fc-widget-content"><div class="fc-content">' + $(".addEvent-dialog").html() +'</div>'
-	    					+ '</div>'
-	    				+ '</div>');
-		var popover = $('#'+id);
-		var top = jQueryObj.position().top + jQueryObj.outerHeight();
-
-		popover.css({'display':'block', 'top':top, 'z-index':'1000'});
-		popover.on('click', '.fc-close', function() {
-			popover.css({'display':'none'});
-			popover.remove();
-		});
-	}
-
-	// function documentMousedown(e) {
-	// 	if ($("#addEvent-popover") && !$(e.target).closest($("#addEvent-popover")).length) {
-	// 		$("#addEvent-popover").css({'display':'none'});
-	// 		$(document).off('mousedown', 'documentMousedown');
-
-	// 	}
-	// }
 
 </script>
 
