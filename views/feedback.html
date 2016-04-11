@@ -19,48 +19,35 @@
 
 <body>
 
-<header class="header">
-	<p style="float:left;"><a id="home" href="./index.html">Trackr</a></p>
-	<div id="header-buttons">
-		<ul class="header-button-list">
-			<li class="dropdown">
-				<a href="javascript:void(0)" class="dropbtn" id="event-button" onclick="dropdown('event-updates')">Event<br>Updates</a>
-				<div class="dropdown-content" id="event-updates">
-					<a href="#">Event 1</a>
-					<a href="#">Event 2</a>
-					<a href="#">Event 3</a>
-				</div>
-			</li>
-			<li class="dropdown">
-				<a href="javascript:void(0)" class="dropbtn" id="feedback-button" onclick="dropdown('feedback-updates')">Feedback<br>Updates</a>
-				<div class="dropdown-content" id="feedback-updates">
-					<a href="#">Feedback 1</a>
-					<a href="#">Feedback 2</a>
-					<a href="#">Feedback 3</a>
-				</div>
-			</li>
-			<li class="dropdown">
-				<a href="javascript:void(0)" class="dropbtn" id="triangle-button" onclick="dropdown('triangle-menu')">▼</a>
-				<div class="dropdown-content" id="triangle-menu">
-					<a href="#">Account</a>
-					<a href="#">Settings</a>
-					<a href="#">Log Out</a>
-				</div>
-			</li>
-		</ul>
+<div class="header disable_select">
+	<p><a id="home" href="./index.html">Trackr</a></p>
+	<div class="header_buttons">
+		<div class="dropdown_container header_button" id="header_events">
+ 			Events
+ 		</div>
+ 		<div class="dropdown_container header_button" id="header_feedback">
+			Feedback
+		</div>
+		<div class="dropdown_container header_button" id="header_triangle">
+			<!-- Triangle Down -->
+			<p class="menu_option">&#9662;</p>
+		</div>
 	</div>
-</header>
+</div>
 
 <div class="container">
 	<!-- Replace the text below with actual data from the database -->
-	<div class="feedback offset_left">
-		<div class="feedback_header">
+	<div class="feedback">
+<!-- 		<div class="feedback-header">
 			<span>
 				Practice at MIT Zesiger Pool, 6:00PM - 8:00PM on April 9th, 2016
 			</span>
 		</div>
 		<div class="content">
-		</div>
+			<div class="table-header" id="player-name-table-header">Player's Names</div>
+			<div class="table-header">Athlete Comments</div>
+			<div class="table-header">Your Comments</div>
+		</div> -->
 	</div>
 </div>
 
@@ -68,22 +55,22 @@
 
 
 <!-- Right Panel -->
-<div id="right-panel">
+<!-- <div id="right-panel">
 	<div id="right-panel-button" class="open">
 		<span id="right-panel-triangle">
 	</div>
 	<div id="player-list">
-		<input type="text" id="search-bar" value="🔍 Search..."></input>
-		
+		<input type="text" id="search-bar" value="🔍 Search..." onKeyPress="searchKeyPress()" onKeyUp="searchKeyPress()"></input>
+
 		<select required id="team-select">
 			<option class="placeholder" selected disabled value="">Team:</option>
 		</select>
-		
+
 		<ul id="team-members">
 
 		</ul>
 	</div>
-</div>
+</div> -->
 
 <script type="text/javascript" src="./../external_js/jquery-1.9.0.min.js"></script>
 <script type="text/javascript" src="./../js/feedback.js"></script>
