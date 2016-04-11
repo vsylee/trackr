@@ -1,6 +1,6 @@
 var feedback_animate_duration = 500;
 var players = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
-var table_columns = ["Player name", "Comment", "Coach feedback"];
+var table_columns = ["Player name", "Athlete Comment", "Coach feedback"];
 
 $(document).ready(function() {
 	
@@ -18,13 +18,23 @@ $(document).ready(function() {
 
 	for (var i = 0; i < players.length; i++) {
 		for (var j = 0; j < table_columns.length; j++) {
-			$("<div>")
-				.addClass("content_col")
-				.css({
-					"backgroundColor": "cyan"
-				})
-				.appendTo($('.content'))
-				.text(table_columns[j]);
+			if (j == 0 || j == 1) {
+				$("<div>")
+					.addClass("content_col")
+					.css({
+						"backgroundColor": "cyan"
+					})
+					.appendTo($('.content'))
+					.text(table_columns[j]);	
+			} else {
+				$("<div>")
+					.addClass("content_col")
+					.css({
+						"backgroundColor": "cyan"
+					})
+					.appendTo($('.content'))
+					.text(table_columns[j]);	
+			}
 		}
 	}
 });	
