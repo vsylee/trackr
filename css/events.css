@@ -13,3 +13,13 @@
 #calendar {
 	padding: 10px;
 }
+
+.addEvent-form {
+	line-height: 150%;
+	padding: 10px;
+	text-align: left;
+}
+
+#addEvent-dialog-text {
+	display: none;
+}
