@@ -21,43 +21,31 @@
 
 <body>
 
-<header class="header">
-	<p style="float:left;"><a id="home" href="./index.html">Trackr</a></p>
-	<div id="header-buttons">
-		<ul class="header-button-list">
-			<li class="dropdown">
-				<a href="javascript:void(0)" class="dropbtn" id="event-button" onclick="dropdown('event-updates')">Event<br>Updates</a>
-				<div class="dropdown-content" id="event-updates">
-					<a href="#">Event 1</a>
-					<a href="#">Event 2</a>
-					<a href="#">Event 3</a>
-				</div>
-			</li>
-			<li class="dropdown">
-				<a href="javascript:void(0)" class="dropbtn" id="feedback-button" onclick="dropdown('feedback-updates')">Feedback<br>Updates</a>
-				<div class="dropdown-content" id="feedback-updates">
-					<a href="#">Feedback 1</a>
-					<a href="#">Feedback 2</a>
-					<a href="#">Feedback 3</a>
-				</div>
-			</li>
-			<li class="dropdown">
-				<a href="javascript:void(0)" class="dropbtn" id="triangle-button" onclick="dropdown('triangle-menu')">▼</a>
-				<div class="dropdown-content" id="triangle-menu">
-					<a href="#">Account</a>
-					<a href="#">Settings</a>
-					<a href="#">Log Out</a>
-				</div>
-			</li>
-		</ul>
+<div class="header disable_select">
+	<p><a id="home" href="./index.html">Trackr</a></p>
+	<div class="header_buttons">
+		<div class="dropdown_container header_button" id="header_events">
+ 			Events
+ 		</div>
+ 		<div class="dropdown_container header_button" id="header_feedback">
+			Feedback
+		</div>
+		<div class="dropdown_container header_button" id="header_account">
+			<!-- Triangle Down -->
+			<p class="menu_option">&#9662;</p>
+		</div>
 	</div>
-</header>
+</div>
+
+<div class="header_expansion">
+
+</div>
 
 <div id="content">
 	<div id="calendar">
 	</div>
 	<div class="addEvent-dialog" id="addEvent-dialog-text">
-		<form action="javascript:addEvent();" class="addEvent-form">
+		<form id="add_event" action="javascript:addEvent();" class="addEvent-form">
 			<label for="name">Event Name: </label><input type="text" name="name" id="name" required/><br>
 			<label for="startDate">Start Date: </label><input type="text" name="date" id="date" required/><br> 
 			<label for="startTime">Start Time: </label><input type="time" name="startTime" id="textbox" required/><br>
@@ -107,23 +95,24 @@
 <script src='./../fullcalendar-2.6.1/fullcalendar.js'></script>
 <script type='text/javascript' src='./../fullcalendar-2.6.1/gcal.js'></script>
 
+<script type="text/javascript" src="./../js/index.js"></script>
 <script type="text/javascript">
 
 		$( "#startTime" ).bind('change keyup input',function() {
-  alert( "Handler for .change() called." );
-});
+		  alert( "Handler for .change() called." );
+		});
 	$(document).ready(function() {
 		$("#textbox").keyup(function() {alert("Keyup detected!");});
-$("#textbox").change(function() {alert("Change detected!");});
-$("#textbox").bind('paste',function() {alert("paste detected!");});
+		$("#textbox").change(function() {alert("Change detected!");});
+		$("#textbox").bind('paste',function() {alert("paste detected!");});
 
-		$('#startTime').on('input propertychange paste', function() {
-			console.log('here');
-	        if ($('#endTime').val() === '') {
-	        	console.log('h');
-	        	$('#endTime').val($('#startTime').val());
-	        }
-	    });
+		// $('#startTime').on('input propertychange paste', function() {
+		// 	console.log('here');
+	 //        if ($('#endTime').val() === '') {
+	 //        	console.log('h');
+	 //        	$('#endTime').val($('#startTime').val());
+	 //        }
+	 //    });
 
 	    $('#calendar').fullCalendar({
 	    	timezone: "local",
@@ -178,8 +167,9 @@ $("#textbox").bind('paste',function() {alert("paste detected!");});
 						var top = $(this).position().top + $(this).outerHeight();
 						var left = $(this).position().left;
 						showAddEventPopover($(this));
-
+						
 						// $(document).on('mousedown', 'documentMousedown');
+
 
 						var options = {
 							className: 'addEvent-popover',
@@ -215,6 +205,10 @@ $("#textbox").bind('paste',function() {alert("paste detected!");});
 			
 		});
 
+		var inputs = $('#add_event');
+		inputs.on('click', function() {
+			console.log("Are you even clicked?");
+		});
 
 	});
 
