@@ -43,9 +43,9 @@ function setup_header_options(id) {
 }
 
 $(document).ready(function() {
-	var content_object = $('.icon_href');
-	var button_icons = $('.big_button_icon');
-	var square_length = content_object.height() * 0.85;
+	var content_object = $('.content');
+	var button_icons = $('.icon_href');
+	var square_length = content_object.height() * 0.46;
 	for (var i = 0; i < button_icons.length; i++) {
 		$(button_icons[i]).css({
 			'width': square_length + 'px',

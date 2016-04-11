@@ -18,13 +18,17 @@
 	width: 50px;
 }
 
+.first_element {
+	margin-right: 9%;
+}
+
 .icon_href {
 	display: flex;
 	flex-flow: column wrap;
 	justify-content: center;
 	align-items: center;
 	height: 100%;
-	width: 40%;
+	width: 30%;
 
 }
 
@@ -46,6 +50,6 @@
 }
 
 .big_button_text {
-	font-size:30px;
-	text-align:center;
+	font-size: 30px;
+	text-align: center;
 }
