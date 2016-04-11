@@ -17,10 +17,28 @@
 
 <body>
 
-<div class="header">
+<div class="header disable_select">
 	<p><a id="home" href="./index.html">Trackr</a></p>
-	<div id="header-buttons">
-		<ul class="header-button-list">
+	<div class="header_buttons">
+		<div class="dropdown_container header_button">
+ 			Events
+ 		</div>
+ 		<div class="dropdown_container header_button">
+			Feedback
+		</div>
+		<div class="dropdown_container header_button">
+			<!-- Triangle Down -->
+			<p class="menu_option">&#9662;</p>
+		</div>
+	</div>
+</div>
+
+<div class="header_expansion ">
+
+</div>
+
+
+<!-- 		<ul class="header-button-list">
 			<li class="dropdown">
 				<a href="javascript:void(0)" class="dropbtn" id="event-button" onclick="dropdown('event-updates')">Event<br>Updates</a>
 				<div class="dropdown-content" id="event-updates">
@@ -46,8 +64,7 @@
 				</div>
 			</li>
 		</ul>
-	</div>
-</div>
+ -->
 <!-- 
 <div id="content">
 	<div class="row">
@@ -91,6 +108,7 @@
 </div> -->
 <script type="text/javascript" src="./../external_js/jquery-1.9.0.min.js"></script>
 <script type="text/javascript" src="./../js/header.js"></script>
+<script type="text/javascript" src="./../js/index.js"></script>
 
 <script type="text/javascript">
 
