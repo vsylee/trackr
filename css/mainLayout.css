@@ -79,9 +79,11 @@ p, a {
 	font-size:25px;
 	padding:0px 20px;
 }
+
 .dropdown:hover .dropbtn {
 	background-color:#e6e6e6;
 }
+
 .dropdown-content {
 	display:none;
 	position: absolute;
@@ -95,12 +97,9 @@ p, a {
 	text-align:left;
 	padding:8px;
 }
+
 /*.dropdown-content a:hover {background-color:#f1f1f1;}*/
 .show {display:block;}
-
-
-
-
 
 #event-updates {
 	/*width:110px;*/
