@@ -12,12 +12,6 @@
 	background-color: orange;
 }
 
-.main_icons {
-	display: flex;
-	height: 50px;
-	width: 50px;
-}
-
 .first_element {
 	margin-right: 9%;
 }
@@ -49,7 +43,6 @@
 	justify-content:center;
 }
 
-.big_button_text {
-	font-size: 30px;
-	text-align: center;
-}
+
+
+

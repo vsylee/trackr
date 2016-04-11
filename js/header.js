@@ -39,11 +39,13 @@ function searchKeyPress() {
 }
 
 $(document).ready(function() {
-
-
+	console.log("Hello");
 	$("#search-bar").click( function (e) {
-		if ($(this).val() == "🔍 Search...") {
+		console.log($(this).val());
+		console.log("🔍 Search...");
+		if ($(this).val().indexOf("Search...") > -1) {
 			$(this).val("");
+			console.log("Hello");
 		}
 	});
 	$(document).click( function (e) {
