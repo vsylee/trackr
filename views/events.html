@@ -177,13 +177,9 @@ $("#textbox").bind('paste',function() {alert("paste detected!");});
 
 						var top = $(this).position().top + $(this).outerHeight();
 						var left = $(this).position().left;
-						$("#addEvent-popover").css({'display':'block', 'top':top});
+						showAddEventPopover($(this));
 
-						$("#addEvent-popover").on('click', '.fc-close', function() {
-							$("#addEvent-popover").css({'display':'none'});
-						});
-
-						$(document).on('mousedown', this.documentMousedownProxy = proxy(this, 'documentMousedown'));
+						// $(document).on('mousedown', 'documentMousedown');
 
 						var options = {
 							className: 'addEvent-popover',
@@ -206,13 +202,13 @@ $("#textbox").bind('paste',function() {alert("paste detected!");});
 	    });
 
 	    $(".fc-addEvent-button").css({'background-color': '#990000', 'background-image': 'none', 'color': 'white'});
-	    $(".fc-addEvent-button").after('<div id="addEvent-popover" class="fc-popover">' +
-	    									'<div class="fc-header fc-widget-header"> <span class="fc-close fc-icon fc-icon-x"></span><span class="fc-title">Add Event</span><div class="fc-clear"></div>'
-	    									+ '</div>'
-	    									+ '<div class="fc-body fc-widget-content"><div class="fc-content">' + $(".addEvent-dialog").html() +'</div>'
-	    									+ '</div>'
-	    								+ '</div>');
-	    $("#addEvent-popover").css({'color': 'black', 'z-index': '1000','display': 'none'});
+	    // $(".fc-addEvent-button").after('<div id="addEvent-popover" class="fc-popover">' +
+	    // 									'<div class="fc-header fc-widget-header"> <span class="fc-close fc-icon fc-icon-x"></span><span class="fc-title">Add Event</span><div class="fc-clear"></div>'
+	    // 									+ '</div>'
+	    // 									+ '<div class="fc-body fc-widget-content"><div class="fc-content">' + $(".addEvent-dialog").html() +'</div>'
+	    // 									+ '</div>'
+	    // 								+ '</div>');
+	    // $("#addEvent-popover").css({'color': 'black', 'z-index': '1000','display': 'none'});
 
 	    $(function() {
 			$( "#date" ).datepicker();
@@ -236,9 +232,31 @@ $("#textbox").bind('paste',function() {alert("paste detected!");});
 		$("#addEvent-popover").css({'display':'none'});
 	}
 
-	// function documentMousedown()
+	function showAddEventPopover(jQueryObj) {
+		var id = jQueryObj.attr('id') + '-popover';
+		jQueryObj.after('<div id="' + id + '" class="fc-popover">' +
+	    					'<div class="fc-header fc-widget-header"> <span class="fc-close fc-icon fc-icon-x"></span><span class="fc-title">Add Event</span><div class="fc-clear"></div>'
+	    					+ '</div>'
+	    					+ '<div class="fc-body fc-widget-content"><div class="fc-content">' + $(".addEvent-dialog").html() +'</div>'
+	    					+ '</div>'
+	    				+ '</div>');
+		var popover = $('#'+id);
+		var top = jQueryObj.position().top + jQueryObj.outerHeight();
 
-	// function showEventPopover
+		popover.css({'display':'block', 'top':top, 'z-index':'1000'});
+		popover.on('click', '.fc-close', function() {
+			popover.css({'display':'none'});
+			popover.remove();
+		});
+	}
+
+	// function documentMousedown(e) {
+	// 	if ($("#addEvent-popover") && !$(e.target).closest($("#addEvent-popover")).length) {
+	// 		$("#addEvent-popover").css({'display':'none'});
+	// 		$(document).off('mousedown', 'documentMousedown');
+
+	// 	}
+	// }
 
 </script>
 
