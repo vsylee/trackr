@@ -52,14 +52,40 @@ p, a {
 }
 
 .header_expansion {
-	width: 20%;
-	height: 40px;
-	background-color: red;
 	position: absolute;
 	top: 60px;
 	right: 0;
+	background-color: red;
+	flex-flow: column wrap;
+	justify-content: flex-start;
+	align-items: center;
+
 	display: none;
 }
+
+.header_expansion_child {
+	display: flex;
+	height: 40px;
+	padding: 5px 5px 0 5px;
+
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	background-color: orange;
+}
+
+.header_expansion_child_events {
+	width: 250px;
+}
+
+.header_expansion_child_feedback {
+	width: 250px;
+}
+
+.header_expansion_child_account {
+	width: 125px;
+}
+
 
 .dropdown_container {
 	display: flex;

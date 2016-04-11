@@ -20,8 +20,29 @@ function hexc(colorval) {
 }
 
 function setup_header_options(id) {
-	console.log('The input id is ' + id);
-
+	var classes = "header_expansion_child";
+	$('.header_expansion').empty();
+	switch (id) {
+		case "header_events":
+			classes += " header_expansion_child_events";
+		case "header_feedback":
+			classes += " header_expansion_child_feedback";
+		case "header_account":
+			classes += " header_expansion_child_account";
+	}
+		// case "header_events":
+		// console.log(navigation_elements[id]);
+		// console.log(navigation_elements.header_events);
+	for (var i = 0; i < navigation_elements[id].length; i++) {
+		$('<div>')
+			.addClass(classes)
+			.appendTo($('.header_expansion'))
+			.on('click', function(e) {
+				console.log("I am being clicked");
+			})
+			.text(navigation_elements[id][i]);
+	}
+	// }
 }
 
 $(document).ready(function() {
@@ -33,7 +54,7 @@ $(document).ready(function() {
 			var self = $(this);
 			var hex_color = hexc(self.css("background-color"));
 			var update_color = hex_color == '#4892d3' ? '#1cdbf7' : '#4892d3';
-			var toggle_display = $('.header_expansion').css('display')  == "none" ? "block" : "none";
+			var toggle_display = $('.header_expansion').css('display')  == "none" ? "flex" : "none";
 
 			self.css({
 				'background-color': update_color
@@ -43,7 +64,7 @@ $(document).ready(function() {
 				previous_option.css({
 					'background-color': '#4892d3'
 				});
-				toggle_display = "block";
+				toggle_display = "flex";
 			}
 
 			var pos_offset = self.offset();
