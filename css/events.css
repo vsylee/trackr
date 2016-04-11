@@ -1,0 +1,15 @@
+#content {
+	display:flex;
+	align-items:stretch;
+	position:fixed;
+	margin-top:100px;
+
+	flex-flow: row wrap;
+	justify-content:space-around;
+	align-content:space-around;
+	margin-right:320px;
+}
+
+#calendar {
+	padding: 10px;
+}
