@@ -39,7 +39,6 @@ function searchKeyPress() {
 }
 
 $(document).ready(function() {
-	console.log("Hello");
 	$("#search-bar").click( function (e) {
 		console.log($(this).val());
 		console.log("🔍 Search...");

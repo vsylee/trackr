@@ -4,7 +4,7 @@ body, html, div {
 }
 
 * {
-	font-family: 'Helvetica';
+	font-family: 'Amaranth';
 	color: white;
 }
 
@@ -13,6 +13,7 @@ p, a {
 	margin: 0px;
 	text-decoration: none;
 	color: white;
+	font-family: 'Amaranth';
 }
 
 .header_button {

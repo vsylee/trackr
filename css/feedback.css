@@ -1,8 +1,4 @@
-* {
-	font-family:'Raleway', sans-serif;
-}
-
-	html, body {
+html, body {
 	width: 100%;
 	height: 100%;
 }
@@ -13,14 +9,15 @@
 	top:60px;
 	left: 0px;
 	bottom: 0px;
-	width: 80%;
+	width: 90%;
 /*	height: 85%;*/
-	background-color: blue;
+	background-color: white;
 
 	display: flex;
 	flex-flow: row wrap;
 	justify-content: flex-start;
 	align-content: flex-start;
+	/*font-family: 'Overlock', serif;*/
 }
 
 /*.offset_left {
@@ -36,6 +33,7 @@
 	align-content: flex-start;
 	overflow: scroll;
 	background-color:#E0E0E0;
+	/*font-family: 'Overlock', serif;*/
 }
 
 .content_col {
@@ -48,25 +46,29 @@
 	padding:3px 3px 3px 4px;
 	border-left: 1px solid gray;
 	border-top: 1px solid gray;
+	font-family: 'Overlock', serif;
 }
 
 #player-name {
 	width: calc(24% - 8px);
 	border-left:none;
+	/*font-family: 'Overlock', serif;*/
 }
 
 .feedback {
 	display: block;
 	width: 100%;
 	height: 100%;
-	background-color: orange;
+	background-color: #757575;
 	overflow:scroll;
+	/*font-family: 'Overlock', serif;*/
 }
 
 .feedback-header {
 	display: block;
 	width: 100%;
 	padding:3px 3px 3px 5px;
+	/*font-family: 'Overlock', serif;*/
 }
 
 .table-header {
@@ -74,13 +76,16 @@
 	color:black;
 	width: calc(38% - 8px);
 	padding:3px 3px 3px 4px;
-	font-size:18px;
-	height:18px;
+	font-size:20px;
+	height:22px;
 	border-left: 1px solid gray;
+	font-family: 'Overlock', serif;
+	font-weight: bold;
 }
 #player-name-table-header {
 	width: calc(24% - 8px);
 	border-left:none;
+	font-family: 'Overlock', serif;
 }
 
 
