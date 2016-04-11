@@ -47,8 +47,9 @@
 	<div class="addEvent-dialog" id="addEvent-dialog-text">
 		<form action="javascript:addEvent();" class="addEvent-form">
 			<label for="name">Event Name: </label><input type="text" name="name" id="name" required/><br>
-			<label for="date">Date: </label><input type="text" name="date" id="date" required/><br> 
-			<label for="startTime">Start Time: </label><input type="text" name="startTime" id="textbox" required/><br> 
+			<label for="startDate">Start Date: </label><input type="text" name="date" id="date" required/><br> 
+			<label for="startTime">Start Time: </label><input type="time" name="startTime" id="textbox" required/><br>
+			<label for="endDate">End Date: </label><input type="text" name="date" id="date"/><br>  
 			<label for="endTime">End Time: </label><input type="time" name="endTime" id="endTime"/><br> 
 			<label for="location">Location: </label><input type="text" name="location" id="location"/><br> 
 			<label for="share">Share with: </label>
@@ -125,11 +126,11 @@ $("#textbox").bind('paste',function() {alert("paste detected!");});
 
 	        eventClick: function(event) {
 	        	if (event.url) return false; // don't allow redirection to source website of events
-	        	// TODO: call eventClick function here to edit the event
+	        	// TODO: call eventClick function here to show summary of event details and to edit the event
 	        },
 
 	        dayClick: function(event) {
-	        	// TODO: call function that brings out the week schedule
+	        	// TODO: call function that brings out the week schedule?
 	        },
 
 	        selectable: true,
@@ -161,17 +162,29 @@ $("#textbox").bind('paste',function() {alert("paste detected!");});
             	addEvent: {
             		id: 'test',
 	            	text: 'Add Event',
-	            	click: function(ev) {
-	            		var options = {
-	            			className: 'fc-more-popover',
-	            			content: '<div class-"fc-header ><span>hello</span></div>',
-	            			parentEl: this.el,
-	            			top: '100px',
-	            			autoHide: true,
-	            		}
+	            	click: function(e) {
 
 						var top = $(this).position().top + $(this).outerHeight();
+						var left = $(this).position().left;
 						$("#addEvent-popover").css({'display':'block', 'top':top});
+
+						$("#addEvent-popover").on('click', '.fc-close', function() {
+							$("#addEvent-popover").css({'display':'none'});
+						});
+
+						$(document).on('mousedown', this.documentMousedownProxy = proxy(this, 'documentMousedown'));
+
+						var options = {
+							className: 'addEvent-popover',
+							content: '<div class="fc-header fc-widget-header"> <span class="fc-close fc-icon fc-icon-x"></span><span class="fc-title">Add Event</span><div class="fc-clear"></div>'
+	    									+ '</div>'
+	    									+ '<div class="fc-body fc-widget-content"><div class="fc-content">' + $(".addEvent-dialog").html() +'</div>'
+	    									+ '</div>',
+	    					top: top,
+	    					left: left,
+	    					autoHide: true
+
+						}
 
     					return false;
 
@@ -199,11 +212,11 @@ $("#textbox").bind('paste',function() {alert("paste detected!");});
 	});
 
 	function addEvent() {
-		var date = $('#date').val();
+		var date = $('#startDate').val();
 		var startTime = $('#startTime').val();
 		var startDateTime = new Date(date+' '+startTime);
 		var endTime = $('#endTime').val();
-		console.log(dateTime.toISOString());
+
 		var event = {
 			title: $('#name').val(),
 			start: startDateTime.toISOString(),
@@ -211,6 +224,10 @@ $("#textbox").bind('paste',function() {alert("paste detected!");});
 		$('#calendar').fullCalendar('renderEvent', event);
 		$("#addEvent-popover").css({'display':'none'});
 	}
+
+	// function documentMousedown()
+
+	// function showEventPopover
 
 </script>
 
