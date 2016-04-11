@@ -1,0 +1,51 @@
+.content {
+	position: absolute;
+	left: 0px;
+	top: 60px;
+	left: 0;
+	right: 320px;
+	bottom: 0;
+	display:flex;
+	flex-flow: row wrap;
+	justify-content: center;
+	align-content: center;
+	background-color: orange;
+}
+
+.main_icons {
+	display: flex;
+	height: 50px;
+	width: 50px;
+}
+
+.icon_href {
+	display: flex;
+	flex-flow: column wrap;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	width: 40%;
+
+}
+
+.row {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: center;
+	align-items: center;
+	height: 48%;
+	width: 100%;
+}
+
+.big_button_icon {
+	display:flex;
+	flex-flow: column wrap;
+	height: 90%;
+	width: 90%;
+	justify-content:center;
+}
+
+.big_button_text {
+	font-size:30px;
+	text-align:center;
+}

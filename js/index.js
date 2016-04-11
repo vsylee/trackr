@@ -30,9 +30,7 @@ function setup_header_options(id) {
 		case "header_account":
 			classes += " header_expansion_child_account";
 	}
-		// case "header_events":
-		// console.log(navigation_elements[id]);
-		// console.log(navigation_elements.header_events);
+
 	for (var i = 0; i < navigation_elements[id].length; i++) {
 		$('<div>')
 			.addClass(classes)
@@ -42,10 +40,18 @@ function setup_header_options(id) {
 			})
 			.text(navigation_elements[id][i]);
 	}
-	// }
 }
 
 $(document).ready(function() {
+	var content_object = $('.icon_href');
+	var button_icons = $('.big_button_icon');
+	var square_length = content_object.height() * 0.85;
+	for (var i = 0; i < button_icons.length; i++) {
+		$(button_icons[i]).css({
+			'width': square_length + 'px',
+			'height': square_length + 'px'
+		});
+	}
 
 	menu_options = $('.header_button');
 	$('.header_button')
