@@ -1,3 +1,9 @@
+var tennis = ['Tennis A', 'Tennis B', 'Tennis C', 'Tennis D', 'Tennis E', 'Tennis F', 'Tennis G', 'Tennis H', 'Tennis I', 'Tennis J', 'Tennis K', 'Tennis L', 'Tennis M', 'Tennis N', 'Tennis O', 'Tennis P', 'Tennis Q', 'Tennis R', 'Tennis S', 'Tennis T', 'Tennis U', 'Tennis V', 'Tennis W', 'Tennis X', 'Tennis Y', 'Tennis Z'];
+var gymnastics = ['Gymnastics A', 'Gymnastics B', 'Gymnastics C', 'Gymnastics D'];
+var soccer = ['Czarina', 'Veronica', 'Jing', 'Sam', 'Michael', 'Roger', 'Richard', 'Paul', 'Chris', 'Josh', 'Mira', 'Miri'];
+var teams = {"gymnastics":gymnastics, "tennis":tennis, "soccer":soccer};
+
+
 function dropdown(id) {
 	document.getElementById(id).classList.toggle("show");
 	// close all menus that aren't the menu just clicked
@@ -8,6 +14,29 @@ function dropdown(id) {
 		}
 	}
 };
+
+function searchKeyPress() {
+	$("#team-members").empty();
+	var searchValue = $("#search-bar").val();
+	var len = searchValue.length;
+	var currentTeam = $("#team-select").val();
+	var currentMembers = teams[currentTeam];
+	var matchingMembers = [];
+	if (currentMembers) {
+		for (var i=0; i < currentMembers.length; i++) {
+			if (currentMembers[i].substr(0,len).toLowerCase() === searchValue.toLowerCase()) {
+				matchingMembers.push(currentMembers[i]);
+			}
+		}
+		for (var i=0; i < matchingMembers.length; i++) {
+			if (i != 0) {
+				$("#team-members").append("<hr>");
+			}
+			$("#team-members").append(
+				"<li>" + matchingMembers[i] + "</li>");
+		}
+	}
+}
 
 $(document).ready(function() {
 
@@ -22,7 +51,7 @@ $(document).ready(function() {
 		if (!$(e.target).closest("#search-bar").length &&
 			!$(e.target).is("#search-bar")) {
 			if ($("#search-bar").val() == "") {
-				$("#search-bar").val("🔍 Search...");
+				$("#search-bar").val("🔍 Search...")
 			}
 		}
 		// if not a menu, close menu
@@ -37,10 +66,7 @@ $(document).ready(function() {
 		}
 	});
 
-	var tennis = ['Tennis A', 'Tennis B', 'Tennis C', 'Tennis D', 'Tennis E', 'Tennis F', 'Tennis G', 'Tennis H', 'Tennis I', 'Tennis J', 'Tennis K', 'Tennis L', 'Tennis M', 'Tennis N', 'Tennis O', 'Tennis P', 'Tennis Q', 'Tennis R', 'Tennis S', 'Tennis T', 'Tennis U', 'Tennis V', 'Tennis W', 'Tennis X', 'Tennis Y', 'Tennis Z'];
-	var gymnastics = ['Gymnastics A', 'Gymnastics B', 'Gymnastics C', 'Gymnastics D'];
-	var teams = {"tennis":tennis, "gymnastics":gymnastics}
-	// populate team list
+	// populate team dropdown menu
 	for (var i=0; i < Object.keys(teams).length; i++) {
 		var team = Object.keys(teams)[i];
 		$("#team-select").append(
@@ -49,8 +75,9 @@ $(document).ready(function() {
 			"</option>");
 	}
 
-	$("#team-select").on('change', function (e) {
-		var selected_team = $(this).val();
+	// populate team member list
+	var populateTeamList = function() {
+		var selected_team = $("#team-select").val();
 		var team_members = teams[selected_team];
 		$("#team-members").empty();
 		for (var i=0; i < team_members.length; i++) {
@@ -60,7 +87,12 @@ $(document).ready(function() {
 			$("#team-members").append(
 				"<li>" + team_members[i] + "</li>");
 		}
+	};
+
+	$("#team-select").on('change', function (e) {
+		populateTeamList();
 	});
+
 
 
 	var right_panel_width = 300;

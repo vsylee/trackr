@@ -170,12 +170,16 @@ p, a {
 
 
 
+
+
+
+
 #right-panel {
 	display:flex;
 	align-items:stretch;
 	position:fixed;
 	right:0px;
-	margin-top:100px;
+	margin-top:60px;
 	top:0px;
 	bottom:0px;
 }
@@ -249,6 +253,7 @@ select#team-select {
 	padding-left:10px;
 	padding-top:5px;
 	padding-bottom:7px;
+	color:black;
 }
 
 hr {
