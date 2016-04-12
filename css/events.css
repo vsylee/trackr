@@ -11,11 +11,11 @@
 }
 
 #calendar {
-	padding: 10px;
+	margin: 10px;
 }
 
 .addEvent-form {
-	line-height: 150%;
+	line-height: 175%;
 	padding: 10px;
 	text-align: left;
 }

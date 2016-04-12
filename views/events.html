@@ -105,16 +105,24 @@
 
 	        selectable: true,
 	        // selectHelper: true,
-	        select: function(start, end) {
-				var title = prompt('Event Title:');
+	        select: function(start, end, jsEvent, view) {
+	        	console.log($(jsEvent.target).parent());
+	        	console.log(view);
+	        	console.log(this.el);
+	        	console.log(this.el.get());
+	        	// showAddEventPopover($(jsEvent.target));
+	        	// $('#startDate').
+				// var title = prompt('Event Title:');
 				var eventData;
-				if (title) {
+				if (true) {
 					eventData = {
-						title: title,
+						title: "Event Name",
 						start: start,
 						end: end
 					};
-					$('#calendar').fullCalendar('renderEvent', eventData, false); // stick? = true
+					var event = $('#calendar').fullCalendar('renderEvent', eventData, false); // stick? = true
+
+					// showAddEventPopover($(event[0]));
 				}
 				$('#calendar').fullCalendar('unselect');
 			},
@@ -135,21 +143,7 @@
 	            	click: function(e) {
 						showAddEventPopover($(this));
 
-
-						// var options = {
-						// 	className: 'addEvent-popover',
-						// 	content: '<div class="fc-header fc-widget-header"> <span class="fc-close fc-icon fc-icon-x"></span><span class="fc-title">Add Event</span><div class="fc-clear"></div>'
-	    	// 								+ '</div>'
-	    	// 								+ '<div class="fc-body fc-widget-content"><div class="fc-content">' + $(".addEvent-dialog").html() +'</div>'
-	    	// 								+ '</div>',
-	    	// 				top: top,
-	    	// 				left: left,
-	    	// 				autoHide: true
-
-						// }
-
     					return false;
-
 		            }
 		        }
             }
@@ -157,6 +151,7 @@
 	    });
 	    $(".fc-addEvent-button").attr('id', 'addEvent-button');
 	    $(".fc-addEvent-button").css({'background-color': '#990000', 'background-image': 'none', 'color': 'white'});
+	    // $(".fc-day-grid-contianer").attr('id', '')
 
 
 
