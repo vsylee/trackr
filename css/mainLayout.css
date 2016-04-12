@@ -5,7 +5,7 @@ body, html, div {
 
 * {
 	font-family: 'Helvetica';
-	color: white;
+	color: black;
 }
 
 p, a {
@@ -52,14 +52,40 @@ p, a {
 }
 
 .header_expansion {
-	width: 20%;
-	height: 40px;
-	background-color: red;
 	position: absolute;
 	top: 60px;
 	right: 0;
+	background-color: red;
+	flex-flow: column wrap;
+	justify-content: flex-start;
+	align-items: center;
+
 	display: none;
 }
+
+.header_expansion_child {
+	display: flex;
+	height: 40px;
+	padding: 5px 5px 0 5px;
+
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	background-color: orange;
+}
+
+.header_expansion_child_events {
+	width: 250px;
+}
+
+.header_expansion_child_feedback {
+	width: 250px;
+}
+
+.header_expansion_child_account {
+	width: 125px;
+}
+
 
 .dropdown_container {
 	display: flex;
@@ -80,112 +106,26 @@ p, a {
 }
 
 #home {
-	font-size:2.25em;
-	padding-left:20px;
+	font-size: 2.25em;
+	padding-left: 20px;
 }
-
-#header-buttons {
-	display:flex;
-	align-items:center;
-}
-
-/*.header-button {
-	color: black;
-	float:right;
-	height:60px;
-
-	font-size:25px;
-	text-align:center;
-
-	border:1px solid gray;
-	padding-top:2px;
-	padding-bottom:2px;
-	margin-right: 8px;
-	background-color:#e6e6e6;
-	border-radius:4px;
-}*/
-
-
-/* some code for dropdown menus adapted from w3school.com */
-.header-button-list {
-	list-style-type: none;
-	margin:0;
-	padding:0;
-	overflow:hidden;
-	background-color: #d5d5d5;
-}
-
-.dropdown {
-	float: left;
-}
-
-.dropbtn {
-	display:flex;
-	align-items:center;
-	color:black;
-	text-align: center;
-
-	height: 60px;
-	font-size:1.25em;
-	padding:0px 20px;
-}
-
-.dropdown:hover .dropbtn {
-	background-color:#e6e6e6;
-}
-
-.dropdown-content {
-	display:none;
-	position: absolute;
-	background-color:#f1f1f1;
-	min-width:190px;
-}
-.dropdown-content a {
-	color:black;
-	text-decoration:none;
-	display: block;
-	text-align:left;
-	padding:8px;
-}
-
-/*.dropdown-content a:hover {background-color:#f1f1f1;}*/
-.show {display:block;}
-
-#event-updates {
-	/*width:110px;*/
-}
-
-#feedback-updates {
-	/*width:125px;*/
-}
-
-#triangle-menu {
-/*	width: 35px;
-	height: 32px;
-	padding-bottom:0px;*/
-	min-width:auto;
-	left:auto;
-	right:0;
-}
-
-
 
 #right-panel {
-	display:flex;
-	align-items:stretch;
-	position:fixed;
-	right:0px;
-	margin-top:100px;
-	top:0px;
-	bottom:0px;
+	position: absolute;
+	display: flex;
+	align-items: stretch;
+	right: 0px;
+	margin-top: 60px;
+	top: 0px;
+	bottom: 0px;
 }
 
 #right-panel-button {
-	background:#BDBDBD;
-	width:20px;
-	display:flex;
-	align-items:center;
-	justify-content:center;
+	background: #BDBDBD;
+	width: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 #player-list {
@@ -203,7 +143,9 @@ p, a {
 	font-size:20px;
 	color:gray;
 	border-radius:5px;
+	border: 0px;
 	margin-bottom:10px;
+	padding-left:5px;
 }
 
 select > .placeholder {
@@ -214,7 +156,6 @@ select > .placeholder {
 select#team-select {
    -webkit-appearance: button;
    -webkit-border-radius: 2px;
-   -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
    -webkit-padding-end: 20px;
    -webkit-padding-start: 2px;
    -webkit-user-select: none;
@@ -230,6 +171,7 @@ select#team-select {
    white-space: nowrap;
    width: 260px;
    min-height: 31px;
+   box-shadow: none;
 }
 
 #team-members {
@@ -237,7 +179,6 @@ select#team-select {
 	bottom:0px;
 	margin-bottom:20px;
 	width:256px;
-	border:2px solid #AAA;
 	padding:0;
 	overflow:hidden;
 	overflow-y:scroll;
@@ -249,6 +190,7 @@ select#team-select {
 	padding-left:10px;
 	padding-top:5px;
 	padding-bottom:7px;
+	color:black;
 }
 
 hr {
@@ -259,18 +201,4 @@ hr {
 	margin:0;
 	border:0px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

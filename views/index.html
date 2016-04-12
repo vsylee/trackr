@@ -12,9 +12,9 @@
 
 <!-- Load style sheets -->
 <link rel="stylesheet" href="./../css/mainLayout.css" />
-<link rel="stylesheet" href="./../css/homepage.css" />
 <link href='https://fonts.googleapis.com/css?family=Amaranth' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Overlock' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="./../css/index.css" />
 </head>
 
 <body>
@@ -26,78 +26,48 @@
  			Events
  		</div>
  		<div class="dropdown_container header_button" style="font-family: 'Overlock', serif;">
-			Feedback
+ 			Feedback
 		</div>
-		<div class="dropdown_container header_button">
+		<div class="dropdown_container header_button" id="header_account">
 			<!-- Triangle Down -->
 			<p class="menu_option">&#9662;</p>
 		</div>
 	</div>
 </div>
 
-<div class="header_expansion ">
+<div class="header_expansion">
 
 </div>
 
-
-<!-- 		<ul class="header-button-list">
-			<li class="dropdown">
-				<a href="javascript:void(0)" class="dropbtn" id="event-button" onclick="dropdown('event-updates')">Event<br>Updates</a>
-				<div class="dropdown-content" id="event-updates">
-					<a href="#">Event 1</a>
-					<a href="#">Event 2</a>
-					<a href="#">Event 3</a>
-				</div>
-			</li>
-			<li class="dropdown">
-				<a href="javascript:void(0)" class="dropbtn" id="feedback-button" onclick="dropdown('feedback-updates')">Feedback<br>Updates</a>
-				<div class="dropdown-content" id="feedback-updates">
-					<a href="#">Feedback 1</a>
-					<a href="#">Feedback 2</a>
-					<a href="#">Feedback 3</a>
-				</div>
-			</li>
-			<li class="dropdown">
-				<a href="javascript:void(0)" class="dropbtn" id="triangle-button" onclick="dropdown('triangle-menu')">▼</a>
-				<div class="dropdown-content" id="triangle-menu">
-					<a href="#">Account</a>
-					<a href="#">Settings</a>
-					<a href="#">Log Out</a>
-				</div>
-			</li>
-		</ul>
- -->
-<!-- 
-<div id="content">
+<div class="content">
 	<div class="row">
-		<a href="./profile.html" id="profile-button" class="big-button">
-			<img src="./../images/profile.jpg" style="max-width:100%;height:calc(100% - 20px);">
-			<p class="big-button-text">My Profile</p>
+		<a href="./profile.html" class="icon_href first_element" id="profile-button">
+			<img src="./../images/Icon180.png" class="big_button_icon">
+			<p> My Profile</p>
 		</a>
-		<a href="./feedback.html" id="feedback-button" class="big-button">
-			<img src="./../images/feedback.jpg" style="max-width:100%;height:calc(100% - 20px);">
-			<p class="big-button-text">Feedback</p>
+		<a href="./feedback.html" class="icon_href" id="feedback-button">
+			<img src="./../images/Icon180.png" class="big_button_icon">
+			<p>Feedback</p>
 		</a>
 	</div>
 	<div class="row">
-		<a href="./events.html" id="events-button" class="big-button">
-			<img src="./../images/events.jpg" style="max-width:100%;height:100%;">
-			<p class="big-button-text">Events</p>
+		<a href="./events.html" class="icon_href first_element" id="feedback-button">
+			<img src="./../images/Icon180.png" class="big_button_icon">
+			<p>Events</p>
 		</a>
-		<a href="./settings.html" id="settings-button" class="big-button">
-			<img src="./../images/settings.jpg" style="max-width:100%;height:100%;">
-			<p class="big-button-text">Settings</p>
+		<a href="./settings.html" class="icon_href" id="feedback-button">
+			<img src="./../images/Icon180.png" class="big_button_icon">
+			<p>Settings</p>
 		</a>
 	</div>
-</div>
-
+</div> 
 
  <div id="right-panel">
 	<div id="right-panel-button" class="open">
 		<span id="right-panel-triangle">
 	</div>
 	<div id="player-list">
-		<input type="text" id="search-bar" value="🔍 Search..."></input>
+		<input type="text" id="search-bar" value="🔍 Search..." onKeyPress="searchKeyPress()" onKeyUp="searchKeyPress()"></input>
 
 		<select required id="team-select">
 			<option class="placeholder" selected disabled value="">Team:</option>
@@ -107,7 +77,8 @@
 
 		</ul>
 	</div>
-</div> -->
+</div>
+
 <script type="text/javascript" src="./../external_js/jquery-1.9.0.min.js"></script>
 <script type="text/javascript" src="./../js/header.js"></script>
 <script type="text/javascript" src="./../js/index.js"></script>

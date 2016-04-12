@@ -1,0 +1,48 @@
+.content {
+	position: absolute;
+	left: 0px;
+	top: 60px;
+	left: 0;
+	right: 320px;
+	bottom: 0;
+	display:flex;
+	flex-flow: row wrap;
+	justify-content: center;
+	align-content: center;
+	background-color: orange;
+}
+
+.first_element {
+	margin-right: 9%;
+}
+
+.icon_href {
+	display: flex;
+	flex-flow: column wrap;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	width: 30%;
+
+}
+
+.row {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: center;
+	align-items: center;
+	height: 48%;
+	width: 100%;
+}
+
+.big_button_icon {
+	display:flex;
+	flex-flow: column wrap;
+	height: 90%;
+	width: 90%;
+	justify-content:center;
+}
+
+
+
+
