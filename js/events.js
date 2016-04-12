@@ -40,16 +40,17 @@ function addEvent(popoverObj) {
 	if (popoverObj !== 'addEvent-button-popover') popover.remove();
 }
 
-function showAddEventPopover(parentObj) {
+function showAddEventPopover(parentObj, container) {
 	console.log(parentObj.parent().parent().parent().parent().parent()); //fc-day-grid
 	// var parent = parentObj.attr('id') === undefined ? $('#calendar') : parentObj;
 	// parent = $('#addEvent-button');
+	// console.log(parentObj);
 	var parent = parentObj;
-	console.log(parentObj);
+	// console.log(parentObj);
 	console.log(parent);
-	// var id = parent.attr('id') + '-popover';
-	var id = "hi";
-	parent.after('<div id="' + id + '" class="fc-popover">' +
+	console.log(container);
+	var id = parent.attr('id') + '-popover';
+	container.after('<div id="' + id + '" class="fc-popover">' +
     					'<div class="fc-header fc-widget-header"> <span class="fc-close fc-icon fc-icon-x"></span><span class="fc-title">Event Details</span><div class="fc-clear"></div>'
     					+ '</div>'
     					+ '<div class="fc-body fc-widget-content"><div class="fc-content">' + addEventDialog(id) +'</div>'
@@ -102,15 +103,19 @@ function showAddEventPopover(parentObj) {
 	    }
 	});
 
-	// $(document).on('mousedown', 'documentMousedown');
+	$(document).on('mousedown', documentMousedown);
 
 
-	// function documentMousedown(e) {
-	// 	if ($("#addEvent-popover") && !$(e.target).closest($("#addEvent-popover")).length) {
-	// 		$("#addEvent-popover").css({'display':'none'});
-	// 		$(document).off('mousedown', 'documentMousedown');
+	function documentMousedown(e) {
+		var parentClass = $(e.target).offsetParent().attr('class');
+		console.log(parentClass);
+		if (parentClass === undefined || !parentClass.startsWith('fc-popover')) {
+			e.stopPropagation();
+			console.log('lol');
+			$("#addEvent-button-popover").css({'display':'none'});
+			$(document).off('mousedown', 'documentMousedown');
 
-	// 	}
-	// }
+		}
+	}
 
 }

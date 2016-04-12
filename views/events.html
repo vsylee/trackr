@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="./../css/mainLayout.css" />
 <link rel="stylesheet" href="./../css/events.css" />
 <link rel='stylesheet' href='./../fullcalendar-2.6.1/fullcalendar.css' />
+<link rel='stylesheet' href='./../fullcalendar-2.6.1/fullcalendar.print.css' media='print'/>
 
 </head>
 
@@ -94,8 +95,10 @@
 	        },
 
 	        eventClick: function(event) {
+
 	        	if (event.url) return false; // don't allow redirection to source website of events
 	        	// TODO: call eventClick function here to show summary of event details and to edit the event
+	        	this.bindPopup('<button class="trigger">Say hi</button>');
 	        },
 
 	        dayClick: function(event) {
@@ -113,17 +116,23 @@
 	        	// showAddEventPopover($(jsEvent.target));
 	        	// $('#startDate').
 				// var title = prompt('Event Title:');
+				var id = $(jsEvent.target).position().top;
+				console.log($('#'+1));
+				console.log(id);
+				id = 'placeholder';
 				var eventData;
-				if (true) {
-					eventData = {
-						title: "Event Name",
-						start: start,
-						end: end
-					};
-					var event = $('#calendar').fullCalendar('renderEvent', eventData, false); // stick? = true
+				// if (true) {
+				// 	eventData = {
+				// 		id: id,
+				// 		title: "Event Name",
+				// 		start: start,
+				// 		end: end,
+				// 		classname: id,
+				// 	};
+				// 	var event = $('#calendar').fullCalendar('renderEvent', eventData, false); // stick? = true
 
-					// showAddEventPopover($(event[0]));
-				}
+				// 	showAddEventPopover(this.el, $('.fc-day-grid-contianer'));
+				// }
 				$('#calendar').fullCalendar('unselect');
 			},
 
@@ -141,7 +150,7 @@
             		id: 'test',
 	            	text: 'Add Event',
 	            	click: function(e) {
-						showAddEventPopover($(this));
+						showAddEventPopover($(this),$(this));
 
     					return false;
 		            }
