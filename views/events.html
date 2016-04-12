@@ -16,71 +16,45 @@
 <link rel="stylesheet" href="./../css/mainLayout.css" />
 <link rel="stylesheet" href="./../css/events.css" />
 <link rel='stylesheet' href='./../fullcalendar-2.6.1/fullcalendar.css' />
+<link rel='stylesheet' href='./../fullcalendar-2.6.1/fullcalendar.print.css' media='print'/>
 
 </head>
 
 <body>
 
-<header class="header">
-	<p style="float:left;"><a id="home" href="./index.html">Trackr</a></p>
-	<div id="header-buttons">
-		<ul class="header-button-list">
-			<li class="dropdown">
-				<a href="javascript:void(0)" class="dropbtn" id="event-button" onclick="dropdown('event-updates')">Event<br>Updates</a>
-				<div class="dropdown-content" id="event-updates">
-					<a href="#">Event 1</a>
-					<a href="#">Event 2</a>
-					<a href="#">Event 3</a>
-				</div>
-			</li>
-			<li class="dropdown">
-				<a href="javascript:void(0)" class="dropbtn" id="feedback-button" onclick="dropdown('feedback-updates')">Feedback<br>Updates</a>
-				<div class="dropdown-content" id="feedback-updates">
-					<a href="#">Feedback 1</a>
-					<a href="#">Feedback 2</a>
-					<a href="#">Feedback 3</a>
-				</div>
-			</li>
-			<li class="dropdown">
-				<a href="javascript:void(0)" class="dropbtn" id="triangle-button" onclick="dropdown('triangle-menu')">▼</a>
-				<div class="dropdown-content" id="triangle-menu">
-					<a href="#">Account</a>
-					<a href="#">Settings</a>
-					<a href="#">Log Out</a>
-				</div>
-			</li>
-		</ul>
+<div class="header disable_select">
+	<p><a id="home" href="./index.html">Trackr</a></p>
+	<div class="header_buttons">
+		<div class="dropdown_container header_button" id="header_events">
+ 			Events
+ 		</div>
+ 		<div class="dropdown_container header_button" id="header_feedback">
+			Feedback
+		</div>
+		<div class="dropdown_container header_button" id="header_account">
+			<!-- Triangle Down -->
+			<p class="menu_option">&#9662;</p>
+		</div>
 	</div>
-</header>
+</div>
+
+<div class="header_expansion">
+
+</div>
 
 <div id="content">
-	<div id="calendar">
-	</div>
-	<div class="addEvent-dialog" id="addEvent-dialog-text">
-		<form action="javascript:addEvent();" class="addEvent-form">
-			<label for="name">Event Name: </label><input type="text" name="name" id="name" required/><br>
-			<label for="date">Date: </label><input type="text" name="date" id="date" required/><br> 
-			<label for="startTime">Start Time: </label><input type="text" name="startTime" id="textbox" required/><br> 
-			<label for="endTime">End Time: </label><input type="time" name="endTime" id="endTime"/><br> 
-			<label for="location">Location: </label><input type="text" name="location" id="location"/><br> 
-			<label for="share">Share with: </label>
-				<select name="teams" value:"Select Team/s">
-					<option value="">Gymnastics</option>
-					<option value="">Soccer</option>
-					<option value="">Tennis</option>
-				  <!-- <option value="">generate list of teams</option> -->
-				</select><br>
-			<label for="request">Request Feedback: </label><input type="checkbox" name="request" id="request"/><br> 
-			<input type="submit" value="Save and Share"/>
-		</form>
+	<div id="calendar_container">
+		<div id="calendar">
+		</div>
 	</div>
 </div>
 
 
 
 
+
 <!-- Right Panel -->
-<!-- <div id="right-panel">
+<div id="right-panel">
 	<div id="right-panel-button" class="open">
 		<span id="right-panel-triangle">
 	</div>
@@ -95,7 +69,7 @@
 
 		</ul>
 	</div>
-</div> -->
+</div>
 
 <script type="text/javascript" src="./../external_js/jquery-1.9.0.min.js"></script>
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -106,25 +80,24 @@
 <script src='./../fullcalendar-2.6.1/fullcalendar.js'></script>
 <script type='text/javascript' src='./../fullcalendar-2.6.1/gcal.js'></script>
 
+<script type="text/javascript" src="./../js/index.js"></script>
+<script type="text/javascript" src="./../js/events.js"></script>
 <script type="text/javascript">
 
-		$( "#startTime" ).bind('change keyup input',function() {
-  alert( "Handler for .change() called." );
-});
 	$(document).ready(function() {
-		$("#textbox").keyup(function() {alert("Keyup detected!");});
-$("#textbox").change(function() {alert("Change detected!");});
-$("#textbox").bind('paste',function() {alert("paste detected!");});
-
-		$('#startTime').on('input propertychange paste', function() {
-			console.log('here');
-	        if ($('#endTime').val() === '') {
-	        	console.log('h');
-	        	$('#endTime').val($('#startTime').val());
+		$("#right-panel-button").click();
+		function resizeCalendar() {
+	        var currentView = $('#calendar').fullCalendar('getView');
+	        if(currentView.name === 'agendaWeek' || currentView.name === 'agendaDay') {
+	            currentView.setHeight(9999);
 	        }
-	    });
+	        $('#calendar').fullCalendar('option', 'height', $('#calendar_container').outerHeight()*0.94);
+	    }
+	    $(window).on('resize', resizeCalendar);
 
 	    $('#calendar').fullCalendar({
+	    	height: $('#calendar_container').outerHeight()*0.94,
+	    	viewDisplay: resizeCalendar,
 	    	timezone: "local",
 	    	fixedWeekCount: false, // makes calendar just display the weeks in that month
 
@@ -135,27 +108,44 @@ $("#textbox").bind('paste',function() {alert("paste detected!");});
 	        },
 
 	        eventClick: function(event) {
+
 	        	if (event.url) return false; // don't allow redirection to source website of events
-	        	// TODO: call eventClick function here to edit the event
+	        	// TODO: call eventClick function here to show summary of event details and to edit the event
+	        	// this.bindPopup('<button class="trigger">Say hi</button>');
 	        },
 
 	        dayClick: function(event) {
-	        	// TODO: call function that brings out the week schedule
+	        	// showAddEventPopover($(this));
+	        	// TODO: call function that brings out the week schedule?
 	        },
 
 	        selectable: true,
 	        // selectHelper: true,
-	        select: function(start, end) {
-				var title = prompt('Event Title:');
+	        select: function(start, end, jsEvent, view) {
+	        	console.log($(jsEvent.target).parent());
+	        	console.log(view);
+	        	console.log(this.el);
+	        	console.log(this.el.get());
+	        	// showAddEventPopover($(jsEvent.target));
+	        	// $('#startDate').
+				// var title = prompt('Event Title:');
+				var id = $(jsEvent.target).position().top;
+				console.log($('#'+1));
+				console.log(id);
+				id = 'placeholder';
 				var eventData;
-				if (title) {
-					eventData = {
-						title: title,
-						start: start,
-						end: end
-					};
-					$('#calendar').fullCalendar('renderEvent', eventData, false); // stick? = true
-				}
+				// if (true) {
+				// 	eventData = {
+				// 		id: id,
+				// 		title: "Event Name",
+				// 		start: start,
+				// 		end: end,
+				// 		classname: id,
+				// 	};
+				// 	var event = $('#calendar').fullCalendar('renderEvent', eventData, false); // stick? = true
+
+				// 	showAddEventPopover(this.el, $('.fc-day-grid-contianer'));
+				// }
 				$('#calendar').fullCalendar('unselect');
 			},
 
@@ -163,65 +153,38 @@ $("#textbox").bind('paste',function() {alert("paste detected!");});
 			eventLimit: true, //more link shows up when there are too many events
 
 	        googleCalendarApiKey: 'AIzaSyCX_A2rKiGZ4wo6LXNyJZ7WCK64SSqVSqU',
-            events: {
-            	editable: true,
-                googleCalendarId: '3qff5g4q570qkmhdo6546mpt5o@group.calendar.google.com', //6.813 class calendar
-            },
+            eventSources: [
+            		{
+            			editable: true,
+                		googleCalendarId: '3qff5g4q570qkmhdo6546mpt5o@group.calendar.google.com', //6.813 class calendar
+                	},
+                	{
+                		editable: true,
+                		googleCalendarId: 'mfj0nf3n8jfn92mklam206a4nk@group.calendar.google.com', //MIT calendar
+                	},
+            ],
 
             customButtons: {
             	addEvent: {
             		id: 'test',
 	            	text: 'Add Event',
-	            	click: function(ev) {
-	            		var options = {
-	            			className: 'fc-more-popover',
-	            			content: '<div class-"fc-header ><span>hello</span></div>',
-	            			parentEl: this.el,
-	            			top: '100px',
-	            			autoHide: true,
-	            		}
-
-						var top = $(this).position().top + $(this).outerHeight();
-						$("#addEvent-popover").css({'display':'block', 'top':top});
+	            	click: function(e) {
+						showAddEventPopover($(this),$(this));
 
     					return false;
-
 		            }
 		        }
             }
 	        
 	    });
-
+	    $(".fc-addEvent-button").attr('id', 'addEvent-button');
 	    $(".fc-addEvent-button").css({'background-color': '#990000', 'background-image': 'none', 'color': 'white'});
-	    $(".fc-addEvent-button").after('<div id="addEvent-popover" class="fc-popover">' +
-	    									'<div class="fc-header fc-widget-header"> <span class="fc-close fc-icon fc-icon-x"></span><span class="fc-title">Add Event</span><div class="fc-clear"></div>'
-	    									+ '</div>'
-	    									+ '<div class="fc-body fc-widget-content"><div class="fc-content">' + $(".addEvent-dialog").html() +'</div>'
-	    									+ '</div>'
-	    								+ '</div>');
-	    $("#addEvent-popover").css({'color': 'black', 'z-index': '1000','display': 'none'});
+	    // $(".fc-day-grid-contianer").attr('id', '')
 
-	    $(function() {
-			$( "#date" ).datepicker();
-			
-		});
 
 
 	});
 
-	function addEvent() {
-		var date = $('#date').val();
-		var startTime = $('#startTime').val();
-		var startDateTime = new Date(date+' '+startTime);
-		var endTime = $('#endTime').val();
-		console.log(dateTime.toISOString());
-		var event = {
-			title: $('#name').val(),
-			start: startDateTime.toISOString(),
-		}
-		$('#calendar').fullCalendar('renderEvent', event);
-		$("#addEvent-popover").css({'display':'none'});
-	}
 
 </script>
 

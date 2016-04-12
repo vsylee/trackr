@@ -1,6 +1,13 @@
 body, html, div {
 	margin: 0px;
 	padding: 0px;
+	/*height: 100%;*/
+}
+
+body {
+	/*display: flex;*/
+	/*flex-direction: column;*/
+	overflow: hidden;
 }
 
 * {
@@ -127,6 +134,7 @@ p, a {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	cursor: pointer;
 }
 
 #player-list {
