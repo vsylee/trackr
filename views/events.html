@@ -43,9 +43,12 @@
 </div>
 
 <div id="content">
-	<div id="calendar">
+	<div id="calendar_container">
+		<div id="calendar">
+		</div>
 	</div>
 </div>
+
 
 
 
@@ -82,9 +85,18 @@
 <script type="text/javascript">
 
 	$(document).ready(function() {
-
+		function resizeCalendar() {
+	        var currentView = $('#calendar').fullCalendar('getView');
+	        if(currentView.name === 'agendaWeek' || currentView.name === 'agendaDay') {
+	            currentView.setHeight(9999);
+	        }
+	    }
+	    $(window).on('resize', resizeCalendar);
 
 	    $('#calendar').fullCalendar({
+	    	// height: $('#calendar_container').height(),
+	    	viewDisplay: resizeCalendar,
+	    	// aspectRatio: 1.5,
 	    	timezone: "local",
 	    	fixedWeekCount: false, // makes calendar just display the weeks in that month
 

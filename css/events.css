@@ -1,17 +1,14 @@
 #content {
-	display:flex;
-	align-items:stretch;
-	position:fixed;
-	margin-top:100px;
-
-	flex-flow: row wrap;
-	justify-content:space-around;
-	align-content:space-around;
+	/* 60px header */
+	margin-top:60px;
+	/* 320px right panel */
 	margin-right:320px;
+	margin-bottom:10px;
+	flex-grow: 1;
 }
 
-#calendar {
-	margin: 10px;
+#calendar_container {
+	margin: 20px;
 }
 
 .addEvent-form {
@@ -23,3 +20,5 @@
 #addEvent-dialog-text {
 	display: none;
 }*/
+
+/*#wrapper {padding:60px 0 0 0; position:absolute; top:0; bottom:0; left:0; right:0;}*/
