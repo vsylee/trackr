@@ -54,7 +54,7 @@
 
 
 <!-- Right Panel -->
-<!-- <div id="right-panel">
+<div id="right-panel">
 	<div id="right-panel-button" class="open">
 		<span id="right-panel-triangle">
 	</div>
@@ -69,7 +69,7 @@
 
 		</ul>
 	</div>
-</div> -->
+</div>
 
 <script type="text/javascript" src="./../external_js/jquery-1.9.0.min.js"></script>
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -85,18 +85,19 @@
 <script type="text/javascript">
 
 	$(document).ready(function() {
+		$("#right-panel-button").click();
 		function resizeCalendar() {
 	        var currentView = $('#calendar').fullCalendar('getView');
 	        if(currentView.name === 'agendaWeek' || currentView.name === 'agendaDay') {
 	            currentView.setHeight(9999);
 	        }
+	        $('#calendar').fullCalendar('option', 'height', $('#calendar_container').outerHeight()*0.94);
 	    }
 	    $(window).on('resize', resizeCalendar);
 
 	    $('#calendar').fullCalendar({
-	    	// height: $('#calendar_container').height(),
+	    	height: $('#calendar_container').outerHeight()*0.94,
 	    	viewDisplay: resizeCalendar,
-	    	// aspectRatio: 1.5,
 	    	timezone: "local",
 	    	fixedWeekCount: false, // makes calendar just display the weeks in that month
 
@@ -110,7 +111,7 @@
 
 	        	if (event.url) return false; // don't allow redirection to source website of events
 	        	// TODO: call eventClick function here to show summary of event details and to edit the event
-	        	this.bindPopup('<button class="trigger">Say hi</button>');
+	        	// this.bindPopup('<button class="trigger">Say hi</button>');
 	        },
 
 	        dayClick: function(event) {
@@ -152,10 +153,16 @@
 			eventLimit: true, //more link shows up when there are too many events
 
 	        googleCalendarApiKey: 'AIzaSyCX_A2rKiGZ4wo6LXNyJZ7WCK64SSqVSqU',
-            events: {
-            	editable: true,
-                googleCalendarId: '3qff5g4q570qkmhdo6546mpt5o@group.calendar.google.com', //6.813 class calendar
-            },
+            eventSources: [
+            		{
+            			editable: true,
+                		googleCalendarId: '3qff5g4q570qkmhdo6546mpt5o@group.calendar.google.com', //6.813 class calendar
+                	},
+                	{
+                		editable: true,
+                		googleCalendarId: 'mfj0nf3n8jfn92mklam206a4nk@group.calendar.google.com', //MIT calendar
+                	},
+            ],
 
             customButtons: {
             	addEvent: {
