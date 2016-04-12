@@ -9,7 +9,7 @@
 	flex-flow: row wrap;
 	justify-content: center;
 	align-content: center;
-	background-color: orange;
+	background-color: white;
 }
 
 .first_element {
@@ -43,6 +43,8 @@
 	justify-content:center;
 }
 
-
+.icon-title {
+	color: black;
+}
 
 
