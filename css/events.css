@@ -19,6 +19,7 @@
 
 #calendar {
 	padding: 2%;
+	color: #333333;
 }
 
 .addEvent-form {
@@ -26,3 +27,28 @@
 	padding: 10px;
 	text-align: left;
 }
+
+#home, #header_events, #header_feedback, #header_account {
+	font-family: 'Amaranth';
+	color: white;
+}
+
+.fc-icon, h2, .fc-day-header, .fc-day-number, .fc-title, .ui-datepicker-month, .ui-datepicker-year, .ui-datepicker-calendar th span, .fc-axis span {
+	color: #333333;
+}
+
+.fc-more {
+	color: #3a87ad;
+}
+
+.fc-content .fc-title/*, .fc-content .fc-time*/ {
+	font-family: 'Overlock', serif;
+	color: white;
+}
+
+label, input {
+	color: #333333;
+	font-family: 'Overlock', serif;
+	font-size: 13px;
+}
+
