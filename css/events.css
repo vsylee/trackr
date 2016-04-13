@@ -1,25 +1,54 @@
 #content {
-	display:flex;
-	align-items:stretch;
-	position:fixed;
-	margin-top:100px;
-
-	flex-flow: row wrap;
-	justify-content:space-around;
-	align-content:space-around;
+	position: absolute;
+	display: flex;
+	align-items: stretch;
+	/* 60px header */
+	margin-top:60px;
+	/* 320px right panel */
 	margin-right:320px;
+	/*margin-bottom:10px;*/
+	flex-grow: 1;
+	bottom: 0px;
+	top: 0px;
+}
+
+#calendar_container {
+	display: flex;
+	align-items: stretch;
 }
 
 #calendar {
-	padding: 10px;
+	padding: 2%;
+	color: #333333;
 }
 
 .addEvent-form {
-	line-height: 150%;
+	line-height: 175%;
 	padding: 10px;
 	text-align: left;
 }
 
-#addEvent-dialog-text {
-	display: none;
+#home, #header_events, #header_feedback, #header_account {
+	font-family: 'Amaranth';
+	color: white;
 }
+
+.fc-icon, h2, .fc-day-header, .fc-day-number, .fc-title, .ui-datepicker-month, .ui-datepicker-year, .ui-datepicker-calendar th span, .fc-axis span {
+	color: #333333;
+}
+
+.fc-more {
+	color: #3a87ad;
+}
+
+.fc-content .fc-title/*, .fc-content .fc-time*/ {
+	font-family: 'Overlock', serif;
+	color: white;
+}
+
+label, input {
+	color: #333333;
+	font-family: 'Overlock', serif;
+	font-size: 13px;
+}
+

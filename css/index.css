@@ -5,11 +5,13 @@
 	left: 0;
 	right: 320px;
 	bottom: 0;
-	display:flex;
+}
+.content {
 	flex-flow: row wrap;
 	justify-content: center;
 	align-content: center;
-	background-color: orange;
+	background-color: #fefefe;
+	display:flex; /*e3e6e8 b8c3c8 eeeeee fff1e1 ebf7fd e9eaed*/
 }
 
 .first_element {
@@ -30,7 +32,7 @@
 	display: flex;
 	flex-flow: row nowrap;
 	justify-content: center;
-	align-items: center;
+	align-items: space-between;
 	height: 48%;
 	width: 100%;
 }
@@ -43,6 +45,8 @@
 	justify-content:center;
 }
 
-
+.icon-title {
+	color: black;
+}
 
 
