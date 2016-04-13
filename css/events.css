@@ -1,11 +1,11 @@
-#content {
+.content {
 	position: absolute;
 	display: flex;
 	align-items: stretch;
 	/* 60px header */
 	margin-top:60px;
 	/* 320px right panel */
-	margin-right:320px;
+	right:320px;
 	/*margin-bottom:10px;*/
 	flex-grow: 1;
 	bottom: 0px;
@@ -33,7 +33,7 @@
 	color: white;
 }
 
-.fc-icon, h2, .fc-day-header, .fc-day-number, .fc-title, .ui-datepicker-month, .ui-datepicker-year, .ui-datepicker-calendar th span, .fc-axis span {
+.fc-icon, h2, .fc-day-header, .fc-day-number, .fc-title, .ui-datepicker-month, .ui-datepicker-year, .ui-datepicker-calendar th span {
 	color: #333333;
 }
 
@@ -44,6 +44,12 @@
 .fc-content .fc-title/*, .fc-content .fc-time*/ {
 	font-family: 'Overlock', serif;
 	color: white;
+}
+
+.fc-axis span {
+	font-family: 'Overlock', serif;
+	color: black;
+	font-size: 15px;
 }
 
 label, input {
