@@ -88,6 +88,49 @@ function searchKeyPress() {
 	}
 }
 
+var right_panel_width = 300;
+var animation_time = 400;
+
+function toggleRightPanel(animationTime) {
+	if ($("#right-panel-button").hasClass('open')) {
+		$("#right-panel").animate({
+			right: "-=" + right_panel_width
+		}, animation_time, function(){
+			// animation complete
+		});
+
+		$(".content").animate({
+			right: "-=" + right_panel_width
+		}, animation_time, function(){
+			// animation complete
+		});
+		$(".container").animate({
+			right: "-=" + right_panel_width
+		}, animation_time, function(){
+			// animation complete
+		});
+		$("#right-panel-button").html("◀").removeClass('open').addClass('closed');
+	} else {
+		$("#right-panel").animate({
+			right: "+=" + right_panel_width
+		}, animation_time, function(){
+			// animation complete
+		});
+
+		$(".content").animate({
+			right: "+=" + right_panel_width
+		}, animation_time, function(){
+			// animation complete
+		});
+		$(".container").animate({
+			right: "+=" + right_panel_width
+		}, animation_time, function(){
+			// animation complete
+		});
+		$("#right-panel-button").html("▶").removeClass('closed').addClass('open');
+	}
+}
+
 $(document).ready(function() {
 	menu_options = $('.header_button');
 	$('.header_button')
@@ -184,47 +227,13 @@ $(document).ready(function() {
 		populateTeamList();
 	});
 
-	var right_panel_width = 300;
-	var animation_time = 500;
 	$("#right-panel-triangle").html("▶");
 	$("#right-panel-button").click(function (e) {
-		if ($(this).hasClass('open')) {
-			$("#right-panel").animate({
-				right: "-=" + right_panel_width
-			}, animation_time, function(){
-				// animation complete
-			});
-
-			$(".content").animate({
-				right: "-=" + right_panel_width
-			}, animation_time, function(){
-				// animation complete
-			});
-			$(".container").animate({
-				right: "-=" + right_panel_width
-			}, animation_time, function(){
-				// animation complete
-			});
-			$(this).html("◀").removeClass('open').addClass('closed');
-		} else {
-			$("#right-panel").animate({
-				right: "+=" + right_panel_width
-			}, animation_time, function(){
-				// animation complete
-			});
-
-			$(".content").animate({
-				right: "+=" + right_panel_width
-			}, animation_time, function(){
-				// animation complete
-			});
-			$(".container").animate({
-				right: "+=" + right_panel_width
-			}, animation_time, function(){
-				// animation complete
-			});
-			$(this).html("▶").removeClass('closed').addClass('open');
-		}
-
+		toggleRightPanel(animation_time);
 	});
+
+
+
+
+
 });

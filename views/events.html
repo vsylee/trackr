@@ -42,7 +42,7 @@
 
 </div>
 
-<div id="content">
+<div class="content">
 	<div id="calendar_container">
 		<div id="calendar">
 		</div>
@@ -75,17 +75,21 @@
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<script type="text/javascript" src="./../js/header.js"></script>
 <script src='./../fullcalendar-2.6.1/lib/moment.min.js'></script>
 <script src='./../fullcalendar-2.6.1/fullcalendar.js'></script>
 <script type='text/javascript' src='./../fullcalendar-2.6.1/gcal.js'></script>
 
-<script type="text/javascript" src="./../js/index.js"></script>
+<script type="text/javascript" src="./../js/header.js"></script>
 <script type="text/javascript" src="./../js/events.js"></script>
 <script type="text/javascript">
 
+$("#right-panel-button").html("◀").removeClass('open').addClass('closed');
+$("#right-panel").css('right', '-300px');
+$(".content").css('right', '20px');
+
 	$(document).ready(function() {
-		$("#right-panel-button").click();
+
+		// $("#right-panel-button").click();
 		function resizeCalendar() {
 	        var currentView = $('#calendar').fullCalendar('getView');
 	        if(currentView.name === 'agendaWeek' || currentView.name === 'agendaDay') {
@@ -115,25 +119,28 @@
 	        },
 
 	        dayClick: function(event) {
+	        	// console.log(event);
+	        	// $('#calendar').fullCalendar('changeView', 'agendaDay');
+	        	// $('#calendar').fullCalendar('gotoDate', event);
 	        	// showAddEventPopover($(this));
-	        	// TODO: call function that brings out the week schedule?
 	        },
 
 	        selectable: true,
-	        // selectHelper: true,
+	        selectHelper: true,
 	        select: function(start, end, jsEvent, view) {
-	        	console.log($(jsEvent.target).parent());
-	        	console.log(view);
-	        	console.log(this.el);
-	        	console.log(this.el.get());
+	        	// console.log($(jsEvent.target).parent());
+	        	// console.log(view);
+	        	// console.log(this.el);
+	        	// console.log(this.el.get());
+
 	        	// showAddEventPopover($(jsEvent.target));
 	        	// $('#startDate').
 				// var title = prompt('Event Title:');
-				var id = $(jsEvent.target).position().top;
-				console.log($('#'+1));
-				console.log(id);
-				id = 'placeholder';
-				var eventData;
+				// var id = $(jsEvent.target).position().top;
+				// console.log($('#'+1));
+				// console.log(id);
+				// id = 'placeholder';
+				// var eventData;
 				// if (true) {
 				// 	eventData = {
 				// 		id: id,
