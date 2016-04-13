@@ -130,7 +130,7 @@ $(".content").css('right', '20px');
 	        },
 
 	        selectable: true,
-	        selectHelper: true,
+	        // selectHelper: true,
 	        select: function(start, end, jsEvent, view) {
 	        	// console.log($(jsEvent.target).parent());
 	        	// console.log(view);
@@ -150,19 +150,19 @@ $(".content").css('right', '20px');
 				console.log("id", id);
 				// id = 'placeholder';
 				// var eventData;
-				if ((view.name == "agendaWeek" || view.name == "agendaDay") && start._d != end._d) {
-					console.log("entered if statement");
-					eventData = {
-						id: id,
-						title: "Event Name",
-						start: start,
-						end: end,
-						classname: id,
-					};
-					var event = $('#calendar').fullCalendar('renderEvent', eventData, false); // stick? = true
+				// if ((view.name == "agendaWeek" || view.name == "agendaDay") && start._d != end._d) {
+				// 	console.log("entered if statement");
+				// 	eventData = {
+				// 		id: id,
+				// 		title: "Event Name",
+				// 		start: start,
+				// 		end: end,
+				// 		classname: id,
+				// 	};
+				// 	var event = $('#calendar').fullCalendar('renderEvent', eventData, false); // stick? = true
 
-					showAddEventPopover($(jsEvent.target), $(jsEvent.target));
-				}
+				// 	showAddEventPopover($(jsEvent.target), $(jsEvent.target));
+				// }
 				$('#calendar').fullCalendar('unselect');
 			},
 
