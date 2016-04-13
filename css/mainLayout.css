@@ -15,6 +15,11 @@ body {
 	color: white;
 }
 
+#home, #header_events, #header_feedback, #header_account {
+	font-family: 'Amaranth';
+	color: white;
+}
+
 p, a {
 	display: flex;
 	margin: 0px;
