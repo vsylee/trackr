@@ -101,6 +101,26 @@ var events = [
 
 var table_columns = ["Player name", "Athlete Comment", "Coach feedback"];
 
+// Function to place caret at end of div from 
+// http://stackoverflow.com/questions/4233265/contenteditable-set-caret-at-the-end-of-the-text-cross-browser
+function placeCaretAtEnd(el) {
+    el.focus();
+    if (typeof window.getSelection != "undefined"
+            && typeof document.createRange != "undefined") {
+        var range = document.createRange();
+        range.selectNodeContents(el);
+        range.collapse(true);
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+    } else if (typeof document.body.createTextRange != "undefined") {
+        var textRange = document.body.createTextRange();
+        textRange.moveToElementText(el);
+        textRange.collapse(true);
+        textRange.select();
+    }
+}
+
 $(document).ready(function() {
 
 	for (var i = 0; i < events.length; i++) {
@@ -161,14 +181,20 @@ $(document).ready(function() {
 											.attr('id',  coach_button_id + (i * events.length + j * comments.length + k))
 											.on('click', function(e) {
 												var this_id = $(this).attr('id');
-												var curr_text = $(this).val() == "Edit" ? "Done" : "Edit";
-												
-												$(this).attr('value', curr_text);
+												var curr_text = $(this).val();
 												var editable_id = '#' 
 																+ coach_comment_id 
 																+ $(this).attr('id').substring(coach_button_id.length);
+
+												var content_editable = curr_text == "Edit" ? true : false;
 												$(editable_id)
-													.attr('contenteditable', true);
+													.attr('contenteditable', content_editable)
+												if (content_editable) {
+													placeCaretAtEnd($(editable_id).get(0));
+												}
+												var curr_text = $(this).val() == "Edit" ? "Done" : "Edit";
+												$(this).attr('value', curr_text);
+												
 											});
 					var field_button_container = $("<div>")
 													.addClass('content_col_button_container')

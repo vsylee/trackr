@@ -46,7 +46,6 @@ html, body {
 	display: flex;
 	justify-content: flex-start;
 	text: black;
-	outline: none;
 	width: 80%;
 	font-family: 'Overlock', serif;
 	color: black;
@@ -58,6 +57,7 @@ html, body {
 	justify-content: flex-end;
 	align-content: flex-end;
 	width: 20%;
+	padding-left: 5px;
 	color: black;
 }
 
