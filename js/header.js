@@ -103,10 +103,20 @@ $(document).ready(function() {
 			}
 
 			var pos_offset = self.offset();
-			var right_position = $(window).width() - pos_offset.left - self.width()
+			var right_position = $(window).width() - pos_offset.left - self.width();
+			var width;
+
+			if ($(this).attr('id').indexOf('header_events') != -1 ||
+				$(this).attr('id').indexOf('header_feedback') != -1) {
+				width = 250;
+			} else {
+				width = 125;
+			}
+
 			$('.header_expansion').css({
 				'display': toggle_display,
 				'right': right_position,
+				'width': width + 'px'
 			});
 			previous_option = self;
 			setup_header_options(self.attr('id'));
@@ -166,8 +176,6 @@ $(document).ready(function() {
 	$("#team-select").on('change', function (e) {
 		populateTeamList();
 	});
-
-
 
 	var right_panel_width = 300;
 	var animation_time = 500;

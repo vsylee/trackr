@@ -187,13 +187,18 @@ $(document).ready(function() {
 																+ $(this).attr('id').substring(coach_button_id.length);
 
 												var content_editable = curr_text == "Edit" ? true : false;
+												var edit_background = curr_text == "Edit" ? "#2795ee" : "#0c5a80";
 												$(editable_id)
 													.attr('contenteditable', content_editable)
 												if (content_editable) {
 													placeCaretAtEnd($(editable_id).get(0));
 												}
 												var curr_text = $(this).val() == "Edit" ? "Done" : "Edit";
-												$(this).attr('value', curr_text);
+												$(this)
+													.attr('value', curr_text)
+													.css({
+														'backgroundColor': edit_background
+													});
 												
 											});
 					var field_button_container = $("<div>")
