@@ -49,8 +49,8 @@ function showAddEventPopover(parentObj, container) {
 	// console.log(parentObj);
 	var parent = parentObj;
 	// console.log(parentObj);
-	console.log(parent);
-	console.log(container);
+	// console.log(parent);
+	// console.log(container);
 	var id = parent.attr('id') + '-popover';
 	container.after('<div id="' + id + '" class="fc-popover">' +
     					'<div class="fc-header fc-widget-header"> <span class="fc-close fc-icon fc-icon-x"></span><span class="fc-title">Event Details</span><div class="fc-clear"></div>'
@@ -68,10 +68,10 @@ function showAddEventPopover(parentObj, container) {
 
 	popover.on('click', '.fc-close', function() {
 		popover.css({'display':'none'});
-		console.log(id);
+		// console.log(id);
 		if (id !== 'addEvent-button-popover') {
 			popover.remove();
-			console.log(true);
+			// console.log(true);
 		}
 		//remove popovers on calendar but not from the addEvent button for safety
 	}).draggable();
