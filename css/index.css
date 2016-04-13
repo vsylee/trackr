@@ -41,6 +41,11 @@
 	height: 90%;
 	width: 90%;
 	justify-content:center;
+	opacity: 1;
+}
+
+.big_button_icon:hover {
+    transform: scale(1.1, 1.1);
 }
 
 .icon-title {

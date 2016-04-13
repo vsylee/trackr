@@ -26,11 +26,11 @@ function addEventDialog(popoverId) {
 function addEvent(popoverObj) {
 	var startDate = $('#startDate').val();
 	var startTime = $('#startTime').val();
-	var startDateTime = new Date(date+' '+startTime);
+	var startDateTime = new Date(startDate+' '+startTime);
 
 	var endDate = $('#endDate').val();
 	var endTime = $('#endTime').val();
-	var endDateTime = new Date(date+' '+endTime);
+	var endDateTime = new Date(endDate+' '+endTime);
 
 	var event = {
 		title: $('#name').val(),

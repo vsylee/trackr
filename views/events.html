@@ -89,7 +89,6 @@ $("#right-panel").css('right', '-300px');
 $(".content").css('right', '20px');
 
 	$(document).ready(function() {
-		// $("#right-panel-button").click();
 		function resizeCalendar() {
 	        var currentView = $('#calendar').fullCalendar('getView');
 	        if(currentView.name === 'agendaWeek' || currentView.name === 'agendaDay') {
@@ -210,9 +209,19 @@ $(".content").css('right', '20px');
 	        
 	    });
 
+	    for (var gameIndex in gameData) {
+	    	var game = gameData[gameIndex];
+	    	eventData = {
+	    		title: 'Game vs '+game['opponent'],
+        		className: 'soccer game',
+        		start: new Date(game['date']+' '+game['startTime']).toISOString(),
+        		end: new Date(game['date']+' '+game['endTime']).toISOString(),
+        		location: game['location'],
+	    	}
+			$('#calendar').fullCalendar('renderEvent', eventData, true);
+		}
 	    $(".fc-addEvent-button").attr('id', 'addEvent-button');
-	    $(".fc-addEvent-button").css({'background-color': '#ee9023', 'background-image': 'none', 'color': 'white'});
-	    console.log(gameData.keys);
+	    $(".fc-addEvent-button").css({'background-color': '#990000', 'background-image': 'none', 'color': 'white'});
 
 
 	});
