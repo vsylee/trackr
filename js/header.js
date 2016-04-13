@@ -25,6 +25,7 @@ function hexc(colorval) {
 }
 
 function setup_header_options(id) {
+	console.log("What's the id " + id);
 	var classes = "header_expansion_child";
 	$('.header_expansion').empty();
 	switch (id) {
@@ -40,8 +41,9 @@ function setup_header_options(id) {
 		$('<div>')
 			.addClass(classes)
 			.appendTo($('.header_expansion'))
+			.attr('id', navigation_elements[id][i])
 			.on('click', function(e) {
-				console.log("I am being clicked");
+
 			})
 			.text(navigation_elements[id][i]);
 	}
