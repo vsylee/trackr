@@ -20,12 +20,13 @@ p, a {
 	margin: 0px;
 	text-decoration: none;
 	color: white;
-	font-family: 'Amaranth';
+	font-family: 'Overlock', serif;
+	font-size: 20px;
 }
 
 .header_button {
 	font-size: 1em;
-	background-color: #4892d3;
+	background-color: #3a87ad;
 }
 
 .disable_select {
@@ -43,10 +44,12 @@ p, a {
 	height: 60px;
 
 	display:flex;
-	background-color: #4892d3;
+	background-color: #3a87ad;
 	align-items:center;
 	justify-content:space-between;
 	z-index: 5;
+
+	border-bottom: 3px #054869 solid; /*02364f 054869 0c5a80*/
 }
 
 .header_buttons {
@@ -129,7 +132,7 @@ p, a {
 }
 
 #right-panel-button {
-	background: #BDBDBD;
+	background: #0c5a80; /* 0c5a80 054869;*/
 	width: 20px;
 	display: flex;
 	align-items: center;
@@ -140,7 +143,7 @@ p, a {
 #player-list {
 	display:flex;
 	flex-flow: column nowrap;
-	background:#E0E0E0;
+	background:#b8c3c8; /*bac1c4 bfc4c7 c5c8d3 e9eaed e0e0e0 ffd19c bce0f1 8cc3dd 5ca2c4;*/
 	width:260px;
 	overflow-y:scroll;
 	padding:20px;
@@ -155,6 +158,7 @@ p, a {
 	border: 0px;
 	margin-bottom:10px;
 	padding-left:5px;
+	font-family: 'Overlock', serif;
 }
 
 select > .placeholder {
@@ -172,7 +176,7 @@ select#team-select {
    background-position: 97% center;
    background-repeat: no-repeat;
    border: 1px solid #AAA;
-   color: #555;
+   color: #555; 
    font-size: inherit;
    overflow: hidden;
    padding: 5px 10px;
@@ -181,6 +185,7 @@ select#team-select {
    width: 260px;
    min-height: 31px;
    box-shadow: none;
+   font-family: 'Overlock', serif;
 }
 
 #team-members {
@@ -192,7 +197,8 @@ select#team-select {
 	overflow:hidden;
 	overflow-y:scroll;
 	flex-grow:10;
-	background-color:#EEEEEE;
+	background-color:#fefefe; /*fefefe e9eaed eeeeee ffe2c0*/
+	font-family: 'Overlock', serif;
 }
 
 #team-members li {
@@ -200,12 +206,13 @@ select#team-select {
 	padding-top:5px;
 	padding-bottom:7px;
 	color:black;
+	font-family: 'Overlock', serif;
 }
 
 hr {
 	height:2px;
-	color: #AAA;
-	background-color: #AAA;
+	color: red; /*AAA*/
+	background-color: #889aa3; 627e8b
 	padding:0;
 	margin:0;
 	border:0px;

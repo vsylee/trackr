@@ -108,10 +108,8 @@ function showAddEventPopover(parentObj, container) {
 
 	function documentMousedown(e) {
 		var parentClass = $(e.target).offsetParent().attr('class');
-		console.log(parentClass);
-		if (parentClass === undefined || !parentClass.startsWith('fc-popover')) {
+		if (parentClass === undefined || !(parentClass.startsWith('fc-popover') || parentClass.startsWith('ui-datepicker'))) {
 			e.stopPropagation();
-			console.log('lol');
 			$("#addEvent-button-popover").css({'display':'none'});
 			$(document).off('mousedown', 'documentMousedown');
 
