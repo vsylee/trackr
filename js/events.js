@@ -43,6 +43,8 @@ function addEvent(popoverObj) {
 }
 
 function showAddEventPopover(parentObj, container) {
+	console.log("parentObj", parentObj);
+	console.log("container", container);
 	console.log(parentObj.parent().parent().parent().parent().parent()); //fc-day-grid
 	// var parent = parentObj.attr('id') === undefined ? $('#calendar') : parentObj;
 	// parent = $('#addEvent-button');

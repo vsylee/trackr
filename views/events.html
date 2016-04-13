@@ -162,7 +162,7 @@ $(".content").css('right', '20px');
 					};
 					var event = $('#calendar').fullCalendar('renderEvent', eventData, false); // stick? = true
 
-					showAddEventPopover($('.content'), $('.content'));
+					showAddEventPopover($(jsEvent.target), $(jsEvent.target));
 				}
 				$('#calendar').fullCalendar('unselect');
 			},
