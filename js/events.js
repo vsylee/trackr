@@ -1,5 +1,3 @@
-
-
 function addEventDialog(popoverId) {
 	var dialog =
 		'<div class="addEvent-dialog" id="addEvent-dialog-text">' +
