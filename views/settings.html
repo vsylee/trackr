@@ -11,44 +11,32 @@
 <title>Trackr - Settings</title>
 
 <!-- Load style sheets -->
-<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Amaranth' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Overlock' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="./../css/mainLayout.css" />
 </head>
 
 <body>
 
-<header class="header">
-	<p style="float:left;"><a id="home" href="./index.html">Trackr</a></p>
-	<div id="header-buttons">
-		<ul class="header-button-list">
-			<li class="dropdown">
-				<a href="javascript:void(0)" class="dropbtn" id="event-button" onclick="dropdown('event-updates')">Event<br>Updates</a>
-				<div class="dropdown-content" id="event-updates">
-					<a href="#">Event 1</a>
-					<a href="#">Event 2</a>
-					<a href="#">Event 3</a>
-				</div>
-			</li>
-			<li class="dropdown">
-				<a href="javascript:void(0)" class="dropbtn" id="feedback-button" onclick="dropdown('feedback-updates')">Feedback<br>Updates</a>
-				<div class="dropdown-content" id="feedback-updates">
-					<a href="#">Feedback 1</a>
-					<a href="#">Feedback 2</a>
-					<a href="#">Feedback 3</a>
-				</div>
-			</li>
-			<li class="dropdown">
-				<a href="javascript:void(0)" class="dropbtn" id="triangle-button" onclick="dropdown('triangle-menu')">▼</a>
-				<div class="dropdown-content" id="triangle-menu">
-					<a href="#">Account</a>
-					<a href="#">Settings</a>
-					<a href="#">Log Out</a>
-				</div>
-			</li>
-		</ul>
+<div class="header disable_select">
+	<p><a id="home" href="./index.html" style="font-family: 'Amaranth', serif">Trackr</a></p>
+	<div class="header_buttons">
+		<div class="dropdown_container header_button" id="header_events" style="font-family: 'Amaranth', serif">
+ 			Events
+ 		</div>
+ 		<div class="dropdown_container header_button" id="header_feedback" style="font-family: 'Amaranth', serif">
+			Feedback
+		</div>
+		<div class="dropdown_container header_button" id="header_account">
+			<!-- Triangle Down -->
+			<p class="menu_option">&#9662;</p>
+		</div>
 	</div>
-</header>
+</div>
+
+<div class="header_expansion">
+
+</div>
 
 <div id="content">
 
