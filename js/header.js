@@ -59,6 +59,7 @@ function setup_header_options(id) {
 // };
 
 function searchKeyPress() {
+	console.log("{ressing");
 	$("#team-members").empty();
 	var searchValue = $("#search-bar").val();
 	var len = searchValue.length;
@@ -210,5 +211,4 @@ $(document).ready(function() {
 		}
 
 	});
-
 });
