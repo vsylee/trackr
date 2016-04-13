@@ -196,6 +196,11 @@ $(document).ready(function() {
 			}, animation_time, function(){
 				// animation complete
 			});
+			$(".container").animate({
+				right: "-=" + right_panel_width
+			}, animation_time, function(){
+				// animation complete
+			});
 			$(this).html("◀").removeClass('open').addClass('closed');
 		} else {
 			$("#right-panel").animate({
@@ -205,6 +210,11 @@ $(document).ready(function() {
 			});
 
 			$(".content").animate({
+				right: "+=" + right_panel_width
+			}, animation_time, function(){
+				// animation complete
+			});
+			$(".container").animate({
 				right: "+=" + right_panel_width
 			}, animation_time, function(){
 				// animation complete
