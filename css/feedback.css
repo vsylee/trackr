@@ -4,13 +4,11 @@ html, body {
 }
 
 .container {
-	position: fixed;
-	padding: 15px;
+	position: absolute;
 	top:60px;
 	left: 0px;
 	bottom: 0px;
 	width: 90%;
-/*	height: 85%;*/
 	background-color: white;
 
 	display: flex;
@@ -32,6 +30,7 @@ html, body {
 
 .content_col {
 	display: flex;
+	flex-flow: row nowrap;
 	width: calc(38% - 8px);
 	height: auto;
 
@@ -41,6 +40,53 @@ html, body {
 	border-left: 1px solid #9E9E9E;
 	border-top: 1px solid #9E9E9E;
 	font-family: 'Overlock', serif;
+}
+
+.content_col_text_container {
+	display: flex;
+	justify-content: flex-start;
+	text: black;
+	outline: none;
+	width: 80%;
+	font-family: 'Overlock', serif;
+	color: black;
+}
+
+.content_col_button_container {
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: flex-end;
+	align-content: flex-end;
+	width: 20%;
+	color: black;
+}
+
+.content_end_button {
+	display: inline-block;
+	font-size: 16px;
+	line-height: 1.8;
+	width: 100%;
+	height: 30px;
+	background-color: #0c5a80;
+	border-style: none;
+	outline: none;
+	cursor: pointer;
+}
+
+.content_end_button:active {
+	background-color: #2795ee;
+}
+
+.button {
+	color: red;
+}
+
+.button:hover {
+	color: blue;
+}
+
+.edit_comment {
+	background-color: #ffffff;
 }
 
 #player-name {

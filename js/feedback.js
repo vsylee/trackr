@@ -1,4 +1,6 @@
 var feedback_animate_duration = 300;
+var coach_comment_id = "comment_field_";
+var coach_button_id = "coach_button_";
 
 var practice1_comments = [
 	{
@@ -103,17 +105,19 @@ $(document).ready(function() {
 
 	for (var i = 0; i < events.length; i++) {
 		var currentEvent = events[i];
-		console.log(currentEvent);
+		var desc = currentEvent.eventName 
+					+ " at "
+					+ currentEvent.location 
+					+ ", " 
+					+ currentEvent.startTime 
+					+ " - " 
+					+ currentEvent.endTime
+					+ " on " 
+					+ currentEvent.date;
 		$("<div>")
 			.addClass("feedback-header")
 			.appendTo($(".feedback"))
-			.text(
-				"▾ " +
-				currentEvent.eventName + " at " +
-				currentEvent.location + ", " +
-				currentEvent.startTime + " - " +
-				currentEvent.endTime + " on " +
-				currentEvent.date);
+			.text("▾ " + desc);
 		$("<div>")
 			.addClass("content")
 			.attr('id', 'event-' + i)
@@ -126,26 +130,51 @@ $(document).ready(function() {
 			);
 
 		var comments = currentEvent.comments;
-		console.log(comments);
+		var counter = 0;
 
 		for (var j = 0; j < comments.length; j++) {
 			for (var k = 0; k < table_columns.length; k++) {
+
+				var rescol = $("<div>")
+								.addClass('content_col')
+								.appendTo($('#event-' + i));
+				var dimensions = {
+					x: rescol.width(),
+					y: rescol.height(),
+				};
+
 				if (k == 0) {
-					$("<div>")
-						.addClass("content_col")
+					rescol
 						.attr('id', 'player-name')
-						.appendTo($('#event-' + i))
 						.text(comments[j].name);
 				} else if (k == 1) {
-					$("<div>")
-						.addClass("content_col")
-						.appendTo($('#event-' + i))
+					rescol
 						.text(comments[j].athlete_comment);
 				} else if (k == 2) {
-					$("<div>")
-						.addClass("content_col")
-						.appendTo($('#event-' + i))
-						.text(comments[j].coach_comment);				
+					var coach_comment = $("<div>")
+											.addClass('content_col_text_container')
+											.text(comments[j].coach_comment)
+											.attr('id', coach_comment_id + (i * events.length + j * comments.length + k))
+											.appendTo(rescol);
+					var field_button = $('<input type="button" value="Edit"/>')
+											.addClass('content_end_button')
+											.attr('id',  coach_button_id + (i * events.length + j * comments.length + k))
+											.on('click', function(e) {
+												var this_id = $(this).attr('id');
+												var curr_text = $(this).val() == "Edit" ? "Done" : "Edit";
+												
+												$(this).attr('value', curr_text);
+												var editable_id = '#' 
+																+ coach_comment_id 
+																+ $(this).attr('id').substring(coach_button_id.length);
+												$(editable_id)
+													.attr('contenteditable', true);
+											});
+					var field_button_container = $("<div>")
+													.addClass('content_col_button_container')
+													.append(field_button)
+													.appendTo(rescol);
+
 				}
 			}
 		}

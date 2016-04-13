@@ -44,7 +44,6 @@ $(document).ready(function() {
 		console.log("🔍 Search...");
 		if ($(this).val().indexOf("Search...") > -1) {
 			$(this).val("");
-			console.log("Hello");
 		}
 	});
 	$(document).click( function (e) {
