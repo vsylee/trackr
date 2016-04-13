@@ -18,6 +18,7 @@ html, body {
 	align-content: flex-start;
 
 	margin: 26px;
+	border: 1px solid #627e8b;
 }
 
 .content {
@@ -107,7 +108,7 @@ html, body {
 }
 
 #player-name {
-	width: calc(24% - 8px);
+	width: calc(24% - 7px);
 	border-left:none;
 }
 
@@ -126,6 +127,7 @@ html, body {
 	/*font-family: 'Overlock', serif;*/
 	color:white;
 	border-top: 2px solid #0c5a80;
+	cursor: pointer;
 }
 .feedback-header:first-of-type {
 	border-top: none;
@@ -143,7 +145,7 @@ html, body {
 	font-weight: bold;
 }
 #player-name-table-header {
-	width: calc(24% - 8px);
+	width: calc(24% - 7px);
 	border-left:none;
 	font-family: 'Overlock', serif;
 }
