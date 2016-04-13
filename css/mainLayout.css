@@ -83,7 +83,15 @@ p, a {
 	justify-content: center;
 	align-items: center;
 	cursor: pointer;
-	background-color: orange;
+	background-color: #8cc3dd; /*8cc3dd b8c3c8*/ /* 054869 8cc3dd*/
+	/*border-bottom: 2px #054869 solid;*/
+	border-top: 1px #054869 solid; 
+	border-left: 1px #054869 solid;
+	border-right: 1px #054869 solid;
+}
+
+.header_expansion_child:last-of-type {
+	border-bottom: 1px #054869 solid;
 }
 
 .header_expansion_child_events {
