@@ -81,6 +81,7 @@
 
 <script type="text/javascript" src="./../js/header.js"></script>
 <script type="text/javascript" src="./../js/events.js"></script>
+<script src="./../data/data.json"></script>
 <script type="text/javascript">
 
 $("#right-panel-button").html("◀").removeClass('open').addClass('closed');
@@ -88,7 +89,6 @@ $("#right-panel").css('right', '-300px');
 $(".content").css('right', '20px');
 
 	$(document).ready(function() {
-
 		// $("#right-panel-button").click();
 		function resizeCalendar() {
 	        var currentView = $('#calendar').fullCalendar('getView');
@@ -96,6 +96,7 @@ $(".content").css('right', '20px');
 	            currentView.setHeight(9999);
 	        }
 	        $('#calendar').fullCalendar('option', 'height', $('#calendar_container').outerHeight()*0.94);
+	        console.log($('#calendar').fullCalendar('clientEvents'));
 	    }
 	    $(window).on('resize', resizeCalendar);
 
@@ -161,15 +162,29 @@ $(".content").css('right', '20px');
 
 	        googleCalendarApiKey: 'AIzaSyCX_A2rKiGZ4wo6LXNyJZ7WCK64SSqVSqU',
             eventSources: [
-            		{
-            			editable: true,
-                		googleCalendarId: '3qff5g4q570qkmhdo6546mpt5o@group.calendar.google.com', //6.813 class calendar
-                	},
+            		// {
+            		// 	editable: true,
+              //   		googleCalendarId: 'cstkovtg3u9dagkkve1j60bk1c@group.calendar.google.com', //fake soccer varsity class calendar
+              //   		className: "hello",
+              //   		color: 'yellow'
+              //   	},
                 	{
                 		editable: true,
                 		googleCalendarId: 'mfj0nf3n8jfn92mklam206a4nk@group.calendar.google.com', //MIT calendar
                 	},
+
             ],
+
+            events: [
+            	{
+            		title: 'Practice',
+            		className: 'soccer practce',
+            		start: practiceData['start'],
+            		end: practiceData['end'],
+            		dow: practiceData['dow'],
+            	},
+
+			],
 
             customButtons: {
             	addEvent: {
@@ -184,10 +199,12 @@ $(".content").css('right', '20px');
             }
 	        
 	    });
+	 //    for (var game in gameData) {
+			
+		// }
 	    $(".fc-addEvent-button").attr('id', 'addEvent-button');
 	    $(".fc-addEvent-button").css({'background-color': '#990000', 'background-image': 'none', 'color': 'white'});
-	    // $(".fc-day-grid-contianer").attr('id', '')
-
+	    console.log(gameData.keys);
 
 
 	});

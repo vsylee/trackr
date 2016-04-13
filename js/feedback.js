@@ -79,6 +79,23 @@ var fake_comments = [
 
 function convert_data() {
 	var keys = Object.keys(gameData)
+	keys.sort(function(a, b) {
+		var first_time = gameData[a]; 
+		var second_time = gameData[b];
+
+		var first_index_colon = first_time.startTime.indexOf(':');
+		var first_hours = first_time.startTime.substring(0, first_index_colon);
+		var first_minutes = first_time.startTime.substring(first_index_colon + 1);
+
+		var second_index_colon = second_time.startTime.indexOf(':');
+		var second_hours = second_time.startTime.substring(0, second_index_colon);
+		var second_minutes = second_time.startTime.substring(second_index_colon + 1);
+
+		return new Date(first_time.date) - new Date(second_time.date) 
+			+ (first_hours - second_hours) * 60 * 1000 
+			+ (first_minutes - second_minutes) * 1000;
+	});
+	keys.reverse();
 	for (var i = 0; i < keys.length; i++) {
 		var current_event = {};
 		var current_event_object = gameData[keys[i]];
@@ -93,9 +110,6 @@ function convert_data() {
 		events[i] = current_event
 	}
 }
-
-
-
 
 // Function to place caret at end of div from 
 // http://stackoverflow.com/questions/4233265/contenteditable-set-caret-at-the-end-of-the-text-cross-browser
