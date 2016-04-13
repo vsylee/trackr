@@ -47,7 +47,7 @@ p, a {
 	background-color: #3a87ad;
 	align-items:center;
 	justify-content:space-between;
-	z-index: 5;
+	z-index: 10;
 
 	border-bottom: 3px #054869 solid; /*02364f 054869 0c5a80*/
 }
@@ -72,6 +72,7 @@ p, a {
 	align-items: center;
 
 	display: none;
+	z-index:100;
 }
 
 .header_expansion_child {
