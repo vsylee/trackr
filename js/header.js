@@ -183,8 +183,8 @@ $(document).ready(function() {
 				// animation complete
 			});
 
-			$("#content").animate({
-				"right": "-=" + right_panel_width
+			$(".content").animate({
+				right: "-=" + right_panel_width
 			}, animation_time, function(){
 				// animation complete
 			});
@@ -196,8 +196,8 @@ $(document).ready(function() {
 				// animation complete
 			});
 
-			$("#content").animate({
-				"right": "+=" + right_panel_width
+			$(".content").animate({
+				right: "+=" + right_panel_width
 			}, animation_time, function(){
 				// animation complete
 			});
