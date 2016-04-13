@@ -1,0 +1,41 @@
+.content {
+	position: absolute;
+	left: 0px;
+	top: 60px;
+	left: 0;
+	right: 320px;
+	bottom: 0;
+}
+
+.content p, a, h1 {
+	color:black;
+}
+.content > div > p {
+	font-size: 2.5em;
+}
+.large {
+	font-size: 1.75em;
+	font-weight: bold;
+}
+.small {
+	font-size: 1.25em;
+}
+
+.content {
+	padding: 30px;
+	display:flex;
+}
+
+img {
+	height:300px;
+	border:1px solid black;
+	margin-right:10px;
+}
+
+hr {
+	margin-bottom:8px;
+}
+
+#profile-info {
+	flex-grow:10;
+}

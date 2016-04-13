@@ -4,13 +4,12 @@ html, body {
 }
 
 .container {
-	position: fixed;
-	padding: 15px;
+	position: absolute;
 	top:60px;
 	left: 0px;
 	bottom: 0px;
-	width: 90%;
-/*	height: 85%;*/
+	right: 320px;
+	width: 100%;
 	background-color: #fefefe;
 
 	display: flex;
@@ -28,10 +27,25 @@ html, body {
 	align-content: flex-start;
 	overflow: scroll;
 	background-color:#E0E0E0;
+
 }
+
+/*	position: absolute;
+	left: 0px;
+	top: 60px;
+	left: 0;
+	right: 320px;
+	bottom: 0;
+	flex-flow: row wrap;
+	justify-content: center;
+	align-content: center;
+	background-color: #fefefe;
+	display:flex;*/
+
 
 .content_col {
 	display: flex;
+	flex-flow: row nowrap;
 	width: calc(38% - 8px);
 	height: auto;
 
@@ -41,6 +55,53 @@ html, body {
 	border-left: 1px solid #627e8b;
 	border-top: 1px solid #627e8b;
 	font-family: 'Overlock', serif;
+}
+
+.content_col_text_container {
+	display: flex;
+	justify-content: flex-start;
+	text: black;
+	width: 80%;
+	font-family: 'Overlock', serif;
+	color: black;
+}
+
+.content_col_button_container {
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: flex-end;
+	align-content: flex-end;
+	width: 20%;
+	padding-left: 5px;
+	color: black;
+}
+
+.content_end_button {
+	display: inline-block;
+	font-size: 16px;
+	line-height: 1.8;
+	width: 100%;
+	height: 30px;
+	background-color: #0c5a80;
+	border-style: none;
+	outline: none;
+	cursor: pointer;
+}
+
+.content_end_button:active {
+	background-color: #2795ee;
+}
+
+.button {
+	color: red;
+}
+
+.button:hover {
+	color: blue;
+}
+
+.edit_comment {
+	background-color: #ffffff;
 }
 
 #player-name {

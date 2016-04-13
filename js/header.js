@@ -25,6 +25,7 @@ function hexc(colorval) {
 }
 
 function setup_header_options(id) {
+	console.log("What's the id " + id);
 	var classes = "header_expansion_child";
 	$('.header_expansion').empty();
 	switch (id) {
@@ -40,8 +41,9 @@ function setup_header_options(id) {
 		$('<div>')
 			.addClass(classes)
 			.appendTo($('.header_expansion'))
+			.attr('id', navigation_elements[id][i])
 			.on('click', function(e) {
-				console.log("I am being clicked");
+
 			})
 			.text(navigation_elements[id][i]);
 	}
@@ -59,6 +61,7 @@ function setup_header_options(id) {
 // };
 
 function searchKeyPress() {
+	console.log("{ressing");
 	$("#team-members").empty();
 	var searchValue = $("#search-bar").val();
 	var len = searchValue.length;
@@ -103,10 +106,20 @@ $(document).ready(function() {
 			}
 
 			var pos_offset = self.offset();
-			var right_position = $(window).width() - pos_offset.left - self.width()
+			var right_position = $(window).width() - pos_offset.left - self.width();
+			var width;
+
+			if ($(this).attr('id').indexOf('header_events') != -1 ||
+				$(this).attr('id').indexOf('header_feedback') != -1) {
+				width = 250;
+			} else {
+				width = 125;
+			}
+
 			$('.header_expansion').css({
 				'display': toggle_display,
 				'right': right_position,
+				'width': width + 'px'
 			});
 			previous_option = self;
 			setup_header_options(self.attr('id'));
@@ -167,8 +180,6 @@ $(document).ready(function() {
 		populateTeamList();
 	});
 
-
-
 	var right_panel_width = 300;
 	var animation_time = 500;
 	$("#right-panel-triangle").html("▶");
@@ -202,5 +213,4 @@ $(document).ready(function() {
 		}
 
 	});
-
 });

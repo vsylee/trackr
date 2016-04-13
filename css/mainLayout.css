@@ -83,8 +83,9 @@ p, a {
 .header_expansion_child {
 	display: flex;
 	height: 40px;
-	padding: 5px 5px 0 5px;
 
+	width: 100%;
+	/*height: 100%;*/
 	justify-content: center;
 	align-items: center;
 	cursor: pointer;
@@ -107,16 +108,12 @@ p, a {
 	width: 250px;
 }
 
-.header_expansion_child_account {
+.header_expansion_childchild_account {
 	width: 125px;
 }
 .header_button {
 
 }
-.header_button:hover {
-	/*background-color:#8cc3dd;*/
-}
-
 
 .dropdown_container {
 	display: flex;
@@ -237,4 +234,3 @@ hr {
 	margin:0;
 	border:0px;
 }
-

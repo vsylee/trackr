@@ -5,11 +5,11 @@
 	left: 0;
 	right: 320px;
 	bottom: 0;
-	display:flex;
 	flex-flow: row wrap;
 	justify-content: center;
 	align-content: center;
-	background-color: #fefefe; /*e3e6e8 b8c3c8 eeeeee fff1e1 ebf7fd e9eaed*/
+	background-color: #fefefe;
+	display:flex; /*e3e6e8 b8c3c8 eeeeee fff1e1 ebf7fd e9eaed*/
 }
 
 .first_element {
