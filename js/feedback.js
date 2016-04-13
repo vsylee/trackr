@@ -134,7 +134,6 @@ function placeCaretAtEnd(el) {
 $(document).ready(function() {
 	convert_data();
 	var counter = 0;
-	console.log(events);
 	for (var i = 0; i < events.length; i++) {
 		var currentEvent = events[i];
 		var desc = currentEvent.eventName 
