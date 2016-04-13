@@ -1,11 +1,11 @@
-#content {
+.content {
 	position: absolute;
 	display: flex;
 	align-items: stretch;
 	/* 60px header */
 	margin-top:60px;
 	/* 320px right panel */
-	margin-right:320px;
+	right:320px;
 	/*margin-bottom:10px;*/
 	flex-grow: 1;
 	bottom: 0px;
