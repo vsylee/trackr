@@ -107,7 +107,7 @@ p, a {
 	width: 250px;
 }
 
-.header_expansion_child_account {
+.header_expansion_childchild_account {
 	width: 125px;
 }
 .header_button {
@@ -238,3 +238,11 @@ hr {
 	border:0px;
 }
 
+.content {
+	position: absolute;
+	left: 0px;
+	top: 60px;
+	left: 0;
+	right: 320px;
+	bottom: 0;
+}
