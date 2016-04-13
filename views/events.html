@@ -119,9 +119,13 @@ $(".content").css('right', '20px');
 	        },
 
 	        dayClick: function(event) {
-	        	// console.log(event);
-	        	// $('#calendar').fullCalendar('changeView', 'agendaDay');
-	        	// $('#calendar').fullCalendar('gotoDate', event);
+	        	var currentView = $('#calendar').fullCalendar('getView');
+		        if(currentView.name === 'month') {
+		            $('#calendar').fullCalendar('changeView', 'agendaWeek');
+		        } else if(currentView.name === 'agendaWeek') {
+		            $('#calendar').fullCalendar('changeView', 'agendaDay');
+		        }
+	        	$('#calendar').fullCalendar('gotoDate', event);
 	        	// showAddEventPopover($(this));
 	        },
 
@@ -133,26 +137,32 @@ $(".content").css('right', '20px');
 	        	// console.log(this.el);
 	        	// console.log(this.el.get());
 
+	        	console.log("start", start._d);
+	        	console.log("end", end._d);
+	        	console.log("jsEvent", jsEvent);
+	        	console.log("view", view.name);
+
 	        	// showAddEventPopover($(jsEvent.target));
 	        	// $('#startDate').
 				// var title = prompt('Event Title:');
-				// var id = $(jsEvent.target).position().top;
+				var id = $(jsEvent.target).position().top;
 				// console.log($('#'+1));
-				// console.log(id);
+				console.log("id", id);
 				// id = 'placeholder';
 				// var eventData;
-				// if (true) {
-				// 	eventData = {
-				// 		id: id,
-				// 		title: "Event Name",
-				// 		start: start,
-				// 		end: end,
-				// 		classname: id,
-				// 	};
-				// 	var event = $('#calendar').fullCalendar('renderEvent', eventData, false); // stick? = true
+				if ((view.name == "agendaWeek" || view.name == "agendaDay") && start._d != end._d) {
+					console.log("entered if statement");
+					eventData = {
+						id: id,
+						title: "Event Name",
+						start: start,
+						end: end,
+						classname: id,
+					};
+					var event = $('#calendar').fullCalendar('renderEvent', eventData, false); // stick? = true
 
-				// 	showAddEventPopover(this.el, $('.fc-day-grid-contianer'));
-				// }
+					showAddEventPopover($('.content'), $('.content'));
+				}
 				$('#calendar').fullCalendar('unselect');
 			},
 
@@ -198,6 +208,7 @@ $(".content").css('right', '20px');
             }
 	        
 	    });
+
 	    for (var gameIndex in gameData) {
 	    	var game = gameData[gameIndex];
 	    	eventData = {

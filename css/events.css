@@ -1,3 +1,6 @@
+html, body {
+	background-color: #fefefe;
+}
 .content {
 	position: absolute;
 	display: flex;
@@ -56,5 +59,9 @@ label, input {
 	color: #333333;
 	font-family: 'Overlock', serif;
 	font-size: 13px;
+}
+
+.fc-popover {
+	opacity: 1.0;
 }
 
