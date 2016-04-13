@@ -3,7 +3,8 @@ var coach_comment_id = "comment_field_";
 var coach_button_id = "coach_button_";
 
 var table_columns = ["Player name", "Athlete Comment", "Coach feedback"];
-
+var previous_comment;
+var previous_button;
 // Function to place caret at end of div from 
 // http://stackoverflow.com/questions/4233265/contenteditable-set-caret-at-the-end-of-the-text-cross-browser
 function placeCaretAtEnd(el) {
@@ -25,7 +26,7 @@ function placeCaretAtEnd(el) {
 }
 
 $(document).ready(function() {
-
+	var counter = 0;
 	for (var i = 0; i < events.length; i++) {
 		var currentEvent = events[i];
 		var desc = currentEvent.eventName 
@@ -53,7 +54,6 @@ $(document).ready(function() {
 			);
 
 		var comments = currentEvent.comments;
-		var counter = 0;
 
 		for (var j = 0; j < comments.length; j++) {
 			for (var k = 0; k < table_columns.length; k++) {
@@ -77,11 +77,11 @@ $(document).ready(function() {
 					var coach_comment = $("<div>")
 											.addClass('content_col_text_container')
 											.text(comments[j].coach_comment)
-											.attr('id', coach_comment_id + (i * events.length + j * comments.length + k))
+											.attr('id', coach_comment_id + counter)
 											.appendTo(rescol);
 					var field_button = $('<input type="button" value="Edit"/>')
 											.addClass('content_end_button')
-											.attr('id',  coach_button_id + (i * events.length + j * comments.length + k))
+											.attr('id',  coach_button_id + counter)
 											.on('click', function(e) {
 												var this_id = $(this).attr('id');
 												var curr_text = $(this).val();
@@ -102,13 +102,25 @@ $(document).ready(function() {
 													.css({
 														'backgroundColor': edit_background
 													});
-												
+												console.log("WHere am I");
+												if (previous_button && previous_button[0] !== $(this)[0]) {
+													console.log("Here?");
+													previous_button
+														.attr('value', "Edit")
+														.css({
+															'backgroundColor': '#0c5a80'
+														});
+													previous_comment
+														.attr('contenteditable', false);
+												} 
+												previous_button = $(this);
+												previous_comment = $(editable_id);											
 											});
 					var field_button_container = $("<div>")
 													.addClass('content_col_button_container')
 													.append(field_button)
 													.appendTo(rescol);
-
+					counter = counter + 1;
 				}
 			}
 		}
