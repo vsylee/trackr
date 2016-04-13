@@ -119,7 +119,9 @@ $(".content").css('right', '20px');
 	        },
 
 	        dayClick: function(event) {
-	        	$('#calendar').fullCalendar('changeView', 'agendaWeek');
+	        	// console.log(event);
+	        	// $('#calendar').fullCalendar('changeView', 'agendaDay');
+	        	// $('#calendar').fullCalendar('gotoDate', event);
 	        	// showAddEventPopover($(this));
 	        },
 
@@ -130,27 +132,27 @@ $(".content").css('right', '20px');
 	        	// console.log(view);
 	        	// console.log(this.el);
 	        	// console.log(this.el.get());
-	        	
-	        	showAddEventPopover($(jsEvent.target));
+
+	        	// showAddEventPopover($(jsEvent.target));
 	        	// $('#startDate').
 				// var title = prompt('Event Title:');
-				var id = $(jsEvent.target).position().top;
-				console.log($('#'+1));
-				console.log(id);
-				id = 'placeholder';
-				var eventData;
-				if (true) {
-					eventData = {
-						id: id,
-						title: "Event Name",
-						start: start,
-						end: end,
-						classname: id,
-					};
-					var event = $('#calendar').fullCalendar('renderEvent', eventData, false); // stick? = true
+				// var id = $(jsEvent.target).position().top;
+				// console.log($('#'+1));
+				// console.log(id);
+				// id = 'placeholder';
+				// var eventData;
+				// if (true) {
+				// 	eventData = {
+				// 		id: id,
+				// 		title: "Event Name",
+				// 		start: start,
+				// 		end: end,
+				// 		classname: id,
+				// 	};
+				// 	var event = $('#calendar').fullCalendar('renderEvent', eventData, false); // stick? = true
 
-					// showAddEventPopover(this.el, $('.fc-day-grid-contianer'));
-				}
+				// 	showAddEventPopover(this.el, $('.fc-day-grid-contianer'));
+				// }
 				$('#calendar').fullCalendar('unselect');
 			},
 
