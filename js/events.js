@@ -42,15 +42,8 @@ function addEvent(popoverObj) {
 	if (popoverObj !== 'addEvent-button-popover') popover.remove();
 }
 
-function showAddEventPopover(parentObj, container) {
-	console.log(parentObj.parent().parent().parent().parent().parent()); //fc-day-grid
-	// var parent = parentObj.attr('id') === undefined ? $('#calendar') : parentObj;
-	// parent = $('#addEvent-button');
-	// console.log(parentObj);
+function showAddEventPopover(container) {
 	var parent = parentObj;
-	// console.log(parentObj);
-	// console.log(parent);
-	// console.log(container);
 	var id = parent.attr('id') + '-popover';
 	container.after('<div id="' + id + '" class="fc-popover">' +
     					'<div class="fc-header fc-widget-header"> <span class="fc-close fc-icon fc-icon-x"></span><span class="fc-title">Event Details</span><div class="fc-clear"></div>'
@@ -64,16 +57,13 @@ function showAddEventPopover(parentObj, container) {
 
 	$('#name').focus();
 
-	popover.css({'display':'block', 'top':top, 'z-index':'100000'});
+	popover.css({'display':'block', 'top':top, 'left':left, 'z-index':'100000'});
 
 	popover.on('click', '.fc-close', function() {
 		popover.css({'display':'none'});
-		// console.log(id);
 		if (id !== 'addEvent-button-popover') {
 			popover.remove();
-			// console.log(true);
 		}
-		//remove popovers on calendar but not from the addEvent button for safety
 	}).draggable();
 
 	$(function() {

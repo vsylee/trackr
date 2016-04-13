@@ -133,26 +133,8 @@ $(".content").css('right', '20px');
 	        selectable: true,
 	        selectHelper: true,
 	        select: function(start, end, jsEvent, view) {
-	        	// console.log($(jsEvent.target).parent());
-	        	// console.log(view);
-	        	// console.log(this.el);
-	        	// console.log(this.el.get());
-
-	        	console.log("start", start._d);
-	        	console.log("end", end._d);
-	        	console.log("jsEvent", jsEvent);
-	        	console.log("view", view.name);
-
-	        	// showAddEventPopover($(jsEvent.target));
-	        	// $('#startDate').
-				// var title = prompt('Event Title:');
 				var id = $(jsEvent.target).position().top;
-				// console.log($('#'+1));
-				console.log("id", id);
-				// id = 'placeholder';
-				// var eventData;
 				if ((view.name == "agendaWeek" || view.name == "agendaDay") && start._d != end._d) {
-					console.log("entered if statement");
 					eventData = {
 						id: id,
 						title: "Event Name",
@@ -161,8 +143,7 @@ $(".content").css('right', '20px');
 						classname: id,
 					};
 					var event = $('#calendar').fullCalendar('renderEvent', eventData, false); // stick? = true
-
-					showAddEventPopover($('.content'), $('.content'));
+					showAddEventPopover($('.content'));
 				}
 				$('#calendar').fullCalendar('unselect');
 			},
@@ -201,6 +182,7 @@ $(".content").css('right', '20px');
             		id: 'test',
 	            	text: 'Add Event',
 	            	click: function(e) {
+	            		console.log("I am working");
 						showAddEventPopover($(this),$(this));
 
     					return false;
