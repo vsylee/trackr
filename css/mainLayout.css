@@ -15,6 +15,11 @@ body {
 	color: white;
 }
 
+#home, #header_events, #header_feedback, #header_account {
+	font-family: 'Amaranth';
+	color: white;
+}
+
 p, a {
 	display: flex;
 	margin: 0px;
@@ -104,6 +109,12 @@ p, a {
 
 .header_expansion_child_account {
 	width: 125px;
+}
+.header_button {
+
+}
+.header_button:hover {
+	/*background-color:#8cc3dd;*/
 }
 
 
