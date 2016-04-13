@@ -114,11 +114,8 @@ $(document).ready(function() {
 
 
 	$("#search-bar").click( function (e) {
-		console.log($(this).val());
-		console.log("🔍 Search...");
-		if ($(this).val().indexOf("Search...") > -1) {
+		if ($(this).val().indexOf("🔍 Search...") > -1) {
 			$(this).val("");
-			console.log("Hello");
 		}
 	});
 	$(document).click( function (e) {
