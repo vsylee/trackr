@@ -237,12 +237,3 @@ hr {
 	margin:0;
 	border:0px;
 }
-
-.content {
-	position: absolute;
-	left: 0px;
-	top: 60px;
-	left: 0;
-	right: 320px;
-	bottom: 0;
-}

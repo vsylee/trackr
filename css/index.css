@@ -1,4 +1,12 @@
 .content {
+	position: absolute;
+	left: 0px;
+	top: 60px;
+	left: 0;
+	right: 320px;
+	bottom: 0;
+}
+.content {
 	flex-flow: row wrap;
 	justify-content: center;
 	align-content: center;
