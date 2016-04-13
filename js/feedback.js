@@ -119,7 +119,7 @@ function placeCaretAtEnd(el) {
             && typeof document.createRange != "undefined") {
         var range = document.createRange();
         range.selectNodeContents(el);
-        range.collapse(true);
+        range.collapse(false);
         var sel = window.getSelection();
         sel.removeAllRanges();
         sel.addRange(range);
@@ -211,9 +211,7 @@ $(document).ready(function() {
 													.css({
 														'backgroundColor': edit_background
 													});
-												console.log("WHere am I");
 												if (previous_button && previous_button[0] !== $(this)[0]) {
-													console.log("Here?");
 													previous_button
 														.attr('value', "Edit")
 														.css({
