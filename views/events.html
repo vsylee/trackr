@@ -119,18 +119,19 @@ $(".content").css('right', '20px');
 	        },
 
 	        dayClick: function(event) {
+	        	$('#calendar').fullCalendar('changeView', 'agendaWeek');
 	        	// showAddEventPopover($(this));
-	        	// TODO: call function that brings out the week schedule?
 	        },
 
 	        selectable: true,
-	        // selectHelper: true,
+	        selectHelper: true,
 	        select: function(start, end, jsEvent, view) {
-	        	console.log($(jsEvent.target).parent());
-	        	console.log(view);
-	        	console.log(this.el);
-	        	console.log(this.el.get());
-	        	// showAddEventPopover($(jsEvent.target));
+	        	// console.log($(jsEvent.target).parent());
+	        	// console.log(view);
+	        	// console.log(this.el);
+	        	// console.log(this.el.get());
+	        	
+	        	showAddEventPopover($(jsEvent.target));
 	        	// $('#startDate').
 				// var title = prompt('Event Title:');
 				var id = $(jsEvent.target).position().top;
@@ -138,18 +139,18 @@ $(".content").css('right', '20px');
 				console.log(id);
 				id = 'placeholder';
 				var eventData;
-				// if (true) {
-				// 	eventData = {
-				// 		id: id,
-				// 		title: "Event Name",
-				// 		start: start,
-				// 		end: end,
-				// 		classname: id,
-				// 	};
-				// 	var event = $('#calendar').fullCalendar('renderEvent', eventData, false); // stick? = true
+				if (true) {
+					eventData = {
+						id: id,
+						title: "Event Name",
+						start: start,
+						end: end,
+						classname: id,
+					};
+					var event = $('#calendar').fullCalendar('renderEvent', eventData, false); // stick? = true
 
-				// 	showAddEventPopover(this.el, $('.fc-day-grid-contianer'));
-				// }
+					// showAddEventPopover(this.el, $('.fc-day-grid-contianer'));
+				}
 				$('#calendar').fullCalendar('unselect');
 			},
 

@@ -9,13 +9,14 @@ html, body {
 	left: 0px;
 	bottom: 0px;
 	right: 320px;
-	/*width: 100%;*/
 	background-color: #fefefe;
 
 	display: flex;
 	flex-flow: row wrap;
 	justify-content: flex-start;
 	align-content: flex-start;
+
+	margin: 26px;
 }
 
 .content {
