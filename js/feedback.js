@@ -205,7 +205,7 @@ $(document).ready(function() {
 												if (content_editable) {
 													placeCaretAtEnd($(editable_id).get(0));
 												}
-												var curr_text = $(this).val() == "Edit" ? "Done" : "Edit";
+												var curr_text = $(this).val() == "Edit" ? "Save" : "Edit";
 												$(this)
 													.attr('value', curr_text)
 													.css({

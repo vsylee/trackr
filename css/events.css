@@ -1,6 +1,7 @@
 html, body {
 	background-color: #fefefe;
 }
+
 .content {
 	position: absolute;
 	display: flex;
@@ -34,6 +35,7 @@ html, body {
 #home, #header_events, #header_feedback, #header_account {
 	font-family: 'Amaranth';
 	color: white;
+	text-decoration: none;
 }
 
 .fc-icon, h2, .fc-day-header, .fc-day-number, .fc-title, .ui-datepicker-month, .ui-datepicker-year, .ui-datepicker-calendar th span {
