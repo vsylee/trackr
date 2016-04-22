@@ -8,7 +8,6 @@ $(document).ready(function() {
     }
     $(window).on('resize', resizeCalendar);
 
-    // initialize the calendar with the following fullCalendar settings
     $('#calendar').fullCalendar({
     	height: $('#calendar_container').outerHeight()*0.94,
     	viewDisplay: resizeCalendar,
@@ -37,24 +36,6 @@ $(document).ready(function() {
 	        }
         	$('#calendar').fullCalendar('gotoDate', event);
         	// showAddEventPopover($(this));
-        },
-
-        eventRender: function(event, element) {
-            // var daysOfWeek = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-
-            var allDay= event;
-            var startDay = event.start.day();
-            var endDay = event.end.day();
-
-            var moreThanADay = startDay !== endDay;
-            
-            var time = event.allDay || moreThanADay ? '' : event.start.format("h:mm A") + ' - ' + event.end.format("h:mm A") + '<br>';
-            var location = event.location ? '<br>' + event.location : '';
-            $(element).attr("data-html", "true"); //allow parsing of newline <br> in tooltip
-            $(element).tooltip({
-                title: time + event.title + location,
-                container: "#calendar"});
-
         },
 
         selectable: true,
@@ -119,7 +100,6 @@ $(document).ready(function() {
         		start: practiceData['start'],
         		end: practiceData['end'],
         		dow: practiceData['dow'],
-                location: 'Briggs Field',
         	},
 
 		],
