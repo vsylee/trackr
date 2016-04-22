@@ -81,7 +81,7 @@ var right_panel_width = 300;
 var animation_time = 400;
 
 function toggleRightPanel(animationTime) {
-	if ($("#right-panel-button").hasClass('open')) {
+	if ($("#right-panel-button").hasClass('right-panel-open')) {
 		$("#right-panel").animate({
 			right: "-=" + right_panel_width
 		}, animation_time, function(){
@@ -98,7 +98,7 @@ function toggleRightPanel(animationTime) {
 		}, animation_time, function(){
 			// animation complete
 		});
-		$("#right-panel-button").html("◀").removeClass('open').addClass('closed');
+		$("#right-panel-button").html("◀").removeClass('right-panel-open').addClass('right-panel-closed');
 	} else {
 		$("#right-panel").animate({
 			right: "+=" + right_panel_width
@@ -116,7 +116,7 @@ function toggleRightPanel(animationTime) {
 		}, animation_time, function(){
 			// animation complete
 		});
-		$("#right-panel-button").html("▶").removeClass('closed').addClass('open');
+		$("#right-panel-button").html("▶").removeClass('right-panel-closed').addClass('right-panel-open');
 	}
 }
 

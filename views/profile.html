@@ -67,18 +67,17 @@
 
 
 
-<!-- Right Panel -->
 <div id="right-panel">
-	<div id="right-panel-button" class="open">
+	<div id="right-panel-button" class="right-panel-open">
 		<span id="right-panel-triangle">
 	</div>
 	<div id="player-list">
-		<input type="text" id="search-bar" value="🔍 Search..."></input>
-		
+		<input type="text" id="search-bar" value="🔍 Search..." onKeyPress="searchKeyPress()" onKeyUp="searchKeyPress()"></input>
+
 		<select required id="team-select">
 			<option class="placeholder" selected disabled value="">Team:</option>
 		</select>
-		
+
 		<ul id="team-members">
 
 		</ul>
