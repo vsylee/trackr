@@ -158,7 +158,8 @@ p, a {
 	display:flex;
 	flex-flow: column nowrap;
 	background:#b8c3c8; /*bac1c4 bfc4c7 c5c8d3 e9eaed e0e0e0 ffd19c bce0f1 8cc3dd 5ca2c4;*/
-	width:260px;
+	/* getting rid of width fixes bootstrap conflict? */
+	/*width:260px; */
 	overflow-y:scroll;
 	padding:20px;
 }
