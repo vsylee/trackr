@@ -35,7 +35,9 @@
 </div>
 
 <div class="container">
-	<div class="feedback">
+	<div class="feedback" id="feedback_events">
+	</div>
+	<div class="feedback_data">
 	</div>
 </div>
 
@@ -43,35 +45,16 @@
 
 </div>
 
-<div id="right-panel">
-	<div id="right-panel-button" class="right-panel-open">
-		<span id="right-panel-triangle">
-	</div>
-	<div id="player-list">
-		<input type="text" id="search-bar" value="🔍 Search..." onKeyPress="searchKeyPress()" onKeyUp="searchKeyPress()"></input>
-
-		<select required id="team-select">
-			<option class="placeholder" selected disabled value="">Team:</option>
-		</select>
-
-		<ul id="team-members">
-			<li style="padding:15px;font-size:27px;text-align:center;color:grey;">Select a team above to view members</li>
-		</ul>
-	</div>
-</div>
-
 <script type="text/javascript" src="./../external_js/jquery-1.9.0.min.js"></script>
 <script type="text/javascript" src="./../js/header.js"></script>
 <!-- <script type="text/javascript" src="./../js/data.js"></script>
  -->
- <script type="text/javascript" src="./../js/feedback.js"></script>
-<script type="text/javascript" src="./../data/data.json"></script>
+<!-- <script type="text/javascript" src="./../js/feedback.js"></script> -->
+<!-- <script type="text/javascript" src="./../data/data.json"></script> -->
+<script type="text/javascript" src="./../js/feedback_other.js"></script>
+
 
 <script type="text/javascript">
-
-$("#right-panel-button").html("◀").removeClass('right-panel-open').addClass('closed');
-$("#right-panel").css('right', '-300px');
-$(".container").css('right', '20px');
 
 </script>
 
