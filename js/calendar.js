@@ -1,4 +1,12 @@
 $(document).ready(function() {
+    // initialize event details form in html (move to html file?)
+    $('#event_details').append(addEventDialog('event_details'));
+    // setting jquery datepicker for form start and end dates
+    // setting max and min date and time for form depending on start and end dates and times
+    customDateTime();
+    sessionStorage.setItem('lastTime', '10:00'); //default value for startTime
+
+    // make sure calendar resizes if window resizes
 	function resizeCalendar() {
         var currentView = $('#calendar').fullCalendar('getView');
         if(currentView.name === 'agendaWeek' || currentView.name === 'agendaDay') {
@@ -21,26 +29,7 @@ $(document).ready(function() {
         	right: 'addEvent month,agendaWeek,agendaDay'
         },
 
-        eventClick: function(event) {
-
-        	if (event.url) return false; // don't allow redirection to source website of events
-        	// TODO: call eventClick function here to show summary of event details and to edit the event
-        	// this.bindPopup('<button class="trigger">Say hi</button>');
-        },
-
-        dayClick: function(event) {
-        	var currentView = $('#calendar').fullCalendar('getView');
-	        if(currentView.name === 'month') {
-	            $('#calendar').fullCalendar('changeView', 'agendaWeek');
-	        } else if(currentView.name === 'agendaWeek') {
-	            $('#calendar').fullCalendar('changeView', 'agendaDay');
-	        }
-        	$('#calendar').fullCalendar('gotoDate', event);
-        	// showAddEventPopover($(this));
-        },
-
         eventRender: function(event, element) {
-            // var daysOfWeek = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 
             var allDay= event;
             var startDay = event.start.day();
@@ -51,15 +40,56 @@ $(document).ready(function() {
             var time = event.allDay || moreThanADay ? '' : event.start.format("h:mm A") + ' - ' + event.end.format("h:mm A") + '<br>';
             var location = event.location ? '<br>' + event.location : '';
             $(element).attr("data-html", "true"); //allow parsing of newline <br> in tooltip
+
             $(element).tooltip({
                 title: time + event.title + location,
                 container: "#calendar"});
+        },
 
+        eventClick: function(event) {
+
+        	if (event.url) return false; // don't allow redirection to source website of events
+        	// TODO: call eventClick function here to show summary of event details and to edit the event
+        	// this.bindPopup('<button class="trigger">Say hi</button>');
+            console.log(event);
+        },
+
+        dayClick: function(date) {
+        	var currentView = $('#calendar').fullCalendar('getView');
+            var end;
+
+            switch (currentView.name) {
+                case 'month':
+                    end = date.add(1, 'h');
+                    break;
+                case 'agendaWeek':
+                    end = date.add(1, 'h');
+                    break;
+                case 'agendaDay':
+                    end = date.add(30, 'm');
+                    break;
+                default:
+                    end = date.add(1, 'h');
+            }
+            addEventModal(date, end, currentView);
+
+	        // if(currentView.name === 'month') {
+	        //     $('#calendar').fullCalendar('changeView', 'agendaWeek');
+	        // } else if(currentView.name === 'agendaWeek') {
+	        //     $('#calendar').fullCalendar('changeView', 'agendaDay');
+	        // }
+        	// $('#calendar').fullCalendar('gotoDate', event);
+        	// showAddEventPopover($(this));
         },
 
         selectable: true,
         // selectHelper: true,
         select: function(start, end, jsEvent, view) {
+            console.log(start);
+            console.log(end);
+            console.log(start===end);
+            var realEnd = view.name==='month' ? start.clone().add(1,'h') : end;
+            addEventModal(start, realEnd, view);
         	// console.log($(jsEvent.target).parent());
         	// console.log(view);
         	// console.log(this.el);
@@ -129,8 +159,11 @@ $(document).ready(function() {
         		id: 'test',
             	text: 'Add Event',
             	click: function(e) {
-					showAddEventPopover($(this),$(this));
-
+					// showAddEventPopover($(this),$(this));
+                    var currentView = $('#calendar').fullCalendar('getView');
+                    var start = $('#calendar').fullCalendar('getDate');
+                    console.log(start.clone().add(1, 'h'));
+                    addEventModal(start, start.clone().add(1, 'h'), currentView);
 					return false;
 	            }
 	        }
@@ -152,5 +185,6 @@ $(document).ready(function() {
     $(".fc-addEvent-button").attr('id', 'addEvent-button');
     $(".fc-addEvent-button").css({'background-color': '#ee9023', 'background-image': 'none', 'color': 'white'});
 
+    // $('.modal-body').after(addEventDialog("event_modal"));
 
 });
