@@ -14,6 +14,7 @@ function addEventDialog(popoverId) {
 				'<div class="form-group"><label for="location" class="control-label">Location: </label><input type="text" class="form-control" name="location" id="location"/></div>' +
 				'<div class="form-group"><label for="share" class="select-label control-label">Share with: </label>' +
 					'<select class="form-control" name="teams" value:"Select Team/s">' +
+                        '<option value="">None</option>' +
 						'<option value="">Gymnastics</option>' +
 						'<option value="">Soccer</option>' +
 						'<option value="">Tennis</option>' +
@@ -27,8 +28,11 @@ function addEventDialog(popoverId) {
 }
 
 function setFormFields(start, end, view) {
-    $('#startDate').datepicker( "setDate", start.format('L') ); // L gives the format MM/DD/YYYY
-    $('#endDate').datepicker( "setDate", end.format('L') );
+    // need to refresh for min and max start and end dates
+    $('#startDate').datepicker( "refresh" );
+    $('#endDate').datepicker( "refresh" );
+    $('#startDate').datepicker( "setDate", start.format('LL') ); // LL gives the format MonthFullName D, YYYY
+    $('#endDate').datepicker( "setDate", end.format('LL') );
 
     $('#startTime').val(start.format('HH:mm')); //military time (needed format for value input)
     $('#endTime').val(end.format('HH:mm'));
@@ -61,6 +65,7 @@ function addEventModal(start, end, view){
     setFormFields(start, end, view);
 
 	$('#event_modal').modal('show');
+    $('#name').focus();
 	$('#event_modal :header, .modal-body, .modal-header span').css({'color': 'black'});
 	$('#event_details, #event_day_timeline_container').css({'display': 'initial', 'color' : 'black'});
     $('.form-group').css({'display': 'initial', 'margin-bottom':'0'});
@@ -71,7 +76,6 @@ function addEventModal(start, end, view){
     $('.time-group .time').css({'float':'right'});
     $('.time-group .form-control').css({'width':'50%'});
 
-    // $('.form-group .select-label').css({'margin-right': '5px'});
     $('.modal-footer').css({'padding-bottom': '0px'})
     $('#event_modal').css({'line-height': '1'});
 
@@ -108,8 +112,6 @@ function addEventModal(start, end, view){
         eventClick: function(event) {
 
         	if (event.url) return false; // don't allow redirection to source website of events
-        	// TODO: call eventClick function here to show summary of event details and to edit the event
-        	// this.bindPopup('<button class="trigger">Say hi</button>');
         },
 
 		eventLimit: true, //more link shows up when there are too many events
@@ -155,24 +157,29 @@ function addEventModal(start, end, view){
 function customDateTime() {    
     $(function() {
         $( "#startDate" ).datepicker({
+            dateFormat: "MM d, yy",
             onClose: function( selectedDate ) {
                 $( "#endDate" ).datepicker( "option", "minDate", selectedDate );
                 if ($( "#endDate" ).val() === $( "#startDate" ).val()) {
                     $('#endTime')[0].min = $('#startTime').val();
                     $('#startTime')[0].max = $('#endTime').val();
                 }
+                $('#startTime').focus();
             }
-        }).datepicker('setDate', new Date());
+        }).datepicker('setDate', moment().format('LL'));
 
         $('#endDate').datepicker({
+            dateFormat: "MM d, yy",
             onClose: function( selectedDate ) {
-                $( "#startDate" ).datepicker( "option", "maxDate", selectedDate );
+                // don't set maxDate for startDate too...bad for usability
+                // $( "#startDate" ).datepicker( "option", "maxDate", selectedDate );
                 if ($( "#endDate" ).val() === $( "#startDate" ).val()) {
                     $('#endTime')[0].min = $('#startTime').val();
                     $('#startTime')[0].max = $('#endTime').val();
                 }
+                $('#endTime').focus();
             }
-        }).datepicker('setDate', new Date());
+        }).datepicker('setDate', moment().format('LL'));
     });
 
     $('#startTime').on('focusout', function() {
@@ -189,11 +196,11 @@ function customDateTime() {
 }
 
 
-function addEvent(popoverObj) {
-    console.log("yo");
+function addEvent(objectId) {
 	var startDate = $('#startDate').val();
 	var startTime = $('#startTime').val();
 	var startDateTime = new Date(startDate+' '+startTime);
+    // console.log(startDate);
     sessionStorage.setItem('lastTime', startTime);
 
 	var endDate = $('#endDate').val();
@@ -206,10 +213,10 @@ function addEvent(popoverObj) {
 		end: endDateTime.toISOString()
 	}
 	$('#calendar').fullCalendar('renderEvent', event, true);
-	$('#'+popoverObj).css({'display':'none'});
+	$('#'+objectId).css({'display':'none'});
 
     $('#event_modal').modal('hide');
-	// if (popoverObj !== 'addEvent-button-popover') popover.remove();
+	// if (objectId !== 'addEvent-button-popover') popover.remove();
 }
 
 function showAddEventPopover(parentObj, container) {
