@@ -4,6 +4,10 @@ html, body {
 	background-color: #fefefe;
 }
 
+.font_family {
+	font-family: helvetica;
+}
+
 .container {
 	position: absolute;
 	top:60px;
@@ -114,15 +118,46 @@ html, body {
 	background-color: #af1323
 }
 
-.feedback_title {
+.feedback_card {
 	display: flex;
-	flex-flow: row wrap;
+	flex-flow: row nowrap;
 	position: relative;
 	width: 100%;
 	height: 100px;
 	justify-content: center;
 	/*align-content: center;*/
 	background-color: blue;
+}
+
+.feedback_card_row {
+	display: flex;
+	flex-flow: row nowrap;
+	position: relative;
+	width: 100%;
+	height: 30%;
+	justify-content: flex-start;
+	background-color: green;
+}
+
+.feedback_card_opponent {
+	display: flex;
+	flex-flow: row nowrap;
+	width: 60%;
+	height: 100%;
+	padding: 5px 0px 0px 10px;
+	justify-content: flex-start;
+	background-color: cyan;
+}
+
+.feedback_card_date {
+	display: flex;
+	flex-flow: row nowrap;
+	position: relative;
+	width: 40%;
+	height: 100%;
+	padding: 5px 5px 0px 0px;
+	justify-content: flex-end;
+	background-color: turquoise;
 }
 
 .feedback-header {

@@ -59,18 +59,39 @@ function convert_data() {
 	}
 }
 
+function setup_card(opponent, date, location, start_time, end_time) {
+	var card_to_add = $('<div>')
+							.addClass('feedback_card font_family')
+
+
+	var title_attr = $('<div>')
+					.addClass('feedback_card_row')
+					.appendTo(card_to_add);
+
+	var opp_to_add = $('<div>')
+							.addClass('feedback_card_opponent')
+							.text(opponent)
+							.appendTo(title_attr);
+	var date_to_add = $('<div>')
+							.addClass('feedback_card_date')
+							.text(date)
+							.appendTo(title_attr);
+
+	return card_to_add
+}
+
 $(document).ready(function() {
 	convert_data();
 	var events_col = $('#feedback_events');
 	for (var i = 0; i < events.length; i++) {
 		var current_event = events[i];
-		$('<div>')
-			.addClass('feedback_title')
-			.appendTo(events_col)
-			.css({
-				'opacity': i / 10
-			});
-		console.log("How many times");
+		var curr_card = setup_card(current_event['opponent'], 
+								   current_event['date'], 
+								   current_event['location'], 
+								   current_event['startTime'],
+								   current_event['endTime']);
+		
+		curr_card.appendTo(events_col);
 	}
 
 
