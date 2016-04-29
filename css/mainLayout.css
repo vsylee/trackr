@@ -165,7 +165,7 @@ p, a {
 }
 
 #search-bar {
-	width:254px;
+	width:100%;
 	min-height:32px;
 	font-size:14px;
 	color:#617F8B;
