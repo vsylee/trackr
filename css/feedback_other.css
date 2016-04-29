@@ -122,7 +122,7 @@ html, body {
 
 .feedback_card {
 	display: flex;
-	flex-flow: row nowrap;
+	flex-flow: column wrap;
 	position: relative;
 	width: 100%;
 	height: 100px;
@@ -148,7 +148,7 @@ html, body {
 	flex-flow: row nowrap;
 	width: 60%;
 	height: 100%;
-	padding: 5px 0px 0px 10px;
+	padding: 0px 0px 0px 10px;
 	justify-content: flex-start;
 	/*background-color: cyan;*/
 	color: black;
@@ -161,13 +161,23 @@ html, body {
 	position: relative;
 	width: 40%;
 	height: 100%;
-	padding: 5px 5px 0px 0px;
+	padding: 0px 5px 0px 0px;
 	justify-content: flex-end;
 	/*background-color: turquoise;*/
 	color: #617F8B;
 	font-family: 'Overlock', serif;
 	font-size: 13px;
 	margin-top: 4px;
+}
+
+.feedback_card_body {
+	display: flex;
+	flex-flow: row nowrap;
+	width: 100%;
+	height: 70%;
+	/*justify-content: center;*/
+	background-color: orange;
+	padding: 0px 0px 0px 10px;
 }
 
 .feedback-header {
