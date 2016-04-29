@@ -167,13 +167,15 @@ p, a {
 #search-bar {
 	width:254px;
 	min-height:32px;
-	font-size:20px;
-	color:gray;
+	font-size:14px;
+	color:#617F8B;
 	border-radius:5px;
 	border: 0px;
-	margin-bottom:10px;
+	/*margin-bottom:10px;*/
 	padding-left:5px;
+	margin:8px;
 	font-family: 'Overlock', serif;
+	background-color: #E3E6E8;
 }
 
 select > .placeholder {

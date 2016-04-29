@@ -66,10 +66,10 @@ $(document).ready(function() {
 		var current_event = events[i];
 		$('<div>')
 			.addClass('feedback_title')
-			.appendTo(events_col)
-			.css({
-				'opacity': i / 10
-			});
+			.appendTo(events_col);
+			// .css({
+			// 	'opacity': i / 10
+			// });
 		console.log("How many times");
 	}
 
