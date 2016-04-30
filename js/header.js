@@ -127,12 +127,22 @@ $(document).ready(function() {
 
 			var self = $(this);
 			var hex_color = hexc(self.css("background-color"));
-			var update_color = hex_color == '#3a87ad' ? '#8cc3dd' : '#3a87ad';
-			var toggle_display = $('.header_expansion').css('display')  == "none" ? "flex" : "none";
+			var display = $('.header_expansion').css('display');
+			var current_color = self.css('background-color');
+			// var update_color = hex_color == '#3a87ad' ? '#8cc3dd' : '#3a87ad';
+			// var toggle_display = $('.header_expansion').css('display')  == "none" ? "flex" : "none";
 
-			self.css({
-				'background-color': update_color
-			});
+			if (display == "none") {
+				display = "flex";
+				current_color = "#8cc3dd";
+			} else {
+				display = "none";
+				current_color = "#3a87ad";
+			}
+
+			// self.css({
+			// 	'background-color': update_color
+			// });
 
 			if (previous_option && previous_option[0] !== self[0]) {
 				previous_option.css({

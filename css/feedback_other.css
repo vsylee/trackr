@@ -100,9 +100,10 @@ html, body {
 
 .feedback {
 	display: flex;
+	flex-flow: row wrap;
 	width: 25%;
 	height: 100%;
-	background-color: #aaa324; /*9E9E9E*/
+	background-color: #; /*9E9E9E*/
 	overflow:scroll;
 }
 
@@ -111,6 +112,17 @@ html, body {
 	width: 75%;
 	height: 100%;
 	background-color: #af1323
+}
+
+.feedback_title {
+	display: flex;
+	flex-flow: row wrap;
+	position: relative;
+	width: 100%;
+	height: 100px;
+	justify-content: center;
+	/*align-content: center;*/
+	background-color: blue;
 }
 
 .feedback-header {
@@ -122,6 +134,7 @@ html, body {
 	border-top: 2px solid #0c5a80;
 	cursor: pointer;
 }
+
 .feedback-header:first-of-type {
 	border-top: none;
 }

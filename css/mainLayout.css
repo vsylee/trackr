@@ -64,7 +64,7 @@ p, a {
 	flex-flow: row nowrap;
 
 	height: 100%;
-	width: 20%;
+/*	width: 20%;*/
 }
 
 .header_expansion {
@@ -99,7 +99,7 @@ p, a {
 .header_expansion_child:last-of-type {
 	border-bottom: 1px #054869 solid;
 }
-
+/*
 .header_expansion_child_events {
 	width: 250px;
 }
@@ -108,9 +108,9 @@ p, a {
 	width: 250px;
 }
 
-.header_expansion_childchild_account {
+.header_expansion_child_account {
 	width: 125px;
-}
+}*/
 
 .dropdown_container {
 	display: flex;
@@ -123,11 +123,6 @@ p, a {
 
 	cursor: pointer;
 	border: none;
-}
-
-.menu_option {
-	display: flex;
-
 }
 
 #home {
