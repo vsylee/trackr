@@ -63,6 +63,7 @@ function setFormFields(start, end, view) {
 
 function addEventModal(start, end, view){
     setFormFields(start, end, view);
+    $('#delete').css({'background-color': '#E30228', 'background-image': 'none', 'color': 'white', 'text-shadow': 'None', 'float':'left'});
 
 	$('#event_modal').modal('show');
     $('#name').focus();
@@ -88,7 +89,7 @@ function addEventModal(start, end, view){
 
         header:  {
         	left: 'prev',
-        	center: 'title',
+        	center: 'title selectDate',
         	right: 'next'
         },
 
@@ -137,8 +138,29 @@ function addEventModal(start, end, view){
 		],
 
 		defaultView: 'agendaDay',
+
+        customButtons: {
+            selectDate: {
+                id: 'selectDate',
+                text: '',
+                click: function(e) {
+                    // showAddEventPopover($(this),$(this));
+                    // var currentView = $('#calendar').fullCalendar('getView');
+                    // var start = $('#calendar').fullCalendar('getDate');
+                    // $('#delete').css({'visibility':'hidden'});
+                    // addEventModal(start, start.clone().add(1, 'h'), currentView);
+                    return false;
+                },
+                // themeIcon: 'calendar'
+            }
+        },
+        // theme: 'true'
         
     });
+    // $('.fc-selectDate-button').append('<input type="text" id="event_details_date"/>');
+    // $('#event_details_date').datepicker();
+    // $(function() {$('#event_details_date').datepicker({
+            // dateFormat: "MM d, yy",}).datepicker('setDate', $('#event_day_timeline').fullCalendar('getDate').format('LL'));});
     // $('#event_day_timeline').css({'width': '50%', 'margin-left':'15px', 'margin-right' : '15px'});
     $('#event_day_timeline h2').css({'font-size': '18px', 'padding-top':'5px'});
     $('#event_day_timeline .fc-day-header').css({'font-size': '14px'});
@@ -195,22 +217,71 @@ function customDateTime() {
     });
 }
 
+function createEvent(objectId) {
+    var startDate = $('#startDate').val();
+    var startTime = $('#startTime').val();
+    var startDateTime = new Date(startDate+' '+startTime);
+    // console.log(startDate);
+    sessionStorage.setItem('lastTime', startTime);
+
+    var endDate = $('#endDate').val();
+    var endTime = $('#endTime').val();
+    var endDateTime = new Date(endDate+' '+endTime);
+
+    var event = {
+        title: $('#name').val(),
+        start: startDateTime.toISOString(),
+        end: endDateTime.toISOString()
+    }
+    $('#calendar').fullCalendar('renderEvent', event, true);
+}
+
+function updateEvent(eventId) {
+    var event = $('#calendar').fullCalendar('clientEvents', eventId)[0];
+
+    var startDate = $('#startDate').val();
+    var startTime = $('#startTime').val();
+    var startDateTime = new Date(startDate+' '+startTime);
+    sessionStorage.setItem('lastTime', startTime);
+
+    var endDate = $('#endDate').val();
+    var endTime = $('#endTime').val();
+    var endDateTime = new Date(endDate+' '+endTime);
+
+    event.title = $('#name').val();
+    event.location = $('#location').val();
+    event.start = startDateTime.toISOString();
+    event.end = endDateTime.toISOString();
+
+    $('#calendar').fullCalendar('updateEvent', event);
+    $('#event_modal').modal('hide');
+}
+
+function addDeleteEvent(eventId) {
+    function deleteEvent() {
+        $('#calendar').fullCalendar( 'removeEvents', eventId );
+    }
+    $('#delete').click(deleteEvent);
+}
+
 
 function addEvent(objectId) {
 	var startDate = $('#startDate').val();
 	var startTime = $('#startTime').val();
 	var startDateTime = new Date(startDate+' '+startTime);
-    // console.log(startDate);
     sessionStorage.setItem('lastTime', startTime);
 
 	var endDate = $('#endDate').val();
 	var endTime = $('#endTime').val();
 	var endDateTime = new Date(endDate+' '+endTime);
 
+    var eventNum = $('#calendar').fullCalendar('clientEvents').length + 1;
+
 	var event = {
 		title: $('#name').val(),
 		start: startDateTime.toISOString(),
-		end: endDateTime.toISOString()
+		end: endDateTime.toISOString(),
+        id: 'event'+eventNum
 	}
 	$('#calendar').fullCalendar('renderEvent', event, true);
 	$('#'+objectId).css({'display':'none'});

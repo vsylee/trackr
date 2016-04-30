@@ -1,4 +1,13 @@
 $(document).ready(function() {
+    // window.onbeforeunload = function(event) {
+    //     // console.log(JSON.parse(sessionStorage.getItem('events'))); 
+    //     // alert("JSON.stringify($('#calendar').fullCalendar('clientEvents'))");
+    //     console.log($('#calendar').fullCalendar('clientEvents'));
+
+    //     var s = JSON.stringify({$('#calendar').fullCalendar('clientEvents')});
+    //     sessionStorage.setItem('events', s);
+    //     return 'hello';
+    // }
     // initialize event details form in html (move to html file?)
     $('#event_details').append(addEventDialog('event_details'));
     // setting jquery datepicker for form start and end dates
@@ -48,10 +57,20 @@ $(document).ready(function() {
 
         eventClick: function(event) {
 
-        	if (event.url) return false; // don't allow redirection to source website of events
+        	// if (event.url) return false; // don't allow redirection to source website of events
         	// TODO: call eventClick function here to show summary of event details and to edit the event
         	// this.bindPopup('<button class="trigger">Say hi</button>');
-            console.log(event);
+            // console.log(event);
+            $('#name').val(event.title);
+            $('#location').val(event.location);
+            $('#delete').css({'visibility':'visible'});
+
+            $('#add_event').attr('action','javascript:updateEvent(\''+event.id+'\');');
+            $('#save_submit').text('Save Changes');
+
+            addDeleteEvent(event.id);
+            addEventModal(event.start, event.end);
+            return false;
         },
 
         dayClick: function(date) {
@@ -71,6 +90,9 @@ $(document).ready(function() {
                 default:
                     end = date.add(1, 'h');
             }
+            $('#delete').css({'visibility':'hidden'});
+            $('#add_event').attr('action','javascript:addEvent(\'event_details\');');
+            $('#save_submit').text('Add Event');
             addEventModal(date, end, currentView);
 
 	        // if(currentView.name === 'month') {
@@ -89,6 +111,9 @@ $(document).ready(function() {
             console.log(end);
             console.log(start===end);
             var realEnd = view.name==='month' ? start.clone().add(1,'h') : end;
+            $('#delete').css({'visibility':'hidden'});
+            $('#add_event').attr('action','javascript:addEvent(\'event_details\');');
+            $('#save_submit').text('Add Event');
             addEventModal(start, realEnd, view);
         	// console.log($(jsEvent.target).parent());
         	// console.log(view);
@@ -142,17 +167,17 @@ $(document).ready(function() {
 
         ],
 
-        events: [
-        	{
-        		title: 'Practice',
-        		className: 'soccer practice',
-        		start: practiceData['start'],
-        		end: practiceData['end'],
-        		dow: practiceData['dow'],
-                location: 'Briggs Field',
-        	},
+  //       events: [
+  //       	{
+  //       		title: 'Practice',
+  //       		className: 'soccer practice',
+  //       		start: practiceData['start'],
+  //       		end: practiceData['end'],
+  //       		dow: practiceData['dow'],
+  //               location: 'Briggs Field',
+  //       	},
 
-		],
+		// ],
 
         customButtons: {
         	addEvent: {
@@ -162,7 +187,9 @@ $(document).ready(function() {
 					// showAddEventPopover($(this),$(this));
                     var currentView = $('#calendar').fullCalendar('getView');
                     var start = $('#calendar').fullCalendar('getDate');
-                    console.log(start.clone().add(1, 'h'));
+                    $('#delete').css({'visibility':'hidden'});
+                    $('#add_event').attr('action','javascript:addEvent(\'event_details\');');
+                    $('#save_submit').text('Add Event');
                     addEventModal(start, start.clone().add(1, 'h'), currentView);
 					return false;
 	            }
@@ -174,16 +201,42 @@ $(document).ready(function() {
     for (var gameIndex in gameData) {
     	var game = gameData[gameIndex];
     	eventData = {
+            id: 'game'+gameIndex,
     		title: 'Game vs '+game['opponent'],
     		className: 'soccer game',
     		start: new Date(game['date']+' '+game['startTime']).toISOString(),
     		end: new Date(game['date']+' '+game['endTime']).toISOString(),
     		location: game['location'],
     	}
+        // to add more games, get length of objects with class "game" and use length+1 as next id
 		$('#calendar').fullCalendar('renderEvent', eventData, true);
 	}
+
+    practiceFirstDay = moment(new Date("2015/09/14"));
+    practiceLastDay = moment(new Date("2016/05/12"));
+    practiceDate = practiceFirstDay;
+    practiceIndex = 0;
+    while (practiceDate < practiceLastDay) {
+        if (practiceDate.day() >= practiceData['dow'][0] && practiceDate.day() <= practiceData['dow'][practiceData['dow'].length-1])  { // constraints day of week (dow) of practice
+            eventData = {
+                id: 'practice'+practiceIndex,
+                title: 'Practice',
+                className: 'soccer practice',
+                start: new Date(practiceDate.format('YYYY/MM/DD')+' '+practiceData['start']).toISOString(),
+                end: new Date(practiceDate.format('YYYY/MM/DD')+' '+practiceData['end']).toISOString(),
+                location: 'Briggs Field',
+            }
+            $('#calendar').fullCalendar('renderEvent', eventData, true);
+        }
+        // to add more practices, get length of objects with class "practice" and use length+1 as next id
+        practiceDate.add(1,'d');
+        practiceIndex++;
+    }
+
+
     $(".fc-addEvent-button").attr('id', 'addEvent-button');
     $(".fc-addEvent-button").css({'background-color': '#ee9023', 'background-image': 'none', 'color': 'white'});
+    // $(".fc-time").css({'margin-right':'10px'});
 
     // $('.modal-body').after(addEventDialog("event_modal"));
 
