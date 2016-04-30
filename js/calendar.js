@@ -48,10 +48,17 @@ $(document).ready(function() {
 
         eventClick: function(event) {
 
-        	if (event.url) return false; // don't allow redirection to source website of events
+        	// if (event.url) return false; // don't allow redirection to source website of events
         	// TODO: call eventClick function here to show summary of event details and to edit the event
         	// this.bindPopup('<button class="trigger">Say hi</button>');
-            console.log(event);
+            // console.log(event);
+            $('#name').val(event.title);
+            $('#location').val(event.location);
+            $('#delete').css({'visibility':'visible'});
+            console.log(event._id);
+            addDeleteEvent(event);
+            addEventModal(event.start, event.end);
+            return false;
         },
 
         dayClick: function(date) {
@@ -71,6 +78,7 @@ $(document).ready(function() {
                 default:
                     end = date.add(1, 'h');
             }
+            $('#delete').css({'visibility':'hidden'});
             addEventModal(date, end, currentView);
 
 	        // if(currentView.name === 'month') {
@@ -162,7 +170,7 @@ $(document).ready(function() {
 					// showAddEventPopover($(this),$(this));
                     var currentView = $('#calendar').fullCalendar('getView');
                     var start = $('#calendar').fullCalendar('getDate');
-                    console.log(start.clone().add(1, 'h'));
+                    $('#delete').css({'visibility':'hidden'});
                     addEventModal(start, start.clone().add(1, 'h'), currentView);
 					return false;
 	            }
@@ -174,6 +182,7 @@ $(document).ready(function() {
     for (var gameIndex in gameData) {
     	var game = gameData[gameIndex];
     	eventData = {
+            id: 'Game'+gameIndex,
     		title: 'Game vs '+game['opponent'],
     		className: 'soccer game',
     		start: new Date(game['date']+' '+game['startTime']).toISOString(),
