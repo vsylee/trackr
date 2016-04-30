@@ -89,7 +89,7 @@ function addEventModal(start, end, view){
 
         header:  {
         	left: 'prev',
-        	center: 'selectDate',
+        	center: 'title selectDate',
         	right: 'next'
         },
 
@@ -150,13 +150,15 @@ function addEventModal(start, end, view){
                     // $('#delete').css({'visibility':'hidden'});
                     // addEventModal(start, start.clone().add(1, 'h'), currentView);
                     return false;
-                }
+                },
+                // themeIcon: 'calendar'
             }
-        }
+        },
+        // theme: 'true'
         
     });
-    $('.fc-selectDate-button').append('<input type="text" id="event_details_date"/>');
-    $('#event_details_date').datepicker();
+    // $('.fc-selectDate-button').append('<input type="text" id="event_details_date"/>');
+    // $('#event_details_date').datepicker();
     // $(function() {$('#event_details_date').datepicker({
             // dateFormat: "MM d, yy",}).datepicker('setDate', $('#event_day_timeline').fullCalendar('getDate').format('LL'));});
     // $('#event_day_timeline').css({'width': '50%', 'margin-left':'15px', 'margin-right' : '15px'});
@@ -234,44 +236,55 @@ function createEvent(objectId) {
     $('#calendar').fullCalendar('renderEvent', event, true);
 }
 
-function updateEvent(event) {
+function updateEvent(eventId) {
+    var event = $('#calendar').fullCalendar('clientEvents', eventId)[0];
+
+    var startDate = $('#startDate').val();
+    var startTime = $('#startTime').val();
+    var startDateTime = new Date(startDate+' '+startTime);
+    sessionStorage.setItem('lastTime', startTime);
+
+    var endDate = $('#endDate').val();
+    var endTime = $('#endTime').val();
+    var endDateTime = new Date(endDate+' '+endTime);
+
     event.title = $('#name').val();
     event.location = $('#location').val();
+    event.start = startDateTime.toISOString();
+    event.end = endDateTime.toISOString();
 
     $('#calendar').fullCalendar('updateEvent', event);
     $('#event_modal').modal('hide');
 }
 
-function addDeleteEvent(event) {
+function addDeleteEvent(eventId) {
     function deleteEvent() {
-        console.log($('#calendar').fullCalendar( 'removeEvents', event.id ));
+        $('#calendar').fullCalendar( 'removeEvents', eventId );
     }
     $('#delete').click(deleteEvent);
 }
 
 
-function addEvent(objectId, update, event) {
-    if (update) {
-        $('#calendar').fullCalendar('updateEvent', event);
-    } else {
-    	var startDate = $('#startDate').val();
-    	var startTime = $('#startTime').val();
-    	var startDateTime = new Date(startDate+' '+startTime);
-        // console.log(startDate);
-        sessionStorage.setItem('lastTime', startTime);
+function addEvent(objectId) {
+	var startDate = $('#startDate').val();
+	var startTime = $('#startTime').val();
+	var startDateTime = new Date(startDate+' '+startTime);
+    sessionStorage.setItem('lastTime', startTime);
 
-    	var endDate = $('#endDate').val();
-    	var endTime = $('#endTime').val();
-    	var endDateTime = new Date(endDate+' '+endTime);
+	var endDate = $('#endDate').val();
+	var endTime = $('#endTime').val();
+	var endDateTime = new Date(endDate+' '+endTime);
 
-    	var event = {
-    		title: $('#name').val(),
-    		start: startDateTime.toISOString(),
-    		end: endDateTime.toISOString()
-    	}
-    	$('#calendar').fullCalendar('renderEvent', event, true);
-    	$('#'+objectId).css({'display':'none'});
-    }
+    var eventNum = $('#calendar').fullCalendar('clientEvents').length + 1;
+
+	var event = {
+		title: $('#name').val(),
+		start: startDateTime.toISOString(),
+		end: endDateTime.toISOString(),
+        id: 'event'+eventNum
+	}
+	$('#calendar').fullCalendar('renderEvent', event, true);
+	$('#'+objectId).css({'display':'none'});
 
     $('#event_modal').modal('hide');
 	// if (objectId !== 'addEvent-button-popover') popover.remove();
