@@ -32,6 +32,7 @@ p, a {
 .header_button {
 	font-size: 1em;
 	background-color: #3a87ad;
+	padding: 0 15px;
 }
 
 .disable_select {
@@ -50,6 +51,7 @@ p, a {
 
 	display:flex;
 	background-color: #3a87ad;
+	/*background-color: black;*/
 	align-items:center;
 	justify-content:space-between;
 	z-index: 10;
@@ -60,11 +62,13 @@ p, a {
 .header_buttons {
 	display: flex;
 	align-items: center;
-	justify-content: flex-start;
+	justify-content: center;
+	text-align: center;
 	flex-flow: row nowrap;
 
 	height: 100%;
 /*	width: 20%;*/
+	margin-right:10px;
 }
 
 .header_expansion {
@@ -99,8 +103,8 @@ p, a {
 .header_expansion_child:last-of-type {
 	border-bottom: 1px #054869 solid;
 }
-/*
-.header_expansion_child_events {
+
+/*.header_expansion_child_events {
 	width: 250px;
 }
 
@@ -119,7 +123,7 @@ p, a {
 	align-items: center;
 	color: white;
 	height: 100%;
-	width: 33.3333333%;
+	/*width: 33.3333333%;*/
 
 	cursor: pointer;
 	border: none;
@@ -227,3 +231,10 @@ hr {
 	margin:0;
 	border:0px;
 }
+
+.small_button_icon {
+	height: 50px;
+	width: 50px;
+	margin-right:10px;
+}
+
