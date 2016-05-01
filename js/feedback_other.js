@@ -23,40 +23,46 @@ var fake_comments = [
 ];
 
 function convert_data() {
-	var keys = Object.keys(gameData)
-	keys.sort(function(a, b) {
-		var first_time = gameData[a]; 
-		var second_time = gameData[b];
+	var eventData = storedEvents;
+	eventData.sort(function(first_event, second_event) {
 
-		var first_index_colon = first_time.startTime.indexOf(':');
-		var first_hours = first_time.startTime.substring(0, first_index_colon);
-		var first_minutes = first_time.startTime.substring(first_index_colon + 1);
+		var first_date = new Date(first_event.start);
+		var second_date = new Date(second_event.start);
 
-		var second_index_colon = second_time.startTime.indexOf(':');
-		var second_hours = second_time.startTime.substring(0, second_index_colon);
-		var second_minutes = second_time.startTime.substring(second_index_colon + 1);
+		return first_date - second_date;
 
-		return new Date(first_time.date) - new Date(second_time.date) 
-			+ (first_hours - second_hours) * 60 * 1000 
-			+ (first_minutes - second_minutes) * 1000;
+		// var first_time = gameData[a]; 
+		// var second_time = gameData[b];
+
+		// var first_index_colon = first_time.startTime.indexOf(':');
+		// var first_hours = first_time.startTime.substring(0, first_index_colon);
+		// var first_minutes = first_time.startTime.substring(first_index_colon + 1);
+
+		// var second_index_colon = second_time.startTime.indexOf(':');
+		// var second_hours = second_time.startTime.substring(0, second_index_colon);
+		// var second_minutes = second_time.startTime.substring(second_index_colon + 1);
+
+		// return new Date(first_time.date) - new Date(second_time.date) 
+		// 	+ (first_hours - second_hours) * 60 * 1000 
+		// 	+ (first_minutes - second_minutes) * 1000;
 	});
-	keys.reverse();
-	for (var i = 0; i < keys.length; i++) {
+	eventData.reverse();
+	for (var i = 0; i < eventData.length; i++) {
 		var current_event = {};
-		var current_event_object = gameData[keys[i]];
-		current_event["event_name"] = "Game";
-		current_event["opponent"] = current_event_object.opponent;
+		var current_event_object = eventData[i];
+		console.log(current_event_object.title);
+		// current_event["event_name"] = "Game";
+		current_event["name"] = current_event_object.title;
 		current_event["location"] = current_event_object.location;
-		current_event["start_time"] = current_event_object.startTime;
-		current_event["end_time"] = current_event_object.endTime;
-		current_event["date"] = current_event_object.date;
+		current_event["start_time"] = current_event_object.start;
+		current_event["end_time"] = current_event_object.end;
 		current_event["comments"] = fake_comments[parseInt(Math.random() * fake_comments.length)];
 
-		events[i] = current_event
+		events[i] = current_event;
 	}
 }
 
-function setup_card(opponent, date, location, start_time, end_time) {
+function setup_card(name, location, start_time, end_time) {
 	var card_to_add = $('<div>')
 							.addClass('feedback_card')
 							.on('click', function(e) {
@@ -67,8 +73,7 @@ function setup_card(opponent, date, location, start_time, end_time) {
 														current_event["location"] + " with " + 
 														current_event["opponent"] + " from " + 
 														current_event["start_time"] + " to " + 
-														current_event["end_time"] + " on " + 
-														current_event["date"];
+														current_event["end_time"];
 								$('#body_title')
 									.text(event_description);
 								var div_container = $('#feedback_data_cols');
@@ -98,7 +103,7 @@ function setup_card(opponent, date, location, start_time, end_time) {
 									"font-size": "17px",
 									"color": "#000000",
 								})
-								.text(opponent),
+								.text(name),
 							$('<div>')
 								.addClass('feedback_card_element')
 								.css({
@@ -110,7 +115,7 @@ function setup_card(opponent, date, location, start_time, end_time) {
 									"justify-content": "flex-end",
 									"font-family": "'Overlock', serif",
 								})
-								.text(moment(new Date(date)).format('MMM DD')));
+								.text(moment(new Date(start_time)).format('MMM DD')));
 	var body_attr = $('<div>')
 						.addClass('feedback_card_body')
 						.appendTo(card_to_add)
@@ -136,8 +141,9 @@ function setup_card(opponent, date, location, start_time, end_time) {
 										"margin-top": "10px",
 										"margin-right": "5px",
 									})
-									.text(moment(new Date(date+" "+start_time)).format('h A')));
+									.text(moment(new Date(start_time)).format('h A')));
 
+	console.log("adding" + name);
 	return card_to_add;
 }
 
@@ -151,8 +157,8 @@ function searchKeyPress() {
 	var matchingEvents = [];
 	for (var i = 0; i < events.length; i++) {
 		var current_event = events[i];
-		if (current_event.opponent.substr(0,len).toLowerCase() === searchValue.toLowerCase()
-				|| current_event.location.substr(0,len).toLowerCase() === searchValue.toLowerCase()) {
+		if (current_event.name.substr(0,len).toLowerCase() === searchValue.toLowerCase() ) {
+				// || current_event.location.substr(0,len).toLowerCase() === searchValue.toLowerCase()) {
 			matchingEvents.push(current_event);
 		}
 	}
@@ -164,8 +170,7 @@ function searchKeyPress() {
 	}
 	for (var i = 0; i < matchingEvents.length; i++) {
 		var current_event = matchingEvents[i]
-		var curr_card = setup_card(current_event['opponent'], 
-								   current_event['date'], 
+		var curr_card = setup_card(current_event['name'],
 								   current_event['location'], 
 								   current_event['start_time'],
 								   current_event['end_time']);
@@ -178,8 +183,7 @@ $(document).ready(function() {
 	var events_col = $('#feedback_events');
 	for (var i = 0; i < events.length; i++) {
 		var current_event = events[i];
-		var curr_card = setup_card(current_event['opponent'], 
-								   current_event['date'], 
+		var curr_card = setup_card(current_event['name'],
 								   current_event['location'], 
 								   current_event['start_time'],
 								   current_event['end_time']);
@@ -199,12 +203,6 @@ $(document).ready(function() {
 			if ($("#search-bar").val() == "") {
 				$("#search-bar").val("🔍 Search by team, location, or date")
 			}
-		}
-		// if not a menu, close menu
-		if (!$(e.target).is(".header_button")) {
-			$('.header_expansion').css('display', "none");
-			$('.header_button').css('background-color', '#3a87ad');
-
 		}
 	});
 
