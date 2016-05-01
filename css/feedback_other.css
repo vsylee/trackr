@@ -105,6 +105,7 @@ html, body {
 .feedback {
 	display: flex;
 	flex-flow: row wrap;
+	align-content:flex-start;
 	width: 25%;
 	height: 100%;
 	overflow:scroll;

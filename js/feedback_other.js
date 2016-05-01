@@ -134,26 +134,33 @@ function setup_card(opponent, date, location, start_time, end_time) {
 
 function searchKeyPress() {
 	console.log("pressing");
+	var events_col = $('#feedback_events');
 	$(".feedback_card").remove();
 	var searchValue = $("#search-bar").val();
 	var len = searchValue.length;
-	// var currentTeam = $("#team-select").val();
-	// var currentMembers = teams[currentTeam];
-	// var matchingMembers = [];
-	// if (currentMembers) {
-	// 	for (var i=0; i < currentMembers.length; i++) {
-	// 		if (currentMembers[i].substr(0,len).toLowerCase() === searchValue.toLowerCase()) {
-	// 			matchingMembers.push(currentMembers[i]);
-	// 		}
-	// 	}
-	// 	for (var i=0; i < matchingMembers.length; i++) {
-	// 		if (i != 0) {
-	// 			$("#team-members").append("<hr>");
-	// 		}
-	// 		$("#team-members").append(
-	// 			"<li>" + matchingMembers[i] + "</li>");
-	// 	}
-	// }
+
+	var matchingEvents = [];
+	for (var i = 0; i < events.length; i++) {
+		var current_event = events[i];
+		if (current_event.opponent.substr(0,len).toLowerCase() === searchValue.toLowerCase()
+				|| current_event.location.substr(0,len).toLowerCase() === searchValue.toLowerCase()) {
+			matchingEvents.push(current_event);
+		}
+	}
+	if (matchingEvents.length === 0) {
+		$("<div>")
+			.addClass('feedback_card')
+			.css("border-bottom", "none")
+			.appendTo(events_col);
+	}
+	for (var i = 0; i < matchingEvents.length; i++) {
+		var current_event = matchingEvents[i]
+		var curr_card = setup_card(current_event['opponent'], 
+								   current_event['date'], 
+								   current_event['location'], 
+								   current_event['start_time'],
+								   current_event['end_time']);
+		curr_card.appendTo(events_col);
 }
 
 $(document).ready(function() {
