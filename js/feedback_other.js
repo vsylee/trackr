@@ -109,7 +109,7 @@ function setup_card(opponent, date, location, start_time, end_time) {
 									.addClass('feedback_card_element')
 									.css({
 										"width": "90%",
-										"color": "#617F8B",
+										"color": "#0c5a80",
 										"padding": "0px 0px 0px 10px",
 										"font-size": "15px",
 										"margin-top": "8px"
@@ -123,8 +123,9 @@ function setup_card(opponent, date, location, start_time, end_time) {
 										"padding": "0px 15px 0px 0px",
 										"font-family": "'Overlock', serif",
 										"font-size": "13px",
-										"color": "#617F8B",
-										"margin-top": "10px"
+										"color": "#0c5a80",  //617F8B
+										"margin-top": "10px",
+										"margin-right": "5px",
 									})
 									.text(start_time));
 
