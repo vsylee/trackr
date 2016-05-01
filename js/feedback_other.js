@@ -83,12 +83,13 @@ function setup_card(opponent, date, location, start_time, end_time) {
 									"padding": "0px 5px 0px 0px",
 									"font-size": "13px",
 									"margin-top": "4px",
-									"color": "#617F8B",
+									"margin-right": "5px",
+									"color": "#63808b",
 									"justify-content": "flex-end",
 									"font-family": "'Overlock', serif",
 									// "background-color": "turquoise"
 								})
-								.text(date));
+								.text(moment(date).format('MMM DD')));
 	var body_attr = $('<div>')
 						.addClass('feedback_card_body')
 						.appendTo(card_to_add)
@@ -113,9 +114,10 @@ function setup_card(opponent, date, location, start_time, end_time) {
 										"font-family": "'Overlock', serif",
 										"font-size": "13px",
 										"color": "#617F8B",
-										"margin-top": "10px"
+										"margin-top": "10px",
+										"margin-right": "5px",
 									})
-									.text(start_time));
+									.text(moment(date+" "+start_time).format('h A')));
 
 	return card_to_add;
 }
