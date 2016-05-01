@@ -1,4 +1,4 @@
-	.content {
+.content {
 	position: absolute;
 	left: 0px;
 	top: 60px;
@@ -26,14 +26,10 @@
 	display:flex;
 }
 
-img {
+#profile-picture {
 	height:300px;
 	border:1px solid black;
 	margin-right:10px;
-}
-
-.small_button_icon {
-	border: 0px;
 }
 
 hr {
