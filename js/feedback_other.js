@@ -176,8 +176,8 @@ function searchKeyPress() {
 	var matchingEvents = [];
 	for (var i = 0; i < events.length; i++) {
 		var current_event = events[i];
-		if (current_event.name.substr(0,len).toLowerCase() === searchValue.toLowerCase() ) {
-				// || current_event.location.substr(0,len).toLowerCase() === searchValue.toLowerCase()) {
+		if (current_event.name.substr(0,len).toLowerCase() === searchValue.toLowerCase()
+				|| current_event.location.substr(0,len).toLowerCase() === searchValue.toLowerCase()) {
 			matchingEvents.push(current_event);
 		}
 	}
@@ -193,6 +193,7 @@ function searchKeyPress() {
 								   current_event['location'], 
 								   current_event['start_time'],
 								   current_event['end_time']);
+		// jQuery.data(curr_card, "event_index", i);
 		curr_card.appendTo(events_col);
 	}
 }
