@@ -82,8 +82,8 @@ function setup_player_row(curr_player_data) {
 										.append($('<img>')
 													.attr('src', curr_player_data["img"])
 													.css({
-														"width": "175px",
-														"height": "175px"
+														"width": "100%",
+														"height": "100%"
 													})),
 							// ,
 									$('<div>')
