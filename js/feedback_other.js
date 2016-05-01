@@ -114,9 +114,6 @@ $(document).ready(function() {
 	var events_col = $('#feedback_events');
 	for (var i = 0; i < events.length; i++) {
 		var current_event = events[i];
-		$('<div>')
-			.addClass('feedback_title')
-			.appendTo(events_col);
 			// .css({
 			// 	'opacity': i / 10
 			// });
