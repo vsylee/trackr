@@ -72,6 +72,7 @@ function setup_player_row(curr_player_data) {
 										.addClass('feedback_data_player')
 										.css({
 											"backgroundColor": "cyan",
+											"position": "relative",
 											"width": "30%",
 											"height": "100%",
 											"justify-content": "flex-end",
@@ -84,6 +85,7 @@ function setup_player_row(curr_player_data) {
 														"width": "175px",
 														"height": "175px"
 													})),
+							// ,
 									$('<div>')
 										.addClass('feedback_data_player')
 										.css({

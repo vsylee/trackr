@@ -22,24 +22,24 @@
 <div class="header disable_select">
 	<p><a id="home" href="./index.html">Trackr</a></p>
 	<div class="header_buttons">
-		<div>
+		<div class="small-button">
 			<a href="./profile.html">
-				<img src="./../images/profile_white.png" class="small_button_icon">
+				<img src="./../images/profile_white.png" class="small-button-icon">
 			</a>
 		</div>
-		<div>
+		<div class="small-button">
 			<a href="./feedback_other.html">
-				<img src="./../images/feedback_white.png" class="small_button_icon">
+				<img src="./../images/feedback_white.png" class="small-button-icon">
 			</a>
 		</div>
-		<div>
+		<div class="small-button">
 			<a href="./events.html">
-				<img src="./../images/events_white.png" class="small_button_icon">
+				<img src="./../images/events_white.png" class="small-button-icon">
 			</a>
 		</div>
-		<div>
+		<div class="small-button">
 			<a href="./settings.html">
-				<img src="./../images/settings_white.png" class="small_button_icon">
+				<img src="./../images/settings_white.png" class="small-button-icon">
 			</a>
 		</div>
 
@@ -63,7 +63,7 @@
 <div class="content">
 
 	<div>
-		<img src='./../images/curry.jpg' />
+		<img id="profile-picture" src='./../images/curry.jpg' />
 		<div>
 			<p class="large">Contact Details</p>
 			<hr>
@@ -85,25 +85,6 @@
 
 </div>
 
-
-
-
-<div id="right-panel">
-	<div id="right-panel-button" class="right-panel-open">
-		<span id="right-panel-triangle">
-	</div>
-	<div id="player-list">
-		<input type="text" id="search-bar" value="🔍 Search..." onKeyPress="searchKeyPress()" onKeyUp="searchKeyPress()"></input>
-
-		<select required id="team-select">
-			<option class="placeholder" selected disabled value="">Team:</option>
-		</select>
-
-		<ul id="team-members">
-			<li style="padding:15px;font-size:27px;text-align:center;color:grey;">Select a team above to view members</li>
-		</ul>
-	</div>
-</div>
 
 <script type="text/javascript" src="./../external_js/jquery-1.9.0.min.js"></script>
 <script type="text/javascript" src="./../js/header.js"></script>

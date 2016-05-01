@@ -30,7 +30,7 @@ p, a {
 }
 
 .header_button {
-	font-size: 1em;
+	font-size: 16px;
 	background-color: #3a87ad;
 	padding: 0 15px;
 }
@@ -104,18 +104,6 @@ p, a {
 	border-bottom: 1px #054869 solid;
 }
 
-/*.header_expansion_child_events {
-	width: 250px;
-}
-
-.header_expansion_child_feedback {
-	width: 250px;
-}
-
-.header_expansion_child_account {
-	width: 125px;
-}*/
-
 .dropdown_container {
 	display: flex;
 	flex-flow: column nowrap;
@@ -134,83 +122,6 @@ p, a {
 	padding-left: 20px;
 }
 
-#right-panel {
-	position: absolute;
-	display: flex;
-	align-items: stretch;
-	right: 0px;
-	margin-top: 60px;
-	top: 0px;
-	bottom: 0px;
-}
-
-#right-panel-button {
-	background: #0c5a80; /* 0c5a80 054869;*/
-	width: 20px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	cursor: pointer;
-}
-
-#player-list {
-	display:flex;
-	flex-flow: column nowrap;
-	background:#b8c3c8; /*bac1c4 bfc4c7 c5c8d3 e9eaed e0e0e0 ffd19c bce0f1 8cc3dd 5ca2c4;*/
-	/* getting rid of width fixes bootstrap conflict? */
-	/*width:260px; */
-	overflow-y:scroll;
-	padding:20px;
-}
-
-select > .placeholder {
-	display: none;
-}
-
-/* this styling code is from http://codepen.io/ericrasch/pen/zjDBx */
-select#team-select {
-   -webkit-appearance: button;
-   -webkit-border-radius: 2px;
-   -webkit-padding-end: 20px;
-   -webkit-padding-start: 2px;
-   -webkit-user-select: none;
-   background-image: url(http://i62.tinypic.com/15xvbd5.png), -webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);
-   background-position: 97% center;
-   background-repeat: no-repeat;
-   border: 1px solid #AAA;
-   color: #555; 
-   font-size: inherit;
-   overflow: hidden;
-   padding: 5px 10px;
-   text-overflow: ellipsis;
-   white-space: nowrap;
-   width: 260px;
-   min-height: 31px;
-   box-shadow: none;
-   font-family: 'Overlock', serif;
-}
-
-#team-members {
-	margin-top:10px;
-	bottom:0px;
-	margin-bottom:20px;
-	width:256px;
-	padding:0;
-	overflow:hidden;
-	overflow-y:scroll;
-	flex-grow:10;
-	background-color:#fefefe; /*fefefe e9eaed eeeeee ffe2c0*/
-	font-family: 'Overlock', serif;
-}
-
-#team-members li {
-	padding-left:10px;
-	padding-top:5px;
-	padding-bottom:7px;
-	color:black;
-	font-family: 'Overlock', serif;
-}
-
 hr {
 	height:2px;
 	color: red; /*AAA*/
@@ -220,9 +131,12 @@ hr {
 	border:0px;
 }
 
-.small_button_icon {
+.small-button {
+	margin-right:15px;
+}
+
+.small-button-icon {
 	height: 50px;
 	width: 50px;
-	margin-right:10px;
 }
 

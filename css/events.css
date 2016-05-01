@@ -9,7 +9,7 @@ html, body {
 	/* 60px header */
 	margin-top:60px;
 	/* 320px right panel */
-	right:320px;
+	right:0px;
 	/*margin-bottom:10px;*/
 	flex-grow: 1;
 	bottom: 0px;
@@ -153,7 +153,24 @@ label, input {
 	padding-right: 0px;
 }
 
-.checkbox label {
+.days-of-week label {
 	/*padding-left: 2px;*/
-	/*margin-right: 10px;*/
+	/*margin-right: 25px;*/
+	cursor: not-allowed;
+}
+
+#days-of-week-label {
+	padding-left: 0px;
+	cursor: auto;
+}
+
+.days-of-week-group {
+	display: none;
+}
+
+#repeat-text {
+	font-family: 'Overlock', serif;
+	color: black;
+	font-size: 15px;
+	/*font-weight: 700;*/
 }

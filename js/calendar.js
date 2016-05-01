@@ -115,7 +115,7 @@ $(document).ready(function() {
         // selectHelper: true,
         select: function(start, end, jsEvent, view) {
             
-            var realEnd = view.name==='month' ? start.clone().add(1,'h') : end;
+            var realEnd = view.name==='month' ? end.clone().subtract(1,'m') : end;
             setModalState('add');
             addEventModal(start, realEnd, view);
 
