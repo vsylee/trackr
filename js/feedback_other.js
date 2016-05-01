@@ -50,7 +50,6 @@ function convert_data() {
 	for (var i = 0; i < eventData.length; i++) {
 		var current_event = {};
 		var current_event_object = eventData[i];
-		console.log(current_event_object.title);
 		// current_event["event_name"] = "Game";
 		current_event["name"] = current_event_object.title;
 		current_event["location"] = current_event_object.location;
@@ -170,12 +169,11 @@ function setup_card(name, location, start_time, end_time) {
 									})
 									.text(moment(new Date(start_time)).format('h A')));
 
-	console.log("adding" + name);
 	return card_to_add;
 }
 
 function searchKeyPress() {
-	console.log("pressing");
+	// console.log("pressing");
 	var events_col = $('#feedback_events');
 	$(".feedback_card").remove();
 	var searchValue = $("#search-bar").val();
@@ -184,8 +182,11 @@ function searchKeyPress() {
 	var matchingEvents = [];
 	for (var i = 0; i < events.length; i++) {
 		var current_event = events[i];
+		// console.log(current_event.name.substr(8,len).toLowerCase())
 		if (current_event.name.substr(0,len).toLowerCase() === searchValue.toLowerCase()
-				|| current_event.location.substr(0,len).toLowerCase() === searchValue.toLowerCase()) {
+				|| current_event.location.substr(0,len).toLowerCase() === searchValue.toLowerCase()
+				|| (current_event.name.substr(0,8) === "Game vs "
+					&& current_event.name.substr(8,len).toLowerCase() === searchValue.toLowerCase()) ) {
 			matchingEvents.push(current_event);
 		}
 	}
