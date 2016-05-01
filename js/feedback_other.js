@@ -47,7 +47,7 @@ function convert_data() {
 	for (var i = 0; i < keys.length; i++) {
 		var current_event = {};
 		var current_event_object = gameData[keys[i]];
-		current_event["eventName"] = "Game";
+		current_event["event_name"] = "Game";
 		current_event["opponent"] = current_event_object.opponent;
 		current_event["location"] = current_event_object.location;
 		current_event["start_time"] = current_event_object.startTime;
@@ -62,6 +62,19 @@ function convert_data() {
 function setup_card(opponent, date, location, start_time, end_time) {
 	var card_to_add = $('<div>')
 							.addClass('feedback_card')
+							.on('click', function(e) {
+								var data_index = jQuery.data(card_to_add, "event_index");
+								var current_event = events[data_index];
+
+								var event_description = current_event["event_name"] + " at " + 
+														current_event["location"] + " with " + 
+														current_event["opponent"] + " from " + 
+														current_event["start_time"] + " to " + 
+														current_event["end_time"] + " on " + 
+														current_event["date"];
+								$('#body_title')
+									.text(event_description);
+							});
 
 	var title_attr = $('<div>')
 					.addClass('feedback_card_row')
@@ -83,13 +96,12 @@ function setup_card(opponent, date, location, start_time, end_time) {
 									"padding": "0px 5px 0px 0px",
 									"font-size": "13px",
 									"margin-top": "4px",
-									"margin-right": "5px",
-									"color": "#63808b",
+									"color": "#617F8B",
 									"justify-content": "flex-end",
 									"font-family": "'Overlock', serif",
 									// "background-color": "turquoise"
 								})
-								.text(moment(date).format('MMM DD')));
+								.text(date));
 	var body_attr = $('<div>')
 						.addClass('feedback_card_body')
 						.appendTo(card_to_add)
@@ -101,7 +113,6 @@ function setup_card(opponent, date, location, start_time, end_time) {
 										"padding": "0px 0px 0px 10px",
 										"font-size": "15px",
 										"margin-top": "8px"
-										// "backgroundColor": "red"
 									})
 									.text("at "+location),
 								$('<div>')
@@ -117,7 +128,7 @@ function setup_card(opponent, date, location, start_time, end_time) {
 										"margin-top": "10px",
 										"margin-right": "5px",
 									})
-									.text(moment(date+" "+start_time).format('h A')));
+									.text(start_time));
 
 	return card_to_add;
 }
@@ -164,6 +175,7 @@ $(document).ready(function() {
 								   current_event['start_time'],
 								   current_event['end_time']);
 		
+		jQuery.data(curr_card, "event_index", i);
 		curr_card.appendTo(events_col);
 	}
 
@@ -172,7 +184,7 @@ $(document).ready(function() {
 			$(this).val("");
 		}
 	});
-	$(document).click( function (e) {
+	$(document).click(function (e) {
 		// if not search bar, return the "Search" text
 		if (!$(e.target).closest("#search-bar").length &&
 			!$(e.target).is("#search-bar")) {

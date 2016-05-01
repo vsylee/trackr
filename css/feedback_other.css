@@ -108,17 +108,30 @@ html, body {
 	align-content:flex-start;
 	width: 25%;
 	height: 100%;
-	background-color: #; /*9E9E9E*/
 	overflow:scroll;
 }
 
 .feedback_data {
 	display: flex;
+	flex-flow: row wrap;
 	width: calc(75% - 2px);
 	height: 100%;
 	background-color: #af1323;
 	border-left: 2px solid #879ba3;
+}
 
+.feedback_data_title {
+	justify-content: center;
+	align-content: center;
+	align-items: center;
+}
+
+.feedback_data_row {
+	display: flex;
+	flex-flow: row wrap;
+	width: 100%;
+	height: 10%;
+	background-color: orange;
 }
 
 .feedback_card {
