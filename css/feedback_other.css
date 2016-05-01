@@ -24,84 +24,6 @@ html, body {
 	border: 1px solid #627e8b;
 }
 
-.content {
-	display: flex;
-	height: auto;
-	width:100%;
-	flex-flow: row wrap;
-	justify-content: flex-start;
-	align-content: flex-start;
-	overflow: scroll;
-	background-color:#E0E0E0;
-
-}
-
-.content_col {
-	display: flex;
-	flex-flow: row nowrap;
-	width: calc(38% - 8px);
-	height: auto;
-
-	background-color: #e3e6e8;
-	color:black;
-	padding:3px 3px 3px 4px;
-	border-left: 1px solid #627e8b;
-	border-top: 1px solid #627e8b;
-	font-family: 'Overlock', serif;
-}
-
-.content_col_text_container {
-	display: flex;
-	justify-content: flex-start;
-	text: black;
-	width: 80%;
-	font-family: 'Overlock', serif;
-	color: black;
-}
-
-.content_col_button_container {
-	display: flex;
-	flex-flow: column nowrap;
-	justify-content: flex-end;
-	align-content: flex-end;
-	width: 20%;
-	padding-left: 5px;
-	color: black;
-}
-
-.content_end_button {
-	display: inline-block;
-	font-size: 16px;
-	line-height: 1.8;
-	width: 100%;
-	height: 30px;
-	background-color: #0c5a80;
-	border-style: none;
-	outline: none;
-	cursor: pointer;
-}
-
-.content_end_button:active {
-	background-color: #2795ee;
-}
-
-.button {
-	color: red;
-}
-
-.button:hover {
-	color: blue;
-}
-
-.edit_comment {
-	background-color: #ffffff;
-}
-
-#player-name {
-	width: calc(24% - 7px);
-	border-left:none;
-}
-
 .feedback {
 	display: flex;
 	flex-flow: row wrap;
@@ -113,11 +35,13 @@ html, body {
 
 .feedback_data {
 	display: flex;
-	flex-flow: row wrap;
+	flex-flow: column nowrap;
 	width: calc(75% - 2px);
 	height: 100%;
 	background-color: #af1323;
+	justify-content: flex-start;
 	border-left: 2px solid #879ba3;
+	overflow: scroll;
 }
 
 .feedback_data_title {
@@ -126,11 +50,29 @@ html, body {
 	align-items: center;
 }
 
-.feedback_data_row {
+.feedback_data_remove {
+
+}
+
+.feedback_data_player {
+	display: flex;
+	flex-flow: row nowrap;
+	height: 100%;
+}
+
+.feedback_data_title {
 	display: flex;
 	flex-flow: row wrap;
 	width: 100%;
 	height: 10%;
+	background-color: orange;
+}
+
+.feedback_data_row {
+	display: flex;
+	flex-flow: row wrap;
+	width: 100%;
+	height: 200px;
 	background-color: orange;
 }
 
@@ -141,8 +83,6 @@ html, body {
 	width: 100%;
 	height: 75px;
 	justify-content: center;
-	/*align-content: center;*/
-	/*background-color: blue;*/
 	border-bottom: 1px solid #b8c3c8; /*ffac4d*/
 }
 
@@ -167,21 +107,6 @@ html, body {
 	height: 100%;
 	justify-content: flex-start;
 }
-
-/*.feedback_card_date {
-	display: flex;
-	flex-flow: row nowrap;
-	position: relative;
-	width: 15%;
-	height: 100%;
-	padding: 0px 5px 0px 0px;
-	justify-content: flex-end;
-	color: #617F8B;
-	font-family: 'Overlock', serif;
-	font-size: 13px;
-	margin-top: 4px;
-	align-content: center;
-}*/
 
 .feedback_card_body {
 	display: flex;

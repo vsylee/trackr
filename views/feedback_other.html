@@ -21,6 +21,26 @@
 <div class="header disable_select">
 	<p><a id="home" href="./index.html">Trackr</a></p>
 	<div class="header_buttons">
+		<div>
+			<a href="./profile.html">
+				<img src="./../images/profile_white.png" class="small_button_icon">
+			</a>
+		</div>
+		<div>
+			<a href="./feedback_other.html">
+				<img src="./../images/feedback_white.png" class="small_button_icon">
+			</a>
+		</div>
+		<div>
+			<a href="./events.html">
+				<img src="./../images/events_white.png" class="small_button_icon">
+			</a>
+		</div>
+		<div>
+			<a href="./settings.html">
+				<img src="./../images/settings_white.png" class="small_button_icon">
+			</a>
+		</div>
 		<div class="dropdown_container header_button" id="header_events">
  			Events
  		</div>
@@ -38,16 +58,16 @@
 	<div class="feedback" id="feedback_events">
 		<input type="text" id="search-bar" value="🔍 Search by team, location, or date" onKeyPress="searchKeyPress()" onKeyUp="searchKeyPress()"></input>
 	</div>
-	<div class="feedback_data">
-	<div class="feedback_data_row feedback_data_title" id="body_title">
-	</div>
+	<div class="feedback_data" id="feedback_data_cols">
+		<div class="feedback_data_title feedback_data_title" id="body_title">
+		</div>
 	</div>
 </div>
 
 <script type="text/javascript" src="./../external_js/jquery-1.9.0.min.js"></script>
 <script type="text/javascript" src="./../js/header.js"></script>
 
-<script type="text/javascript" src="./../data/data.json"></script>
+<script type="text/javascript" src="./../data/events.json"></script>
 <script src='./../fullcalendar-2.6.1/lib/moment.min.js'></script>
 <script type="text/javascript" src="./../js/feedback_other.js"></script>
 
