@@ -62,7 +62,28 @@ function convert_data() {
 	}
 }
 
-function setup_card(name, location, start_time, end_time) {
+function setup_player_row(curr_player_data) {
+	var player_row = $('<div>')
+							.addClass('feedback_data_row feedback_data_remove')
+							.append($('<div>')
+										.addClass('feedback_data_player')
+										.css({
+											"backgroundColor": "cyan",
+											"width": "30%",
+											"height": "100%"
+										}),
+									$('<div>')
+										.addClass('feedback_data_player')
+										.css({
+											"backgroundColor": "green",
+											"width": "50%",
+											"height": "100%"
+										}));
+
+	return player_row;
+}
+
+function setup_card(opponent, date, location, start_time, end_time) {
 	var card_to_add = $('<div>')
 							.addClass('feedback_card')
 							.on('click', function(e) {
@@ -84,8 +105,7 @@ function setup_card(name, location, start_time, end_time) {
 
 								for (var i = 0; i < curr_player_data.length; i++) {
 									div_container
-										.append($('<div>')
-													.addClass('feedback_data_row feedback_data_remove'));
+										.append(setup_player_row(curr_player_data[i]));
 										
 								}
 
