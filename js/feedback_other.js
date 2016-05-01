@@ -69,21 +69,24 @@ function setup_card(opponent, date, location, start_time, end_time) {
 					.append($('<div>')
 								.addClass('feedback_card_element')
 								.css({
-									"width": "70%",
+									"width": "85%",
 									"padding": "0px 0px 0px 10px",
 									"font-size": "17px",
-									"color": "#000000"
+									"color": "#000000",
+									// "background-color": "cyan"
 								})
 								.text(opponent),
 							$('<div>')
 								.addClass('feedback_card_element')
 								.css({
-									"width": "30%",
+									"width": "15%",
 									"padding": "0px 5px 0px 0px",
 									"font-size": "13px",
+									"margin-top": "4px",
 									"color": "#617F8B",
 									"justify-content": "flex-end",
-									"font-family": "'Overlock', serif"
+									"font-family": "'Overlock', serif",
+									// "background-color": "turquoise"
 								})
 								.text(date));
 	var body_attr = $('<div>')
@@ -94,20 +97,23 @@ function setup_card(opponent, date, location, start_time, end_time) {
 									.css({
 										"width": "90%",
 										"color": "#617F8B",
-										
-										"backgroundColor": "red"
+										"padding": "0px 0px 0px 10px",
+										"font-size": "15px",
+										"margin-top": "8px"
+										// "backgroundColor": "red"
 									})
-									.text(location),
+									.text("at "+location),
 								$('<div>')
 									.addClass('feedback_card_element')
 									.css({
 										"width": "10%",
-										"backgroundColor": "purple",
+										// "backgroundColor": "purple",
 										"justify-content": "flex-end",
 										"padding": "0px 15px 0px 0px",
 										"font-family": "'Overlock', serif",
 										"font-size": "13px",
-										"color": "#617F8B"
+										"color": "#617F8B",
+										"margin-top": "10px"
 									})
 									.text(start_time));
 
