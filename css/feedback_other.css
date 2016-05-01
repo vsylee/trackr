@@ -105,19 +105,33 @@ html, body {
 .feedback {
 	display: flex;
 	flex-flow: row wrap;
+	align-content:flex-start;
 	width: 25%;
 	height: 100%;
-	background-color: #; /*9E9E9E*/
 	overflow:scroll;
 }
 
 .feedback_data {
 	display: flex;
+	flex-flow: row wrap;
 	width: calc(75% - 2px);
 	height: 100%;
 	background-color: #af1323;
 	border-left: 2px solid #879ba3;
+}
 
+.feedback_data_title {
+	justify-content: center;
+	align-content: center;
+	align-items: center;
+}
+
+.feedback_data_row {
+	display: flex;
+	flex-flow: row wrap;
+	width: 100%;
+	height: 10%;
+	background-color: orange;
 }
 
 .feedback_card {
@@ -125,7 +139,7 @@ html, body {
 	flex-flow: column wrap;
 	position: relative;
 	width: 100%;
-	height: 100px;
+	height: 75px;
 	justify-content: center;
 	/*align-content: center;*/
 	/*background-color: blue;*/
@@ -133,8 +147,7 @@ html, body {
 }
 
 .feedback_card:first-of-type {
-	border-top: 5px solid #b8c3c8;
-	background-color: red;
+	border-top: 1px solid #b8c3c8;
 }
 
 .feedback_card_row {
@@ -145,21 +158,17 @@ html, body {
 	height: 30%;
 	justify-content: flex-start;
 	/*background-color: green;*/
-	margin-top: 18px;
+	margin-top: 8px;
 }
 
 .feedback_card_element {
 	display: flex;
 	flex-flow: row nowrap;
-	width: 85%;
 	height: 100%;
 	justify-content: flex-start;
-	/*background-color: cyan;*/
-	color: black;
-	font-size: 17px;
 }
 
-.feedback_card_date {
+/*.feedback_card_date {
 	display: flex;
 	flex-flow: row nowrap;
 	position: relative;
@@ -167,23 +176,21 @@ html, body {
 	height: 100%;
 	padding: 0px 5px 0px 0px;
 	justify-content: flex-end;
-	/*background-color: turquoise;*/
 	color: #617F8B;
 	font-family: 'Overlock', serif;
 	font-size: 13px;
 	margin-top: 4px;
 	align-content: center;
-}
+}*/
 
 .feedback_card_body {
 	display: flex;
 	flex-flow: row nowrap;
 	width: 100%;
 	height: 50%;
-	/*justify-content: center;*/
-	background-color: orange;
+	/*background-color: orange;*/
 	padding: 0px 0px 0px 10px;
-	color: black;
+	/*color: black;*/
 }
 
 .feedback-header {
@@ -220,7 +227,7 @@ html, body {
 
 #search-bar {
 	width:100%;
-	min-height:32px;
+	height:32px;
 	font-size:14px;
 	color:#617F8B;
 	border-radius:5px;
