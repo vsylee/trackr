@@ -63,25 +63,74 @@ function setup_card(opponent, date, location, start_time, end_time) {
 	var card_to_add = $('<div>')
 							.addClass('feedback_card')
 
-
 	var title_attr = $('<div>')
 					.addClass('feedback_card_row')
-					.appendTo(card_to_add);
-
-	var opp_to_add = $('<div>')
-							.addClass('feedback_card_opponent')
-							.text(opponent)
-							.appendTo(title_attr);
-	var date_to_add = $('<div>')
-							.addClass('feedback_card_date')
-							.text(date)
-							.appendTo(title_attr);
-	var body_to_add = $('<div>')
-							.addClass('feedback_card_body')
-							.text(start_time)
-							.appendTo(card_to_add);
+					.appendTo(card_to_add)
+					.append($('<div>')
+								.addClass('feedback_card_element')
+								.css({
+									"width": "70%",
+									"padding": "0px 0px 0px 10px",
+									"font-size": "17px",
+									"color": "#000000"
+								})
+								.text(opponent),
+							$('<div>')
+								.addClass('feedback_card_element')
+								.css({
+									"width": "30%",
+									"padding": "0px 5px 0px 0px",
+									"font-size": "13px",
+									"color": "#617F8B",
+									"justify-content": "flex-end",
+									"font-family": "'Overlock', serif"
+								})
+								.text(date));
+	var body_attr = $('<div>')
+						.addClass('feedback_card_body')
+						.appendTo(card_to_add)
+						.append($('<div>')
+									.addClass('feedback_card_element')
+									.css({
+										"width": "60%",
+										"backgroundColor": "red"
+									})
+									.text(location),
+								$('<div>')
+									.addClass('feedback_card_element')
+									.css({
+										"width": "40%",
+										"backgroundColor": "purple",
+										"justify-content": "flex-end",
+										"padding": "0px 15px 0px 0px"
+									})
+									.text(start_time));
 
 	return card_to_add;
+}
+
+function searchKeyPress() {
+	console.log("pressing");
+	// $("#team-members").empty();
+	var searchValue = $("#search-bar").val();
+	var len = searchValue.length;
+	// var currentTeam = $("#team-select").val();
+	// var currentMembers = teams[currentTeam];
+	// var matchingMembers = [];
+	// if (currentMembers) {
+	// 	for (var i=0; i < currentMembers.length; i++) {
+	// 		if (currentMembers[i].substr(0,len).toLowerCase() === searchValue.toLowerCase()) {
+	// 			matchingMembers.push(currentMembers[i]);
+	// 		}
+	// 	}
+	// 	for (var i=0; i < matchingMembers.length; i++) {
+	// 		if (i != 0) {
+	// 			$("#team-members").append("<hr>");
+	// 		}
+	// 		$("#team-members").append(
+	// 			"<li>" + matchingMembers[i] + "</li>");
+	// 	}
+	// }
 }
 
 $(document).ready(function() {
@@ -89,12 +138,12 @@ $(document).ready(function() {
 	var events_col = $('#feedback_events');
 	for (var i = 0; i < events.length; i++) {
 		var current_event = events[i];
-		$('<div>')
-			.addClass('feedback_title')
-			.appendTo(events_col);
-			// .css({
-			// 	'opacity': i / 10
-			// });
+		// $('<div>')
+		// 	.addClass('feedback_title')
+		// 	.appendTo(events_col);
+		// 	// .css({
+		// 	// 	'opacity': i / 10
+		// 	// });
 		console.log("How many times");
 		var curr_card = setup_card(current_event['opponent'], 
 								   current_event['date'], 
@@ -104,6 +153,27 @@ $(document).ready(function() {
 		
 		curr_card.appendTo(events_col);
 	}
+
+	$("#search-bar").click( function (e) {
+		if ($(this).val().indexOf("🔍 Search by team, location, or date") > -1) {
+			$(this).val("");
+		}
+	});
+	$(document).click( function (e) {
+		// if not search bar, return the "Search" text
+		if (!$(e.target).closest("#search-bar").length &&
+			!$(e.target).is("#search-bar")) {
+			if ($("#search-bar").val() == "") {
+				$("#search-bar").val("🔍 Search by team, location, or date")
+			}
+		}
+		// if not a menu, close menu
+		if (!$(e.target).is(".header_button")) {
+			$('.header_expansion').css('display', "none");
+			$('.header_button').css('background-color', '#3a87ad');
+
+		}
+	});
 
 
 });
