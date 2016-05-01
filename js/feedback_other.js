@@ -87,13 +87,16 @@ function setup_card(name, location, start_time, end_time) {
 	var card_to_add = $('<div>')
 							.addClass('feedback_card')
 							.on('click', function(e) {
-								var data_index = jQuery.data(card_to_add, "event_index");
-								var current_event = events[data_index];
+								
+								var curr_name = jQuery.data(card_to_add, "name");
+								var curr_location = jQuery.data(card_to_add, "location");
+								var curr_start_time = jQuery.data(card_to_add, "start_time");
+								var curr_end_time = jQuery.data(card_to_add, "end_time");
 
-								var event_description = current_event["name"] + " at " + 
-														current_event["location"] + " from " + 
-														current_event["start_time"] + " to " + 
-														current_event["end_time"];
+								var event_description = curr_name + " at " + 
+														curr_location + " from " + 
+														curr_start_time + " to " + 
+														curr_end_time
 								$('#body_title')
 									.text(current_event["name"]); // event_description
 								var div_container = $('#feedback_data_cols');
@@ -110,6 +113,11 @@ function setup_card(name, location, start_time, end_time) {
 
 
 							});
+
+	jQuery.data(card_to_add, "name", name);
+	jQuery.data(card_to_add, "location", location);
+	jQuery.data(card_to_add, "start_time", start_time);
+	jQuery.data(card_to_add, "end_time", end_time);
 
 	var title_attr = $('<div>')
 					.addClass('feedback_card_row')
@@ -188,12 +196,11 @@ function searchKeyPress() {
 			.appendTo(events_col);
 	}
 	for (var i = 0; i < matchingEvents.length; i++) {
-		var current_event = matchingEvents[i]
+		var current_event = matchingEvents[i];
 		var curr_card = setup_card(current_event['name'],
 								   current_event['location'], 
 								   current_event['start_time'],
 								   current_event['end_time']);
-		// jQuery.data(curr_card, "event_index", i);
 		curr_card.appendTo(events_col);
 	}
 }
@@ -208,7 +215,8 @@ $(document).ready(function() {
 								   current_event['start_time'],
 								   current_event['end_time']);
 		
-		jQuery.data(curr_card, "event_index", i);
+		// jQuery.data(curr_card, "event_index", i);
+
 		curr_card.appendTo(events_col);
 	}
 
