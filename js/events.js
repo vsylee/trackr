@@ -113,14 +113,35 @@ function addEventModal(start, end, view){
 */
 function customDateTime() {    
     $(function() {
+        $('#repeat').change(function (){
+            if (this.checked) {
+                $('#repeatUntilDate').prop('required',true);
+                $('#repeatUntilDate').focus();
+                $('.days-of-week label').css({'cursor':'pointer'});
+                $('.days-of-week-group').css({'display':'block'});
+
+                var startDayOfWeek = moment(new Date($('#startDate').val())).day();
+                $('#day'+startDayOfWeek).prop('checked', true);
+            } else {
+                $('#repeatUntilDate').prop('required',false);
+                $('#repeatUntilDate').val('');
+                $('.days-of-week label').css({'cursor':'not-allowed'});
+                $('.days-of-week-group').css({'display':'none'});
+                //TODO: uncheck all days of week
+                $('.days-of-week input').prop('checked', false);
+            }
+        })
         $('#repeatUntilDate').datepicker({
+            // TODO: minDate is startDate
             dateFormat: "MM d, yy",
             onSelect: function() {
                 $('#repeat').prop('checked', true);
+                $('.days-of-week label').css({'cursor':'pointer'});
+                $('.days-of-week-group').css({'display':'block'});
             },
             onClose: function(selectedDate) {
                 var momentDate = moment(new Date(selectedDate));
-                if (momentDate.isValid()) {
+                if (!selectedDate || momentDate.isValid()) {
                     if (!selectedDate) {
                         $('#repeat').prop('checked', false);
                     }
@@ -133,8 +154,10 @@ function customDateTime() {
         $( "#startDate" ).datepicker({
             dateFormat: "MM d, yy",
             onClose: function( selectedDate ) {
+                // TODO: set minDate of startDate
+                // TODO: uncheck all days of week, check selectedDay
                 var momentDate = moment(new Date(selectedDate));
-                if (momentDate.isValid()) {
+                if (selectedDate || momentDate.isValid()) {
                     $( "#endDate" ).datepicker( "option", "minDate", selectedDate );
                     if ($( "#endDate" ).val() === $( "#startDate" ).val()) {
                         $('#endTime')[0].min = $('#startTime').val();
@@ -153,7 +176,7 @@ function customDateTime() {
             onClose: function( selectedDate ) {
                 // don't set maxDate for startDate too...bad for usability
                 // $( "#startDate" ).datepicker( "option", "maxDate", selectedDate );
-                if (moment(new Date(selectedDate)).isValid()) {
+                if (selectedDate || moment(new Date(selectedDate)).isValid()) {
                     if ($( "#endDate" ).val() === $( "#startDate" ).val()) {
                         $('#endTime')[0].min = $('#startTime').val();
                         $('#startTime')[0].max = $('#endTime').val();
@@ -182,10 +205,20 @@ function customDateTime() {
 * Closes the modal.
 */
 function updateEvent(eventId) {
-    var event = $('#calendar').fullCalendar('clientEvents', eventId)[0];
-    event = formToEventDetails(event);    
+    if ($('#repeat').prop('checked')) {
+        var dow = [];
+        $('.days-of-week input:checked').each(function() {
+            dow.push(parseInt($(this).attr('name')));
+        });
+        var eventClass = $('#calendar').fullCalendar('clientEvents', eventId)[0].className;
+        updateRepeatingEvents($('#repeatUntilDate').val(), dow, eventClass);
+    } else {
+        var event = $('#calendar').fullCalendar('clientEvents', eventId)[0];
+        event = formToEventDetails(event);  
 
-    $('#calendar').fullCalendar('updateEvent', event);
+        $('#calendar').fullCalendar('updateEvent', event);
+    }
+
     $('#event_modal').modal('hide');
 }
 
@@ -194,10 +227,17 @@ function updateEvent(eventId) {
 * Closes the modal.
 */
 function addEvent() {
-	var event = {};
-    event = formToEventDetails(event);
-
-	$('#calendar').fullCalendar('renderEvent', event, true);
+    if ($('#repeat').prop('checked')) {
+        var dow = [];
+        $('.days-of-week input:checked').each(function() {
+            dow.push(parseInt($(this).attr('name')));
+        });
+        createRepeatingEvents($('#repeatUntilDate').val(), dow);
+    } else {
+    	var event = {};
+        event = formToEventDetails(event);
+    	$('#calendar').fullCalendar('renderEvent', event, true);
+    }
 
     $('#event_modal').modal('hide');
 }
@@ -222,6 +262,7 @@ function formToEventDetails(event) {
     event.end = endDateTime.toISOString();
     event.shareWith = $('#shareWith').val();
     event.feedback = $('#request').prop('checked');
+    event.repeat = $('#repeat').prop('checked');
 
     if (!event.id) {
         var eventNum = $('#calendar').fullCalendar('clientEvents').length + 1;
@@ -229,6 +270,55 @@ function formToEventDetails(event) {
     }
 
     return event;
+}
+
+/**
+* Creates an event that repeats until lastDate
+* on the days of the week in dow (each day of the week is represented by 0-7 from Sunday to Saturday).
+* Other events details are obtained from the existing inputs in the form in the event details modal,
+* including the startDate.
+*/
+function createRepeatingEvents(lastDate, dow) {
+    var end = moment(new Date(lastDate)).add(1,'d');   
+    var eventIndex = $('#calendar').fullCalendar('clientEvents').length + 1;
+
+    var event = {};
+    event = formToEventDetails(event);
+    var eventLength = moment(event.end).diff(moment(event.start)); // in milliseconds (swapping end with start will negate answer)
+    var eventDate = moment(event.start).clone();
+    var className = 'repeat'+Math.floor((Math.random() * 1000000) + 1); //random repeat group number from 1 to 1,000,000
+    while ($('.'+className).length > 0) {
+        className = 'repeat'+Math.floor((Math.random() * 1000000) + 1);
+    }
+
+    while (eventDate < end) {
+        if (dow.includes(eventDate.day()))  { // constraint for days of week (dow) of events
+            event.id = 'event'+eventIndex;
+            event.start = eventDate.clone();
+            event.end = moment(event.start).add(eventLength, 'ms');
+            event.dowCustom = dow;
+            event.repeatUntilDate = end;
+            event.className = className;
+
+            $('#calendar').fullCalendar('renderEvent', event, true);
+        }
+        eventDate.add(1,'d');
+        eventIndex++;
+    }
+}
+
+function updateRepeatingEvents(lastDate, dow, eventClass) {
+    var end = moment(new Date(lastDate)).add(1,'d');
+
+    var eventsInRepeat = $('#calendar').fullCalendar('clientEvents', function(event) {
+        return eventClass.length > 0 && event.className.includes(eventClass[0]);
+    });
+
+    $.each(eventsInRepeat, function(index, event) {
+        event = formToEventDetails(event);  
+        $('#calendar').fullCalendar('updateEvent', event);
+    });
+    // console.log(eventsInRepeat);
 }
 
 /**
@@ -253,11 +343,13 @@ function setModalState(state,eventId) {
             $('#delete').css({'visibility':'hidden'});
             $('#add_event').attr('action','javascript:addEvent(\'event_details\');');
             $('#save_submit').text('Add Event');
+            $('#repeat-text').text('Repeat until:');
             break;
         case 'update':
             $('#delete').css({'visibility':'visible'});
             $('#add_event').attr('action','javascript:updateEvent(\''+eventId+'\');');
             $('#save_submit').text('Save Changes');
+            $('#repeat-text').text('Change until:');
             // adds delete event to onclick of delete button
             addDeleteEvent(eventId);
             break;
@@ -265,5 +357,6 @@ function setModalState(state,eventId) {
             $('#delete').css({'visibility':'hidden'});
             $('#add_event').attr('action','javascript:addEvent(\'event_details\');');
             $('#save_submit').text('Add Event');
+            $('#repeat-text').text('Repeat until:');
     }
 }
