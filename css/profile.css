@@ -32,6 +32,10 @@ img {
 	margin-right:10px;
 }
 
+.small_button_icon {
+	border: 0px;
+}
+
 hr {
 	margin-bottom:8px;
 }
