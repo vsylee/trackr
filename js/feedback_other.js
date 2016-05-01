@@ -1,29 +1,26 @@
 var events = [];
 var fake_comments = [
-	[
-		{
-			"name": "Czarina",
-			"athlete_comment": "I didn't think there was enough recovery time between the weight lifting and the sprints.",
-			"coach_comment": "That's a great point. I'll take that into future consideration."
-		},
-		{
-			"name": "Veronica",
-			"athlete_comment": "I can really feel myself improving.",
-			"coach_comment": "That's great Veronica. You have three more years left too!"
-		},
-		{
-			"name": "Jing",
-			"athlete_comment": "I am really starting to feel the ball as an extension of my body now.",
-			"coach_comment": "That's the way to really understand the sport."
-		},
-		{
-			"name": "Sam",
-			"athlete_comment": "My stamina has improved so much by doing the mile test.",
-			"coach_comment": "Sam your legs look amazing.",
-		}
-	]
+	{
+		"name": "Czarina",
+		"athlete_comment": "I didn't think there was enough recovery time between the weight lifting and the sprints.",
+		"coach_comment": "That's a great point. I'll take that into future consideration."
+	},
+	{
+		"name": "Veronica",
+		"athlete_comment": "I can really feel myself improving.",
+		"coach_comment": "That's great Veronica. You have three more years left too!"
+	},
+	{
+		"name": "Jing",
+		"athlete_comment": "I am really starting to feel the ball as an extension of my body now.",
+		"coach_comment": "That's the way to really understand the sport."
+	},
+	{
+		"name": "Sam",
+		"athlete_comment": "My stamina has improved so much by doing the mile test.",
+		"coach_comment": "Sam your legs look amazing.",
+	}
 ];
-
 
 function convert_data() {
 	var keys = Object.keys(gameData)
@@ -74,6 +71,20 @@ function setup_card(opponent, date, location, start_time, end_time) {
 														current_event["date"];
 								$('#body_title')
 									.text(event_description);
+								var div_container = $('#feedback_data_cols');
+
+								// Should be loading real data here
+								var curr_player_data = fake_comments;
+								$('.feedback_data_remove').remove();
+
+								for (var i = 0; i < curr_player_data.length; i++) {
+									div_container
+										.append($('<div>')
+													.addClass('feedback_data_row feedback_data_remove'));
+										
+								}
+
+
 							});
 
 	var title_attr = $('<div>')
@@ -86,7 +97,6 @@ function setup_card(opponent, date, location, start_time, end_time) {
 									"padding": "0px 0px 0px 10px",
 									"font-size": "17px",
 									"color": "#000000",
-									// "background-color": "cyan"
 								})
 								.text(opponent),
 							$('<div>')
@@ -99,7 +109,6 @@ function setup_card(opponent, date, location, start_time, end_time) {
 									"color": "#617F8B",
 									"justify-content": "flex-end",
 									"font-family": "'Overlock', serif",
-									// "background-color": "turquoise"
 								})
 								.text(moment(new Date(date)).format('MMM DD')));
 	var body_attr = $('<div>')
@@ -185,7 +194,6 @@ $(document).ready(function() {
 		}
 	});
 	$(document).click(function (e) {
-		// if not search bar, return the "Search" text
 		if (!$(e.target).closest("#search-bar").length &&
 			!$(e.target).is("#search-bar")) {
 			if ($("#search-bar").val() == "") {
@@ -200,25 +208,7 @@ $(document).ready(function() {
 		}
 	});
 
-
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
