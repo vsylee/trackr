@@ -113,10 +113,10 @@ html, body {
 
 .feedback_data {
 	display: flex;
-	width: 75%;
+	width: calc(75% - 2px);
 	height: 100%;
 	background-color: #af1323;
-	/*border-left: 5px solid green;*/
+	border-left: 2px solid #879ba3;
 
 }
 
@@ -130,6 +130,11 @@ html, body {
 	/*align-content: center;*/
 	/*background-color: blue;*/
 	border-bottom: 1px solid #b8c3c8; /*ffac4d*/
+}
+
+.feedback_card:first-of-type {
+	border-top: 5px solid #b8c3c8;
+	background-color: red;
 }
 
 .feedback_card_row {
@@ -146,7 +151,7 @@ html, body {
 .feedback_card_opponent {
 	display: flex;
 	flex-flow: row nowrap;
-	width: 60%;
+	width: 85%;
 	height: 100%;
 	padding: 0px 0px 0px 10px;
 	justify-content: flex-start;
@@ -159,7 +164,7 @@ html, body {
 	display: flex;
 	flex-flow: row nowrap;
 	position: relative;
-	width: 40%;
+	width: 15%;
 	height: 100%;
 	padding: 0px 5px 0px 0px;
 	justify-content: flex-end;
