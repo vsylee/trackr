@@ -38,7 +38,7 @@ html, body {
 	flex-flow: column nowrap;
 	width: calc(75% - 2px);
 	height: 100%;
-	background-color: #af1323;
+	/*background-color: #af1323;*/
 	justify-content: flex-start;
 	border-left: 2px solid #879ba3;
 	overflow: scroll;
@@ -63,17 +63,23 @@ html, body {
 .feedback_data_title {
 	display: flex;
 	flex-flow: row wrap;
+	justify-content:flex-end;
 	width: 100%;
-	height: 10%;
-	background-color: orange;
+	height: 50px; /*12%;*/
+	border-bottom: 1px solid #b8c3c8;
+	font-size: 20px;
+	color: black;
+	/*padding-right: 10px;*/
+	/*text-align: right;*/
+	/*background-color: orange;*/
 }
 
 .feedback_data_row {
 	display: flex;
 	flex-flow: row wrap;
 	width: 100%;
-	height: 30%;
-	background-color: orange;
+	height: 50px; /*30%;*/
+	background-color: blue;
 }
 
 .feedback_card {

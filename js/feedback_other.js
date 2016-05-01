@@ -75,7 +75,7 @@ function setup_player_row(curr_player_data) {
 										.addClass('feedback_data_player')
 										.css({
 											"backgroundColor": "green",
-											"width": "50%",
+											"width": "70%",
 											"height": "100%"
 										}));
 
@@ -97,7 +97,7 @@ function setup_card(name, location, start_time, end_time) {
 														curr_start_time + " to " + 
 														curr_end_time
 								$('#body_title')
-									.text(event_description);
+									.text(current_event["name"]); // event_description
 								var div_container = $('#feedback_data_cols');
 
 								// Should be loading real data here
