@@ -113,10 +113,10 @@ html, body {
 
 .feedback_data {
 	display: flex;
-	width: 75%;
+	width: calc(75% - 2px);
 	height: 100%;
 	background-color: #af1323;
-	/*border-left: 5px solid green;*/
+	border-left: 2px solid #879ba3;
 
 }
 
@@ -212,6 +212,20 @@ html, body {
 	font-family: 'Overlock', serif;
 }
 
+
+#search-bar {
+	width:100%;
+	min-height:32px;
+	font-size:14px;
+	color:#617F8B;
+	border-radius:5px;
+	border: 0px;
+	/*margin-bottom:10px;*/
+	padding-left:5px;
+	margin:8px;
+	font-family: 'Overlock', serif;
+	background-color: #E3E6E8;
+}
 
 
 

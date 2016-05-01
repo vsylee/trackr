@@ -164,20 +164,6 @@ p, a {
 	padding:20px;
 }
 
-#search-bar {
-	width:100%;
-	min-height:32px;
-	font-size:14px;
-	color:#617F8B;
-	border-radius:5px;
-	border: 0px;
-	/*margin-bottom:10px;*/
-	padding-left:5px;
-	margin:8px;
-	font-family: 'Overlock', serif;
-	background-color: #E3E6E8;
-}
-
 select > .placeholder {
 	display: none;
 }
