@@ -63,23 +63,48 @@ function setup_card(opponent, date, location, start_time, end_time) {
 	var card_to_add = $('<div>')
 							.addClass('feedback_card')
 
-
 	var title_attr = $('<div>')
 					.addClass('feedback_card_row')
-					.appendTo(card_to_add);
-
-	var opp_to_add = $('<div>')
-							.addClass('feedback_card_opponent')
-							.text(opponent)
-							.appendTo(title_attr);
-	var date_to_add = $('<div>')
-							.addClass('feedback_card_date')
-							.text(date)
-							.appendTo(title_attr);
-	var body_to_add = $('<div>')
-							.addClass('feedback_card_body')
-							.text(start_time)
-							.appendTo(card_to_add);
+					.appendTo(card_to_add)
+					.append($('<div>')
+								.addClass('feedback_card_element')
+								.css({
+									"width": "70%",
+									"padding": "0px 0px 0px 10px",
+									"font-size": "17px",
+									"color": "#000000"
+								})
+								.text(opponent),
+							$('<div>')
+								.addClass('feedback_card_element')
+								.css({
+									"width": "30%",
+									"padding": "0px 5px 0px 0px",
+									"font-size": "13px",
+									"color": "#617F8B",
+									"justify-content": "flex-end",
+									"font-family": "'Overlock', serif"
+								})
+								.text(date));
+	var body_attr = $('<div>')
+						.addClass('feedback_card_body')
+						.appendTo(card_to_add)
+						.append($('<div>')
+									.addClass('feedback_card_element')
+									.css({
+										"width": "60%",
+										"backgroundColor": "red"
+									})
+									.text(location),
+								$('<div>')
+									.addClass('feedback_card_element')
+									.css({
+										"width": "40%",
+										"backgroundColor": "purple",
+										"justify-content": "flex-end",
+										"padding": "0px 15px 0px 0px"
+									})
+									.text(start_time));
 
 	return card_to_add;
 }
