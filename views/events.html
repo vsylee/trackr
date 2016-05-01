@@ -80,23 +80,6 @@
 	</div>
 </div>
 
-<div id="right-panel">
-	<div id="right-panel-button" class="right-panel-open">
-		<span id="right-panel-triangle">
-	</div>
-	<div id="player-list">
-		<input type="text" id="search-bar" value="🔍 Search..." onKeyPress="searchKeyPress()" onKeyUp="searchKeyPress()"></input>
-
-		<select required id="team-select">
-			<option class="placeholder" selected disabled value="">Team:</option>
-		</select>
-
-		<ul id="team-members">
-			<li style="padding:15px;font-size:27px;text-align:center;color:grey;">Select a team above to view members</li>
-		</ul>
-	</div>
-</div>
-
 <!-- modal for adding events -->
 <!-- this part needs to appear last so that it always appear above all other objects -->
 <div class="modal" id="event_modal">
@@ -115,12 +98,56 @@
 					</div>
 					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" id="event_details">
 						<!-- event details form -->
+						<div class="addEvent-dialog" id="addEvent-dialog-text">
+							<form id="add_event" action="javascript:addEvent(\'' + popoverId + '\');" class="form-horizontal">
+								<label for="name" class="control-label">Event Name: </label>
+								<input type="text" class="form-control" name="name" id="name" required autofocus=true/>
+				                <div class="form-group">
+				                	<div class="row">
+				                		<label for="startDate" class="control-label col-xs-6 col-sm-6 col-md-6 col-lg-6">Start Date:</label>
+				                		<label for="startTime" class="control-label col-xs-6 col-sm-6 col-md-6 col-lg-6">Start Time:</label>
+				                	</div>
+				                	<div class="row time-group">
+				                		<input type="text" class="form-control col-xs-6 col-sm-6 col-md-6 col-lg-6" name="date" id="startDate" required/>
+				                		<input type="time" class="form-control col-xs-6 col-sm-6 col-md-6 col-lg-6 time" name="time" id="startTime" required/>
+				                	</div>
+				                </div>
+				                <div class="form-group">
+				                	<div class="row">
+				                		<label for="endDate" class="control-label col-xs-6 col-sm-6 col-md-6 col-lg-6">End Date:</label>
+				                		<label for="endTime" class="control-label col-xs-6 col-sm-6 col-md-6 col-lg-6">End Time:</label>
+				                	</div>
+				                	<div class="row time-group">
+				                		<input type="text" class="form-control col-xs-6 col-sm-6 col-md-6 col-lg-6" name="date" id="endDate"/>
+				                		<input type="time" class="form-control col-xs-6 col-sm-6 col-md-6 col-lg-6 time" name="time" id="endTime"/>
+				                	</div>
+				                </div>
+								<div class="form-group">
+									<label for="location" class="control-label">Location: </label>
+									<input type="text" class="form-control" name="location" id="location"/>
+								</div>
+								<div class="form-group">
+									<label for="share" class="select-label control-label">Share with: </label>
+									<select class="form-control" name="teams" value:"Select Team/s">
+				                        <option value="">None</option>
+										<option value="">Gymnastics</option>
+										<option value="">Soccer</option>
+										<option value="">Tennis</option>
+									  <!-- <option value="">generate list of teams</option> -->
+									</select>
+								</div>
+								<div class="checkbox form-group">
+									<label for="request" class="control-label"><input type="checkbox" name="request" id="request"/>Request Feedback</label>
+								</div>
+								<!-- hidden submit button which is called when Save button of modal is clicked -->
+								<input type="submit" value="Save and Share" id="event_submit" style="display: none;">
+							</form>
+						</div>
 					</div>
 				</div>
 
 			<div class="modal-footer">
 				<!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  data-dismiss="modal" -->
-				<!-- TODO: cancel, revert changes, delete event button -->
 				<button type="button" class="btn btn-default" data-dismiss="modal" id="delete" align="left">Delete Event</button>
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 				<button type="button" class="btn btn-primary" onclick="javascript:$('#event_submit').click()" form="add_event" id="save_submit">Save changes</button>
@@ -149,6 +176,7 @@
 
 
 <script src="./../data/data.json"></script>
+<script src="./../data/events.json"></script>
 
 <script type="text/javascript">
 

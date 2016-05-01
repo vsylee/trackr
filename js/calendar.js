@@ -1,19 +1,40 @@
 $(document).ready(function() {
-    // window.onbeforeunload = function(event) {
-    //     // console.log(JSON.parse(sessionStorage.getItem('events'))); 
-    //     // alert("JSON.stringify($('#calendar').fullCalendar('clientEvents'))");
-    //     console.log($('#calendar').fullCalendar('clientEvents'));
-
-    //     var s = JSON.stringify({$('#calendar').fullCalendar('clientEvents')});
-    //     sessionStorage.setItem('events', s);
-    //     return 'hello';
-    // }
-    // initialize event details form in html (move to html file?)
-    $('#event_details').append(addEventDialog('event_details'));
     // setting jquery datepicker for form start and end dates
     // setting max and min date and time for form depending on start and end dates and times
     customDateTime();
     sessionStorage.setItem('lastTime', '10:00'); //default value for startTime
+
+    // initialize event details modal so that when it closes, the contents in the form will resest
+    $('#event_modal').on('hidden.bs.modal', function() {
+        $('#add_event')[0].reset();
+    });
+
+    // before navigating away from the page, get events and update storeEvents
+    window.onbeforeunload = function(event) {
+        // code adapted from http://jsfiddle.net/100thGear/v6tSd/
+        var calendarEvents = $('#calendar').fullCalendar('clientEvents');
+        var eventsCopy = [];
+        // make a copy of calendar events because it's a circular object and can't be stringified by JSON
+        $.each(calendarEvents, function(index, value) {
+            if (!value.url) { // if the event is not from an event source like Google calendar
+                var event = new Object();
+                event.id = value.id;
+                event.start = value.start;
+                event.end = value.end;
+                event.title = value.title;
+                event.allDay = value.allDay;
+                event.className = value.className;
+                event.editable = value.editable;
+                event.feedback = value.feedback;
+                event.shareWith = value.shareWith;
+                event.location = value.location;
+                eventsCopy.push(event);
+            }
+        })
+        
+        storedEvents = JSON.stringify(eventsCopy);
+        return null; // don't display alert
+    }
 
     // make sure calendar resizes if window resizes
 	function resizeCalendar() {
@@ -25,7 +46,11 @@ $(document).ready(function() {
     }
     $(window).on('resize', resizeCalendar);
 
-    // initialize the calendar with the following fullCalendar settings
+/***********************************************
+**** 
+****            Initialize fullCalendar
+****
+************************************************/
     $('#calendar').fullCalendar({
     	height: $('#calendar_container').outerHeight()*0.94,
     	viewDisplay: resizeCalendar,
@@ -33,13 +58,13 @@ $(document).ready(function() {
     	fixedWeekCount: false, // makes calendar just display the weeks in that month
 
         header:  {
-        	left: 'prev,next today',
+        	left: 'prev,today,next',
         	center: 'title',
         	right: 'addEvent month,agendaWeek,agendaDay'
         },
 
         eventRender: function(event, element) {
-
+            // create tooltip to show event details on hover
             var allDay= event;
             var startDay = event.start.day();
             var endDay = event.end.day();
@@ -52,24 +77,24 @@ $(document).ready(function() {
 
             $(element).tooltip({
                 title: time + event.title + location,
-                container: "#calendar"});
+                container: "#calendar",
+                delay: { show: 100, hide: 100 },
+                trigger : 'hover'
+            });
         },
 
         eventClick: function(event) {
+            // only show modal for editable events (those without a url)
+            if (!event.url) { 
+                $('#name').val(event.title);
+                $('#location').val(event.location);
 
-        	// if (event.url) return false; // don't allow redirection to source website of events
-        	// TODO: call eventClick function here to show summary of event details and to edit the event
-        	// this.bindPopup('<button class="trigger">Say hi</button>');
-            // console.log(event);
-            $('#name').val(event.title);
-            $('#location').val(event.location);
-            $('#delete').css({'visibility':'visible'});
-
-            $('#add_event').attr('action','javascript:updateEvent(\''+event.id+'\');');
-            $('#save_submit').text('Save Changes');
-
-            addDeleteEvent(event.id);
-            addEventModal(event.start, event.end);
+                setModalState('update');
+                // adds delete event to onclick of delete button
+                addDeleteEvent(event.id);
+                addEventModal(event.start, event.end);
+            }
+            // return false so that clicking on the events doesn't take user to the url (i.e. Google calendar)
             return false;
         },
 
@@ -77,12 +102,13 @@ $(document).ready(function() {
         	var currentView = $('#calendar').fullCalendar('getView');
             var end;
 
+            // set default event length based on the view
             switch (currentView.name) {
                 case 'month':
                     end = date.add(1, 'h');
                     break;
                 case 'agendaWeek':
-                    end = date.add(1, 'h');
+                    end = date.add(30, 'm');
                     break;
                 case 'agendaDay':
                     end = date.add(30, 'm');
@@ -90,62 +116,19 @@ $(document).ready(function() {
                 default:
                     end = date.add(1, 'h');
             }
-            $('#delete').css({'visibility':'hidden'});
-            $('#add_event').attr('action','javascript:addEvent(\'event_details\');');
-            $('#save_submit').text('Add Event');
-            addEventModal(date, end, currentView);
 
-	        // if(currentView.name === 'month') {
-	        //     $('#calendar').fullCalendar('changeView', 'agendaWeek');
-	        // } else if(currentView.name === 'agendaWeek') {
-	        //     $('#calendar').fullCalendar('changeView', 'agendaDay');
-	        // }
-        	// $('#calendar').fullCalendar('gotoDate', event);
-        	// showAddEventPopover($(this));
+            setModalState('add');
+            addEventModal(date, end, currentView);
         },
 
         selectable: true,
         // selectHelper: true,
         select: function(start, end, jsEvent, view) {
-            console.log(start);
-            console.log(end);
-            console.log(start===end);
+            
             var realEnd = view.name==='month' ? start.clone().add(1,'h') : end;
-            $('#delete').css({'visibility':'hidden'});
-            $('#add_event').attr('action','javascript:addEvent(\'event_details\');');
-            $('#save_submit').text('Add Event');
+            setModalState('add');
             addEventModal(start, realEnd, view);
-        	// console.log($(jsEvent.target).parent());
-        	// console.log(view);
-        	// console.log(this.el);
-        	// console.log(this.el.get());
 
-        	// console.log("start", start._d);
-        	// console.log("end", end._d);
-        	// console.log("jsEvent", jsEvent);
-        	// console.log("view", view.name);
-
-        	// showAddEventPopover($(jsEvent.target));
-        	// $('#startDate').
-			// var title = prompt('Event Title:');
-			var id = $(jsEvent.target).position().top;
-			// console.log($('#'+1));
-			// console.log("id", id);
-			// id = 'placeholder';
-			// var eventData;
-			// if ((view.name == "agendaWeek" || view.name == "agendaDay") && start._d != end._d) {
-			// 	console.log("entered if statement");
-			// 	eventData = {
-			// 		id: id,
-			// 		title: "Event Name",
-			// 		start: start,
-			// 		end: end,
-			// 		classname: id,
-			// 	};
-			// 	var event = $('#calendar').fullCalendar('renderEvent', eventData, false); // stick? = true
-
-			// 	showAddEventPopover($(jsEvent.target), $(jsEvent.target));
-			// }
 			$('#calendar').fullCalendar('unselect');
 		},
 
@@ -154,43 +137,23 @@ $(document).ready(function() {
 
         googleCalendarApiKey: 'AIzaSyCX_A2rKiGZ4wo6LXNyJZ7WCK64SSqVSqU',
         eventSources: [
-        		// {
-        		// 	editable: true,
-          //   		googleCalendarId: 'cstkovtg3u9dagkkve1j60bk1c@group.calendar.google.com', //fake soccer varsity class calendar
-          //   		className: "hello",
-          //   		color: 'yellow'
-          //   	},
             	{
-            		editable: true,
+                    // not editable
             		googleCalendarId: 'mfj0nf3n8jfn92mklam206a4nk@group.calendar.google.com', //MIT calendar
             	},
 
         ],
 
-  //       events: [
-  //       	{
-  //       		title: 'Practice',
-  //       		className: 'soccer practice',
-  //       		start: practiceData['start'],
-  //       		end: practiceData['end'],
-  //       		dow: practiceData['dow'],
-  //               location: 'Briggs Field',
-  //       	},
-
-		// ],
-
         customButtons: {
         	addEvent: {
-        		id: 'test',
             	text: 'Add Event',
             	click: function(e) {
-					// showAddEventPopover($(this),$(this));
                     var currentView = $('#calendar').fullCalendar('getView');
                     var start = $('#calendar').fullCalendar('getDate');
-                    $('#delete').css({'visibility':'hidden'});
-                    $('#add_event').attr('action','javascript:addEvent(\'event_details\');');
-                    $('#save_submit').text('Add Event');
+
+                    setModalState('add');
                     addEventModal(start, start.clone().add(1, 'h'), currentView);
+
 					return false;
 	            }
 	        }
@@ -198,46 +161,32 @@ $(document).ready(function() {
         
     });
 
-    for (var gameIndex in gameData) {
-    	var game = gameData[gameIndex];
-    	eventData = {
-            id: 'game'+gameIndex,
-    		title: 'Game vs '+game['opponent'],
-    		className: 'soccer game',
-    		start: new Date(game['date']+' '+game['startTime']).toISOString(),
-    		end: new Date(game['date']+' '+game['endTime']).toISOString(),
-    		location: game['location'],
-    	}
-        // to add more games, get length of objects with class "game" and use length+1 as next id
-		$('#calendar').fullCalendar('renderEvent', eventData, true);
-	}
-
-    practiceFirstDay = moment(new Date("2015/09/14"));
-    practiceLastDay = moment(new Date("2016/05/12"));
-    practiceDate = practiceFirstDay;
-    practiceIndex = 0;
-    while (practiceDate < practiceLastDay) {
-        if (practiceDate.day() >= practiceData['dow'][0] && practiceDate.day() <= practiceData['dow'][practiceData['dow'].length-1])  { // constraints day of week (dow) of practice
-            eventData = {
-                id: 'practice'+practiceIndex,
-                title: 'Practice',
-                className: 'soccer practice',
-                start: new Date(practiceDate.format('YYYY/MM/DD')+' '+practiceData['start']).toISOString(),
-                end: new Date(practiceDate.format('YYYY/MM/DD')+' '+practiceData['end']).toISOString(),
-                location: 'Briggs Field',
-            }
-            $('#calendar').fullCalendar('renderEvent', eventData, true);
-        }
-        // to add more practices, get length of objects with class "practice" and use length+1 as next id
-        practiceDate.add(1,'d');
-        practiceIndex++;
+    // import storedEvents from events.json to calendar
+    for (var eventIndex in storedEvents) {
+        var eventData = storedEvents[eventIndex];
+        $('#calendar').fullCalendar('renderEvent', eventData, true);
     }
 
-
+    // add an id for Add Event button in calendar
     $(".fc-addEvent-button").attr('id', 'addEvent-button');
-    $(".fc-addEvent-button").css({'background-color': '#ee9023', 'background-image': 'none', 'color': 'white'});
-    // $(".fc-time").css({'margin-right':'10px'});
-
-    // $('.modal-body').after(addEventDialog("event_modal"));
 
 });
+
+function setModalState(state) {
+    switch (state) {
+        case 'add':
+            $('#delete').css({'visibility':'hidden'});
+            $('#add_event').attr('action','javascript:addEvent(\'event_details\');');
+            $('#save_submit').text('Add Event');
+            break;
+        case 'update':
+            $('#delete').css({'visibility':'visible'});
+            $('#add_event').attr('action','javascript:updateEvent(\''+event.id+'\');');
+            $('#save_submit').text('Save Changes');
+            break;
+        default:
+            $('#delete').css({'visibility':'hidden'});
+            $('#add_event').attr('action','javascript:addEvent(\'event_details\');');
+            $('#save_submit').text('Add Event');
+    }
+}

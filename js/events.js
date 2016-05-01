@@ -1,32 +1,3 @@
-function addEventDialog(popoverId) {
-	var dialog =
-		'<div class="addEvent-dialog" id="addEvent-dialog-text">' +
-			'<form id="add_event" action="javascript:addEvent(\'' + popoverId + '\');" class="form-horizontal">' +
-				'<label for="name" class="control-label">Event Name: </label><input type="text" class="form-control" name="name" id="name" required autofocus=true/>' +
-                '<div class="form-group"><div class="row"><label for="startDate" class="control-label col-xs-6 col-sm-6 col-md-6 col-lg-6"">Start Date:</label><label for="startTime" class="control-label col-xs-6 col-sm-6 col-md-6 col-lg-6">Start Time:</label></div>' +
-                '<div class="row time-group"><input type="text" class="form-control col-xs-6 col-sm-6 col-md-6 col-lg-6" name="date" id="startDate" required/><input type="time" class="form-control col-xs-6 col-sm-6 col-md-6 col-lg-6 time" name="time" id="startTime" required/></div></div>' +
-                '<div class="form-group"><div class="row"><label for="endDate" class="control-label col-xs-6 col-sm-6 col-md-6 col-lg-6"">End Date:</label><label for="endTime" class="control-label col-xs-6 col-sm-6 col-md-6 col-lg-6">End Time:</label></div>' +
-                '<div class="row time-group"><input type="text" class="form-control col-xs-6 col-sm-6 col-md-6 col-lg-6" name="date" id="endDate"/><input type="time" class="form-control col-xs-6 col-sm-6 col-md-6 col-lg-6 time" name="time" id="endTime"/></div></div>' +
-				// '<div class="form-group"><label for="startDate">Start Date: </label><input type="text" name="date" id="startDate" required/></div>' +
-				// '<div class="form-group"><label for="startTime">Time: </label><input type="time" name="startTime" id="startTime" required/><input type="time" name="endTime" id="endTime"/></div>' +
-				// '<div class="form-group"><label for="endDate" class="control-label">End Date and Time: </label><input type="datetime-local" class="form-control" name="date" id="endDate"/></div>' + 
-				// '<label for="endTime">End Time: </label></div>' +
-				'<div class="form-group"><label for="location" class="control-label">Location: </label><input type="text" class="form-control" name="location" id="location"/></div>' +
-				'<div class="form-group"><label for="share" class="select-label control-label">Share with: </label>' +
-					'<select class="form-control" name="teams" value:"Select Team/s">' +
-                        '<option value="">None</option>' +
-						'<option value="">Gymnastics</option>' +
-						'<option value="">Soccer</option>' +
-						'<option value="">Tennis</option>' +
-					  '<!-- <option value="">generate list of teams</option> -->' +
-					'</select></div>' +
-				'<div class="checkbox form-group"><label for="request" class="control-label"><input type="checkbox" name="request" id="request"/>Request Feedback</label></div>' +
-				'<input type="submit" value="Save and Share" id="event_submit" style="display: none;">' +
-			'</form>' +
-		'</div>'
-	return dialog;
-}
-
 function setFormFields(start, end, view) {
     // need to refresh for min and max start and end dates
     $('#startDate').datepicker( "refresh" );
@@ -36,60 +7,25 @@ function setFormFields(start, end, view) {
 
     $('#startTime').val(start.format('HH:mm')); //military time (needed format for value input)
     $('#endTime').val(end.format('HH:mm'));
-
-    // switch(view.name) {
-    //     case 'month':
-    //         $('#startTime').val(sessionStorage.getItem('lastTime'));
-    //         $('#endTime').val($('#startTime').val())[0].stepUp(60);
-    //         break;
-    //     case 'agendaWeek':
-    //         var time = start.format('HH:mm:ss');
-    //         $('#startTime')[0].value = time;
-    //         $('#endTime').val($('#startTime').val())[0].stepUp(60);
-    //         break;
-    //     case 'agendaDay':
-    //         var time = start.format('HH:mm:ss');
-    //         $('#startTime')[0].value = time;
-    //         $('#endTime').val($('#startTime').val())[0].stepUp(30);
-    //         break;
-    //     default:
-    //         $('#startTime').val(sessionStorage.getItem('lastTime'));
-    //         $('#endTime').val($('#startTime').val())[0].stepUp(60);
-    //         console.log('oops');
-    // }
-
-    // $('#event_day_timeline').fullCalendar('gotoDate', date);
 }
 
 function addEventModal(start, end, view){
+
+    $('.tooltip').hide();
     setFormFields(start, end, view);
-    $('#delete').css({'background-color': '#E30228', 'background-image': 'none', 'color': 'white', 'text-shadow': 'None', 'float':'left'});
 
 	$('#event_modal').modal('show');
     $('#name').focus();
-	$('#event_modal :header, .modal-body, .modal-header span').css({'color': 'black'});
-	$('#event_details, #event_day_timeline_container').css({'display': 'initial', 'color' : 'black'});
-    $('.form-group').css({'display': 'initial', 'margin-bottom':'0'});
-    $('.form-group .row').css({'padding': '0px 15px 0px 15px'});
-    $('.row .control-label').css({'padding':'0px', 'text-align':'left'});
-    $('.control-label').css({'font-size': '15px'});
-    $('.checkbox .control-label').css({'padding':'0px 15px 0px 15px'});
-    $('.time-group .time').css({'float':'right'});
-    $('.time-group .form-control').css({'width':'50%'});
-
-    $('.modal-footer').css({'padding-bottom': '0px'})
-    $('#event_modal').css({'line-height': '1'});
 
 	$('#event_day_timeline').fullCalendar({
 
     	height: $('.addEvent-dialog').outerHeight(),
-    	// viewDisplay: resizeCalendar,
     	timezone: 'local',
     	fixedWeekCount: false, // makes calendar just display the weeks in that month
 
         header:  {
         	left: 'prev',
-        	center: 'title selectDate',
+        	center: 'title',
         	right: 'next'
         },
 
@@ -139,21 +75,21 @@ function addEventModal(start, end, view){
 
 		defaultView: 'agendaDay',
 
-        customButtons: {
-            selectDate: {
-                id: 'selectDate',
-                text: '',
-                click: function(e) {
-                    // showAddEventPopover($(this),$(this));
-                    // var currentView = $('#calendar').fullCalendar('getView');
-                    // var start = $('#calendar').fullCalendar('getDate');
-                    // $('#delete').css({'visibility':'hidden'});
-                    // addEventModal(start, start.clone().add(1, 'h'), currentView);
-                    return false;
-                },
-                // themeIcon: 'calendar'
-            }
-        },
+        // customButtons: {
+        //     selectDate: {
+        //         id: 'selectDate',
+        //         text: '',
+        //         click: function(e) {
+        //             // showAddEventPopover($(this),$(this));
+        //             // var currentView = $('#calendar').fullCalendar('getView');
+        //             // var start = $('#calendar').fullCalendar('getDate');
+        //             // $('#delete').css({'visibility':'hidden'});
+        //             // addEventModal(start, start.clone().add(1, 'h'), currentView);
+        //             return false;
+        //         },
+        //         // themeIcon: 'calendar'
+        //     }
+        // },
         // theme: 'true'
         
     });
@@ -217,25 +153,6 @@ function customDateTime() {
     });
 }
 
-function createEvent(objectId) {
-    var startDate = $('#startDate').val();
-    var startTime = $('#startTime').val();
-    var startDateTime = new Date(startDate+' '+startTime);
-    // console.log(startDate);
-    sessionStorage.setItem('lastTime', startTime);
-
-    var endDate = $('#endDate').val();
-    var endTime = $('#endTime').val();
-    var endDateTime = new Date(endDate+' '+endTime);
-
-    var event = {
-        title: $('#name').val(),
-        start: startDateTime.toISOString(),
-        end: endDateTime.toISOString()
-    }
-    $('#calendar').fullCalendar('renderEvent', event, true);
-}
-
 function updateEvent(eventId) {
     var event = $('#calendar').fullCalendar('clientEvents', eventId)[0];
 
@@ -290,48 +207,3 @@ function addEvent(objectId) {
 	// if (objectId !== 'addEvent-button-popover') popover.remove();
 }
 
-function showAddEventPopover(parentObj, container) {
-	// console.log("parentObj", parentObj);
-	// console.log("container", container);
-	// console.log(parentObj.parent().parent().parent().parent().parent()); //fc-day-grid
-	// var parent = parentObj.attr('id') === undefined ? $('#calendar') : parentObj;
-	// parent = $('#addEvent-button');
-	// console.log(parentObj);
-	var parent = parentObj;
-	var id = parent.attr('id') + '-popover';
-	container.after('<div id="' + id + '" class="fc-popover">' +
-    					'<div class="fc-header fc-widget-header"> <span class="fc-close fc-icon fc-icon-x"></span><span class="fc-title">Event Details</span><div class="fc-clear"></div>'
-    					+ '</div>'
-    					+ '<div class="fc-body fc-widget-content"><div class="fc-content">' + addEventDialog(id) +'</div>'
-    					+ '</div>'
-    				+ '</div>');
-	var popover = $('#'+id);
-	var top = parentObj.position().top + parent.outerHeight();
-	var left = parentObj.position().left + parent.outerWidth();
-
-	$('#name').focus();
-
-	popover.css({'display':'block', 'top':top, 'left':left, 'z-index':'100000'});
-
-	popover.on('click', '.fc-close', function() {
-		popover.css({'display':'none'});
-		if (id !== 'addEvent-button-popover') {
-			popover.remove();
-		}
-	}).draggable();
-
-    customDateTime();
-
-	$(document).on('mousedown', documentMousedown);
-
-	function documentMousedown(e) {
-		var parentClass = $(e.target).offsetParent().attr('class');
-		if (parentClass === undefined || !(parentClass.startsWith('fc-popover') || parentClass.startsWith('ui-datepicker'))) {
-			e.stopPropagation();
-			$("#addEvent-button-popover").css({'display':'none'});
-			$(document).off('mousedown', 'documentMousedown');
-
-		}
-	}
-
-}
