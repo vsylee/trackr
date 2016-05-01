@@ -46,7 +46,7 @@ html, body {
 	color: #3a87ad;
 }
 
-.fc-content .fc-title/*, .fc-content .fc-time*/ {
+.fc-content .fc-title/* .fc-time*/ {
 	font-family: 'Overlock', serif;
 	color: white;
 }
@@ -67,3 +67,66 @@ label, input {
 	opacity: 1.0;
 }
 
+.fc-addEvent-button {
+	background-color: #ee9023;
+	background-image: none;
+	color: white;
+}
+
+.fc-event[href] {
+	/* show that events that have urls (from Google calendar) to be NOT clickable */
+	cursor: not-allowed;
+	/* don't underline urls of events in calendar that have been clicked */
+	text-decoration: none;
+}
+
+#delete {
+	background-color: #ca320a;
+	background-image: none;
+	color: white;
+	text-shadow: none;
+	float: left;
+}
+
+#event_modal :header, .modal-body, .modal-header span {
+	color: black;
+}
+
+#event_details, #event_day_timeline_container {
+	display: initial;
+	color: black;
+}
+
+.form-group {
+	display: initial;
+	margin-bottom: 0;
+}
+
+.form-group .row, .checkbox .control-label {
+	padding: 0px 15px 0px 15px;
+}
+
+.row .control-label {
+	padding: 0px;
+	text-align: left;
+}
+
+.control-label {
+	font-size: 15px;
+}
+
+.time-group .time {
+	float: right;
+}
+
+.time-group .form-control {
+	width: 50%;
+}
+
+.modal-footer {
+	padding-bottom: 0px;
+}
+
+#event_modal {
+	line-height: 1;
+}
