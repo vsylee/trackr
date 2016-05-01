@@ -125,7 +125,7 @@ function setup_card(name, location, start_time, end_time) {
 														curr_start_time + " to " + 
 														curr_end_time
 								$('#body_title')
-									.text(event_description); // event_description
+									.text(curr_name); // event_description
 								var div_container = $('#feedback_data_cols');
 
 								// Should be loading real data here
