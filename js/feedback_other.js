@@ -114,12 +114,11 @@ function setup_card(opponent, date, location, start_time, end_time) {
 										"font-size": "15px",
 										"margin-top": "8px"
 									})
-									.text("at "+location),
+									.text("at " + location),
 								$('<div>')
 									.addClass('feedback_card_element')
 									.css({
 										"width": "10%",
-										// "backgroundColor": "purple",
 										"justify-content": "flex-end",
 										"padding": "0px 15px 0px 0px",
 										"font-family": "'Overlock', serif",
@@ -161,6 +160,7 @@ function searchKeyPress() {
 								   current_event['start_time'],
 								   current_event['end_time']);
 		curr_card.appendTo(events_col);
+	}
 }
 
 $(document).ready(function() {
