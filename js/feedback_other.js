@@ -101,7 +101,7 @@ function setup_card(opponent, date, location, start_time, end_time) {
 									"font-family": "'Overlock', serif",
 									// "background-color": "turquoise"
 								})
-								.text(moment(date).format('MMM DD')));
+								.text(moment(new Date(date)).format('MMM DD')));
 	var body_attr = $('<div>')
 						.addClass('feedback_card_body')
 						.appendTo(card_to_add)
@@ -127,7 +127,7 @@ function setup_card(opponent, date, location, start_time, end_time) {
 										"margin-top": "10px",
 										"margin-right": "5px",
 									})
-									.text(moment(date+" "+start_time).format('h A')));
+									.text(moment(new Date(date+" "+start_time)).format('h A')));
 
 	return card_to_add;
 }
