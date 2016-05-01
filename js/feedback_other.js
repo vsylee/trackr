@@ -2,21 +2,25 @@ var events = [];
 var fake_comments = [
 	{
 		"name": "Czarina",
+		"img": "../images/extra_credit_one.jpeg",
 		"athlete_comment": "I didn't think there was enough recovery time between the weight lifting and the sprints.",
 		"coach_comment": "That's a great point. I'll take that into future consideration."
 	},
 	{
 		"name": "Veronica",
+		"img": "../images/extra_credit_two.jpg",
 		"athlete_comment": "I can really feel myself improving.",
 		"coach_comment": "That's great Veronica. You have three more years left too!"
 	},
 	{
 		"name": "Jing",
+		"img": "../images/extra_credit_three.jpg",
 		"athlete_comment": "I am really starting to feel the ball as an extension of my body now.",
 		"coach_comment": "That's the way to really understand the sport."
 	},
 	{
 		"name": "Sam",
+		"img": "../images/extra_credit_four.jpg",
 		"athlete_comment": "My stamina has improved so much by doing the mile test.",
 		"coach_comment": "Sam your legs look amazing.",
 	}
@@ -70,15 +74,37 @@ function setup_player_row(curr_player_data) {
 										.css({
 											"backgroundColor": "cyan",
 											"width": "30%",
-											"height": "100%"
-										}),
+											"height": "100%",
+											"justify-content": "flex-end",
+											"align-content": "center",
+											"align-items": "center"
+										})
+										.append($('<img>')
+													.attr('src', curr_player_data["img"])
+													.css({
+														"width": "175px",
+														"height": "175px"
+													})),
 									$('<div>')
 										.addClass('feedback_data_player')
 										.css({
 											"backgroundColor": "green",
 											"width": "50%",
 											"height": "100%"
-										}));
+										})
+										.append($('<div>')
+													.addClass('feedback_data_player')
+													.css({
+														"width": "50%",
+														"height": "100%",
+														"justify-content": "flex-start",
+														"padding": "0px 0px 0px 10px",
+														"align-items": "center",
+														"align-content": "center"
+													})
+													.text(curr_player_data["coach_comment"])
+										)
+							);
 
 	return player_row;
 }
