@@ -143,7 +143,7 @@ function setup_card(opponent, date, location, start_time, end_time) {
 
 function searchKeyPress() {
 	console.log("pressing");
-	// $("#team-members").empty();
+	$(".feedback_card").remove();
 	var searchValue = $("#search-bar").val();
 	var len = searchValue.length;
 	// var currentTeam = $("#team-select").val();

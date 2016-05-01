@@ -219,7 +219,7 @@ html, body {
 
 #search-bar {
 	width:100%;
-	min-height:32px;
+	height:32px;
 	font-size:14px;
 	color:#617F8B;
 	border-radius:5px;
