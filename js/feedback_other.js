@@ -25,11 +25,8 @@ var fake_comments = [
 function convert_data() {
 	var keys = Object.keys(gameData)
 	keys.sort(function(a, b) {
-		var first_event = gameData[a]; 
-		var second_event = gameData[b];
-
-		var first_event_T = first_event.start.indexOf('T');
-
+		var first_time = gameData[a]; 
+		var second_time = gameData[b];
 
 		var first_index_colon = first_time.startTime.indexOf(':');
 		var first_hours = first_time.startTime.substring(0, first_index_colon);
