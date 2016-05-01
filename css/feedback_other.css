@@ -138,7 +138,7 @@ html, body {
 	flex-flow: column wrap;
 	position: relative;
 	width: 100%;
-	height: 70px;
+	height: 75px;
 	justify-content: center;
 	/*align-content: center;*/
 	/*background-color: blue;*/
@@ -157,7 +157,7 @@ html, body {
 	height: 30%;
 	justify-content: flex-start;
 	/*background-color: green;*/
-	margin-top: 10px;
+	margin-top: 8px;
 }
 
 .feedback_card_element {
