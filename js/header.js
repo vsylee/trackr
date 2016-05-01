@@ -53,30 +53,6 @@ function setup_header_options(id) {
 	}
 }
 
-function searchKeyPress() {
-	console.log("{ressing");
-	$("#team-members").empty();
-	var searchValue = $("#search-bar").val();
-	var len = searchValue.length;
-	var currentTeam = $("#team-select").val();
-	var currentMembers = teams[currentTeam];
-	var matchingMembers = [];
-	if (currentMembers) {
-		for (var i=0; i < currentMembers.length; i++) {
-			if (currentMembers[i].substr(0,len).toLowerCase() === searchValue.toLowerCase()) {
-				matchingMembers.push(currentMembers[i]);
-			}
-		}
-		for (var i=0; i < matchingMembers.length; i++) {
-			if (i != 0) {
-				$("#team-members").append("<hr>");
-			}
-			$("#team-members").append(
-				"<li>" + matchingMembers[i] + "</li>");
-		}
-	}
-}
-
 var right_panel_width = 300;
 var animation_time = 400;
 
@@ -183,27 +159,6 @@ $(document).ready(function() {
 			setup_header_options(self.attr('id'));
 		});
 
-
-	$("#search-bar").click( function (e) {
-		if ($(this).val().indexOf("🔍 Search...") > -1) {
-			$(this).val("");
-		}
-	});
-	$(document).click( function (e) {
-		// if not search bar, return the "Search" text
-		if (!$(e.target).closest("#search-bar").length &&
-			!$(e.target).is("#search-bar")) {
-			if ($("#search-bar").val() == "") {
-				$("#search-bar").val("🔍 Search...")
-			}
-		}
-		// if not a menu, close menu
-		if (!$(e.target).is(".header_button")) {
-			$('.header_expansion').css('display', "none");
-			$('.header_button').css('background-color', '#3a87ad');
-
-		}
-	});
 
 	// populate team dropdown menu
 	for (var i=0; i < Object.keys(teams).length; i++) {

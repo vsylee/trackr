@@ -163,18 +163,6 @@ p, a {
 	padding:20px;
 }
 
-#search-bar {
-	width:254px;
-	min-height:32px;
-	font-size:20px;
-	color:gray;
-	border-radius:5px;
-	border: 0px;
-	margin-bottom:10px;
-	padding-left:5px;
-	font-family: 'Overlock', serif;
-}
-
 select > .placeholder {
 	display: none;
 }

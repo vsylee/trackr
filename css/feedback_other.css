@@ -4,6 +4,10 @@ html, body {
 	background-color: #fefefe;
 }
 
+.font_family {
+	font-family: helvetica;
+}
+
 .container {
 	position: absolute;
 	top:60px;
@@ -109,20 +113,77 @@ html, body {
 
 .feedback_data {
 	display: flex;
-	width: 75%;
+	width: calc(75% - 2px);
 	height: 100%;
-	background-color: #af1323
+	background-color: #af1323;
+	border-left: 2px solid #879ba3;
+
 }
 
-.feedback_title {
+.feedback_card {
 	display: flex;
-	flex-flow: row wrap;
+	flex-flow: column wrap;
 	position: relative;
 	width: 100%;
 	height: 100px;
 	justify-content: center;
 	/*align-content: center;*/
-	background-color: blue;
+	/*background-color: blue;*/
+	border-bottom: 1px solid #b8c3c8; /*ffac4d*/
+}
+
+.feedback_card:first-of-type {
+	border-top: 5px solid #b8c3c8;
+	background-color: red;
+}
+
+.feedback_card_row {
+	display: flex;
+	flex-flow: row nowrap;
+	position: relative;
+	width: 100%;
+	height: 30%;
+	justify-content: flex-start;
+	/*background-color: green;*/
+	margin-top: 18px;
+}
+
+.feedback_card_element {
+	display: flex;
+	flex-flow: row nowrap;
+	width: 85%;
+	height: 100%;
+	justify-content: flex-start;
+	/*background-color: cyan;*/
+	color: black;
+	font-size: 17px;
+}
+
+.feedback_card_date {
+	display: flex;
+	flex-flow: row nowrap;
+	position: relative;
+	width: 15%;
+	height: 100%;
+	padding: 0px 5px 0px 0px;
+	justify-content: flex-end;
+	/*background-color: turquoise;*/
+	color: #617F8B;
+	font-family: 'Overlock', serif;
+	font-size: 13px;
+	margin-top: 4px;
+	align-content: center;
+}
+
+.feedback_card_body {
+	display: flex;
+	flex-flow: row nowrap;
+	width: 100%;
+	height: 50%;
+	/*justify-content: center;*/
+	background-color: orange;
+	padding: 0px 0px 0px 10px;
+	color: black;
 }
 
 .feedback-header {
@@ -156,6 +217,20 @@ html, body {
 	font-family: 'Overlock', serif;
 }
 
+
+#search-bar {
+	width:100%;
+	min-height:32px;
+	font-size:14px;
+	color:#617F8B;
+	border-radius:5px;
+	border: 0px;
+	/*margin-bottom:10px;*/
+	padding-left:5px;
+	margin:8px;
+	font-family: 'Overlock', serif;
+	background-color: #E3E6E8;
+}
 
 
 
