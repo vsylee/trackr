@@ -92,22 +92,54 @@ function setup_card(opponent, date, location, start_time, end_time) {
 						.append($('<div>')
 									.addClass('feedback_card_element')
 									.css({
-										"width": "60%",
+										"width": "90%",
+										"color": "#617F8B",
+										
 										"backgroundColor": "red"
 									})
 									.text(location),
 								$('<div>')
 									.addClass('feedback_card_element')
 									.css({
-										"width": "40%",
+										"width": "10%",
 										"backgroundColor": "purple",
 										"justify-content": "flex-end",
-										"padding": "0px 15px 0px 0px"
+										"padding": "0px 15px 0px 0px",
+										"font-family": "'Overlock', serif",
+										"font-size": "13px",
+										"color": "#617F8B"
 									})
 									.text(start_time));
 
 	return card_to_add;
 }
+
+// .feedback_card_element {
+// 	display: flex;
+// 	flex-flow: row nowrap;
+// 	width: 85%;
+// 	height: 100%;
+// 	justify-content: flex-start;
+// 	/*background-color: cyan;*/
+// 	color: black;
+// 	font-size: 17px;
+// }
+
+// .feedback_card_date {
+// 	display: flex;
+// 	flex-flow: row nowrap;
+// 	position: relative;
+// 	width: 15%;
+// 	height: 100%;
+// 	padding: 0px 5px 0px 0px;
+// 	justify-content: flex-end;
+// 	/*background-color: turquoise;*/
+// 	color: #617F8B;
+// 	font-family: 'Overlock', serif;
+// 	font-size: 13px;
+// 	margin-top: 4px;
+// 	align-content: center;
+// }
 
 function searchKeyPress() {
 	console.log("pressing");
