@@ -170,13 +170,6 @@ $(document).ready(function() {
 	var events_col = $('#feedback_events');
 	for (var i = 0; i < events.length; i++) {
 		var current_event = events[i];
-		// $('<div>')
-		// 	.addClass('feedback_title')
-		// 	.appendTo(events_col);
-		// 	// .css({
-		// 	// 	'opacity': i / 10
-		// 	// });
-		console.log("How many times");
 		var curr_card = setup_card(current_event['opponent'], 
 								   current_event['date'], 
 								   current_event['location'], 
