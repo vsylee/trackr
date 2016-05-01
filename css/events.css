@@ -88,7 +88,7 @@ label, input {
 	float: left;
 }
 
-#event_modal :header, .modal-body, .modal-header span {
+#event_modal h4, .modal-body, .modal-header span {
 	color: black;
 }
 
@@ -102,7 +102,7 @@ label, input {
 	margin-bottom: 0;
 }
 
-.form-group .row, .checkbox .control-label {
+.form-group .row {
 	padding: 0px 15px 0px 15px;
 }
 
@@ -111,7 +111,7 @@ label, input {
 	text-align: left;
 }
 
-.control-label {
+.control-label, .checkbox label {
 	font-size: 15px;
 }
 
@@ -127,6 +127,33 @@ label, input {
 	padding-bottom: 0px;
 }
 
-#event_modal {
+/*#event_modal {
 	line-height: 1;
+}*/
+
+.checkbox .control-label {
+	padding-left: 15px;
+}
+
+#event_day_timeline h2 {
+	font-size: 18px;
+	padding-top: 5px;
+}
+
+#event_day_timeline .fc-day-header {
+	font-size: 14px;
+}
+
+#repeatUntilDate {
+	float: right;
+}
+
+#repeatUntil {
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.checkbox label {
+	/*padding-left: 2px;*/
+	/*margin-right: 10px;*/
 }

@@ -102,7 +102,7 @@
 							<form id="add_event" action="javascript:addEvent(\'' + popoverId + '\');" class="form-horizontal">
 								<label for="name" class="control-label">Event Name: </label>
 								<input type="text" class="form-control" name="name" id="name" required autofocus=true/>
-				                <div class="form-group">
+				                <div class="form-group" id="start-group">
 				                	<div class="row">
 				                		<label for="startDate" class="control-label col-xs-6 col-sm-6 col-md-6 col-lg-6">Start Date:</label>
 				                		<label for="startTime" class="control-label col-xs-6 col-sm-6 col-md-6 col-lg-6">Start Time:</label>
@@ -112,7 +112,7 @@
 				                		<input type="time" class="form-control col-xs-6 col-sm-6 col-md-6 col-lg-6 time" name="time" id="startTime" required/>
 				                	</div>
 				                </div>
-				                <div class="form-group">
+				                <div class="form-group" id="end-group">
 				                	<div class="row">
 				                		<label for="endDate" class="control-label col-xs-6 col-sm-6 col-md-6 col-lg-6">End Date:</label>
 				                		<label for="endTime" class="control-label col-xs-6 col-sm-6 col-md-6 col-lg-6">End Time:</label>
@@ -122,22 +122,45 @@
 				                		<input type="time" class="form-control col-xs-6 col-sm-6 col-md-6 col-lg-6 time" name="time" id="endTime"/>
 				                	</div>
 				                </div>
+				                <div class="form-group" id="repeat-group">
+					                <div class="row">
+					                	<div class="checkbox col-xs-6 col-sm-6 col-md-6 col-lg-6" id="repeatUntil">
+											<label for="repeat">
+												<input type="checkbox" name="repeat" id="repeat"/>
+												Repeat event until:
+											</label>
+										</div>
+										<input type="text" placeholder="Select Date" id="repeatUntilDate" class="form-control col-xs-6 col-sm-6 col-md-6 col-lg-6" style="width:50%">	
+									</div>
+									<!-- <label class="control-label">On these days:</label> -->
+									<div class="checkbox" disabled>
+										<label for="m"><input type="checkbox" name="m" id="m"/>M</label>
+										<label for="t"><input type="checkbox" name="t" id="t"/>T</label>
+										<label for="w"><input type="checkbox" name="w" id="w"/>W</label>
+										<label for="r"><input type="checkbox" name="r" id="r"/>R</label>
+										<label for="f"><input type="checkbox" name="f" id="f"/>F</label>
+										<label for="sa"><input type="checkbox" name="sa" id="sa"/>Sa</label>
+										<label for="s"><input type="checkbox" name="s" id="s"/>S</label>
+									</div>
+								</div>
 								<div class="form-group">
 									<label for="location" class="control-label">Location: </label>
 									<input type="text" class="form-control" name="location" id="location"/>
 								</div>
 								<div class="form-group">
 									<label for="share" class="select-label control-label">Share with: </label>
-									<select class="form-control" name="teams" value:"Select Team/s">
-				                        <option value="">None</option>
-										<option value="">Gymnastics</option>
-										<option value="">Soccer</option>
-										<option value="">Tennis</option>
+									<select id="shareWith" class="form-control" name="teams" value:"Select Team/s">
+				                        <option id="optionNone" value="None">None</option>
+										<option id="optionGymnastics" value="Gymnastics">Gymnastics</option>
+										<option id="optionSoccer" value="Soccer">Soccer</option>
+										<option id="optionTennis" value="Tennis">Tennis</option>
 									  <!-- <option value="">generate list of teams</option> -->
 									</select>
 								</div>
-								<div class="checkbox form-group">
-									<label for="request" class="control-label"><input type="checkbox" name="request" id="request"/>Request Feedback</label>
+								<div class="form-group">
+									<div class="checkbox">
+										<label for="request"><input type="checkbox" name="request" id="request"/>Request Feedback</label>
+									</div>
 								</div>
 								<!-- hidden submit button which is called when Save button of modal is clicked -->
 								<input type="submit" value="Save and Share" id="event_submit" style="display: none;">

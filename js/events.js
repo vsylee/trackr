@@ -1,3 +1,31 @@
+/**
+* Creates a tooltip to display more event details of event in the calendar with calendarId.
+* Event detials include time, full event name, and location if it exists.
+*/
+function createTooltip(event, element, calendarId) {
+    var allDay= event;
+    var startDay = event.start.day();
+    var endDay = event.end.day();
+
+    var moreThanADay = startDay !== endDay;
+    
+    var time = event.allDay || moreThanADay ? '' : event.start.format("h:mm A") + ' - ' + event.end.format("h:mm A") + '<br>';
+    var location = event.location ? '<br>' + event.location : '';
+
+    $(element).attr("data-html", "true"); //allow parsing of newline <br> in tooltip
+
+    $(element).tooltip({
+        title: time + event.title + location,
+        container: "#"+calendarId,
+        delay: { show: 100, hide: 100 },
+        trigger : 'hover'
+    });
+}
+
+/**
+* Helper function for modal setup.
+* Sets the form fields with start and end dates and times based on start, end, and view.
+*/
 function setFormFields(start, end, view) {
     // need to refresh for min and max start and end dates
     $('#startDate').datepicker( "refresh" );
@@ -9,14 +37,23 @@ function setFormFields(start, end, view) {
     $('#endTime').val(end.format('HH:mm'));
 }
 
+/**
+* Initializes and shows the Event Details modal.
+*/
 function addEventModal(start, end, view){
 
     $('.tooltip').hide();
     setFormFields(start, end, view);
 
 	$('#event_modal').modal('show');
+    // put focus on event name input
     $('#name').focus();
 
+/***************************************************
+**** 
+****       Initialize fullCalendar for modal
+****
+****************************************************/
 	$('#event_day_timeline').fullCalendar({
 
     	height: $('.addEvent-dialog').outerHeight(),
@@ -30,24 +67,10 @@ function addEventModal(start, end, view){
         },
 
         eventRender: function(event, element) {
-            var allDay= event;
-            var startDay = event.start.day();
-            var endDay = event.end.day();
-
-            var moreThanADay = startDay !== endDay;
-            
-            var time = event.allDay || moreThanADay ? '' : event.start.format("h:mm A") + ' - ' + event.end.format("h:mm A") + '<br>';
-            var location = event.location ? '<br>' + event.location : '';
-
-            $(element).attr("data-html", "true"); //allow parsing of newline <br> in tooltip
-
-            $(element).tooltip({
-                title: time + event.title + location,
-                container: "#event_day_timeline"});
+            createTooltip(event, element, 'event_day_timeline');
         },
 
         eventClick: function(event) {
-
         	if (event.url) return false; // don't allow redirection to source website of events
         },
 
@@ -74,55 +97,54 @@ function addEventModal(start, end, view){
 		],
 
 		defaultView: 'agendaDay',
-
-        // customButtons: {
-        //     selectDate: {
-        //         id: 'selectDate',
-        //         text: '',
-        //         click: function(e) {
-        //             // showAddEventPopover($(this),$(this));
-        //             // var currentView = $('#calendar').fullCalendar('getView');
-        //             // var start = $('#calendar').fullCalendar('getDate');
-        //             // $('#delete').css({'visibility':'hidden'});
-        //             // addEventModal(start, start.clone().add(1, 'h'), currentView);
-        //             return false;
-        //         },
-        //         // themeIcon: 'calendar'
-        //     }
-        // },
-        // theme: 'true'
         
     });
-    // $('.fc-selectDate-button').append('<input type="text" id="event_details_date"/>');
-    // $('#event_details_date').datepicker();
-    // $(function() {$('#event_details_date').datepicker({
-            // dateFormat: "MM d, yy",}).datepicker('setDate', $('#event_day_timeline').fullCalendar('getDate').format('LL'));});
-    // $('#event_day_timeline').css({'width': '50%', 'margin-left':'15px', 'margin-right' : '15px'});
-    $('#event_day_timeline h2').css({'font-size': '18px', 'padding-top':'5px'});
-    $('#event_day_timeline .fc-day-header').css({'font-size': '14px'});
-    $('#event_day_timeline').fullCalendar('gotoDate', start);
-    // $('.fc-agendaDay-slots td div').css({'height': '12px'});
-    // $('.fc-day-grid, .fc-row, .fc-bg, .fc-axis, .fc-day, .fc-week').css({'height': '12px'});
-    // $('.fc-day-grid').css({'height':'15px'});
-    // $('.fc-divider').css({'z-index': '1000'});
-    // $('.fc-bg table').css({'height': '12px'});
-    // $('.fc-time-grid tr').css({'height': '9px'});
-    // $('#event_day_timeline .fc-day').css({'height': '10px'});
 
-    // $('#event_day_timeline span').css({'font-size': '12px'});
+    $('#event_day_timeline').fullCalendar('gotoDate', start);
+
 }
 
+/**
+* Sets startDate and endDate to have jQuery datepickers
+* endDate has a minimum date of startDate
+* endTime has a minimum time of startTime
+*
+* Puts focus on startTime when startDate datepicker closes and the same for endTime
+*/
 function customDateTime() {    
     $(function() {
+        $('#repeatUntilDate').datepicker({
+            dateFormat: "MM d, yy",
+            onSelect: function() {
+                $('#repeat').prop('checked', true);
+            },
+            onClose: function(selectedDate) {
+                var momentDate = moment(new Date(selectedDate));
+                if (momentDate.isValid()) {
+                    if (!selectedDate) {
+                        $('#repeat').prop('checked', false);
+                    }
+                } else {
+                    $("#repeat-group").addClass('has-error');
+                }
+            }
+        })
+
         $( "#startDate" ).datepicker({
             dateFormat: "MM d, yy",
             onClose: function( selectedDate ) {
-                $( "#endDate" ).datepicker( "option", "minDate", selectedDate );
-                if ($( "#endDate" ).val() === $( "#startDate" ).val()) {
-                    $('#endTime')[0].min = $('#startTime').val();
-                    $('#startTime')[0].max = $('#endTime').val();
+                var momentDate = moment(new Date(selectedDate));
+                if (momentDate.isValid()) {
+                    $( "#endDate" ).datepicker( "option", "minDate", selectedDate );
+                    if ($( "#endDate" ).val() === $( "#startDate" ).val()) {
+                        $('#endTime')[0].min = $('#startTime').val();
+                        $('#startTime')[0].max = $('#endTime').val();
+                    }
+                    $('#startTime').focus();
+                } else {
+                    $("#start-group").addClass('has-error');
                 }
-                $('#startTime').focus();
+                
             }
         }).datepicker('setDate', moment().format('LL'));
 
@@ -131,31 +153,60 @@ function customDateTime() {
             onClose: function( selectedDate ) {
                 // don't set maxDate for startDate too...bad for usability
                 // $( "#startDate" ).datepicker( "option", "maxDate", selectedDate );
-                if ($( "#endDate" ).val() === $( "#startDate" ).val()) {
-                    $('#endTime')[0].min = $('#startTime').val();
-                    $('#startTime')[0].max = $('#endTime').val();
+                if (moment(new Date(selectedDate)).isValid()) {
+                    if ($( "#endDate" ).val() === $( "#startDate" ).val()) {
+                        $('#endTime')[0].min = $('#startTime').val();
+                        $('#startTime')[0].max = $('#endTime').val();
+                    }
+                    $('#endTime').focus();
+                } else {
+                    $("#end-group").addClass('has-error');
                 }
-                $('#endTime').focus();
             }
         }).datepicker('setDate', moment().format('LL'));
     });
 
-    $('#startTime').on('focusout', function() {
-        
+    $('#startTime').on('focusout', function() {        
         if ($('#endTime').val() === '' && $('#startTime').val() !== '') {
             $('#endTime').val($('#startTime').val())[0].stepUp(60);
         }
 
         if ($( "#endDate" ).val() === $( "#startDate" ).val()) {
-            console.log("hello");
             $('#endTime')[0].min = $('#startTime').val();
         }
     });
 }
 
+/**
+* Updates the event on the calendar based on the event details form.
+* Closes the modal.
+*/
 function updateEvent(eventId) {
     var event = $('#calendar').fullCalendar('clientEvents', eventId)[0];
+    event = formToEventDetails(event);    
 
+    $('#calendar').fullCalendar('updateEvent', event);
+    $('#event_modal').modal('hide');
+}
+
+/**
+* Adds the event from the event details form to the calendar.
+* Closes the modal.
+*/
+function addEvent() {
+	var event = {};
+    event = formToEventDetails(event);
+
+	$('#calendar').fullCalendar('renderEvent', event, true);
+
+    $('#event_modal').modal('hide');
+}
+
+/**
+* Transfers event details form details to event.
+* Returns mutated event with updated details.
+*/
+function formToEventDetails(event) {
     var startDate = $('#startDate').val();
     var startTime = $('#startTime').val();
     var startDateTime = new Date(startDate+' '+startTime);
@@ -169,11 +220,20 @@ function updateEvent(eventId) {
     event.location = $('#location').val();
     event.start = startDateTime.toISOString();
     event.end = endDateTime.toISOString();
+    event.shareWith = $('#shareWith').val();
+    event.feedback = $('#request').prop('checked');
 
-    $('#calendar').fullCalendar('updateEvent', event);
-    $('#event_modal').modal('hide');
+    if (!event.id) {
+        var eventNum = $('#calendar').fullCalendar('clientEvents').length + 1;
+        event.id ='event'+eventNum;
+    }
+
+    return event;
 }
 
+/**
+* Associates eventId to the Delete Event button.
+*/
 function addDeleteEvent(eventId) {
     function deleteEvent() {
         $('#calendar').fullCalendar( 'removeEvents', eventId );
@@ -181,29 +241,29 @@ function addDeleteEvent(eventId) {
     $('#delete').click(deleteEvent);
 }
 
-
-function addEvent(objectId) {
-	var startDate = $('#startDate').val();
-	var startTime = $('#startTime').val();
-	var startDateTime = new Date(startDate+' '+startTime);
-    sessionStorage.setItem('lastTime', startTime);
-
-	var endDate = $('#endDate').val();
-	var endTime = $('#endTime').val();
-	var endDateTime = new Date(endDate+' '+endTime);
-
-    var eventNum = $('#calendar').fullCalendar('clientEvents').length + 1;
-
-	var event = {
-		title: $('#name').val(),
-		start: startDateTime.toISOString(),
-		end: endDateTime.toISOString(),
-        id: 'event'+eventNum
-	}
-	$('#calendar').fullCalendar('renderEvent', event, true);
-	$('#'+objectId).css({'display':'none'});
-
-    $('#event_modal').modal('hide');
-	// if (objectId !== 'addEvent-button-popover') popover.remove();
+/**
+* Sets the Event Details modal based on state which can be 'add' or 'update'.
+* Makes Add Event or Save Changes button.
+* Makes Delete Event button visible or not.
+* If it is visible, associate event to be deleted when it is clicked.
+*/
+function setModalState(state,eventId) {
+    switch (state) {
+        case 'add':
+            $('#delete').css({'visibility':'hidden'});
+            $('#add_event').attr('action','javascript:addEvent(\'event_details\');');
+            $('#save_submit').text('Add Event');
+            break;
+        case 'update':
+            $('#delete').css({'visibility':'visible'});
+            $('#add_event').attr('action','javascript:updateEvent(\''+eventId+'\');');
+            $('#save_submit').text('Save Changes');
+            // adds delete event to onclick of delete button
+            addDeleteEvent(eventId);
+            break;
+        default:
+            $('#delete').css({'visibility':'hidden'});
+            $('#add_event').attr('action','javascript:addEvent(\'event_details\');');
+            $('#save_submit').text('Add Event');
+    }
 }
-

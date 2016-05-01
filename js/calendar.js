@@ -1,4 +1,8 @@
 $(document).ready(function() {
+    var sessionEvents = sessionStorage.getItem('events');
+    // sessionEvents.legnth == 2 when it is []
+    storedEvents = sessionEvents && sessionEvents.length > 2  ? JSON.parse(sessionEvents) : storedEvents;
+
     // setting jquery datepicker for form start and end dates
     // setting max and min date and time for form depending on start and end dates and times
     customDateTime();
@@ -33,6 +37,7 @@ $(document).ready(function() {
         })
         
         storedEvents = JSON.stringify(eventsCopy);
+        sessionStorage.setItem('events', storedEvents);
         return null; // don't display alert
     }
 
@@ -65,22 +70,7 @@ $(document).ready(function() {
 
         eventRender: function(event, element) {
             // create tooltip to show event details on hover
-            var allDay= event;
-            var startDay = event.start.day();
-            var endDay = event.end.day();
-
-            var moreThanADay = startDay !== endDay;
-            
-            var time = event.allDay || moreThanADay ? '' : event.start.format("h:mm A") + ' - ' + event.end.format("h:mm A") + '<br>';
-            var location = event.location ? '<br>' + event.location : '';
-            $(element).attr("data-html", "true"); //allow parsing of newline <br> in tooltip
-
-            $(element).tooltip({
-                title: time + event.title + location,
-                container: "#calendar",
-                delay: { show: 100, hide: 100 },
-                trigger : 'hover'
-            });
+            createTooltip(event, element, 'calendar');
         },
 
         eventClick: function(event) {
@@ -88,10 +78,10 @@ $(document).ready(function() {
             if (!event.url) { 
                 $('#name').val(event.title);
                 $('#location').val(event.location);
+                $('#option'+event.shareWith).prop('selected', true);
+                $('#request').prop('checked', event.feedback);
 
-                setModalState('update');
-                // adds delete event to onclick of delete button
-                addDeleteEvent(event.id);
+                setModalState('update', event.id);
                 addEventModal(event.start, event.end);
             }
             // return false so that clicking on the events doesn't take user to the url (i.e. Google calendar)
@@ -171,22 +161,3 @@ $(document).ready(function() {
     $(".fc-addEvent-button").attr('id', 'addEvent-button');
 
 });
-
-function setModalState(state) {
-    switch (state) {
-        case 'add':
-            $('#delete').css({'visibility':'hidden'});
-            $('#add_event').attr('action','javascript:addEvent(\'event_details\');');
-            $('#save_submit').text('Add Event');
-            break;
-        case 'update':
-            $('#delete').css({'visibility':'visible'});
-            $('#add_event').attr('action','javascript:updateEvent(\''+event.id+'\');');
-            $('#save_submit').text('Save Changes');
-            break;
-        default:
-            $('#delete').css({'visibility':'hidden'});
-            $('#add_event').attr('action','javascript:addEvent(\'event_details\');');
-            $('#save_submit').text('Add Event');
-    }
-}
