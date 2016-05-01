@@ -83,16 +83,15 @@ function setup_player_row(curr_player_data) {
 	return player_row;
 }
 
-function setup_card(opponent, date, location, start_time, end_time) {
+function setup_card(name, location, start_time, end_time) {
 	var card_to_add = $('<div>')
 							.addClass('feedback_card')
 							.on('click', function(e) {
 								var data_index = jQuery.data(card_to_add, "event_index");
 								var current_event = events[data_index];
 
-								var event_description = current_event["event_name"] + " at " + 
-														current_event["location"] + " with " + 
-														current_event["opponent"] + " from " + 
+								var event_description = current_event["name"] + " at " + 
+														current_event["location"] + " from " + 
 														current_event["start_time"] + " to " + 
 														current_event["end_time"];
 								$('#body_title')
@@ -177,8 +176,8 @@ function searchKeyPress() {
 	var matchingEvents = [];
 	for (var i = 0; i < events.length; i++) {
 		var current_event = events[i];
-		if (current_event.name.substr(0,len).toLowerCase() === searchValue.toLowerCase() ) {
-				// || current_event.location.substr(0,len).toLowerCase() === searchValue.toLowerCase()) {
+		if (current_event.name.substr(0,len).toLowerCase() === searchValue.toLowerCase()
+				|| current_event.location.substr(0,len).toLowerCase() === searchValue.toLowerCase()) {
 			matchingEvents.push(current_event);
 		}
 	}
@@ -194,6 +193,7 @@ function searchKeyPress() {
 								   current_event['location'], 
 								   current_event['start_time'],
 								   current_event['end_time']);
+		// jQuery.data(curr_card, "event_index", i);
 		curr_card.appendTo(events_col);
 	}
 }
