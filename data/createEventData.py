@@ -14,7 +14,7 @@ data2 = {}
 opponentsHome = ['Framingham State', 'Keene State College', 'Emmanuel College', 'Suffolk University', 'US Coast Guard Academy']
 dates = ['2015/10/20', '2015/10/27', '2015/11/15', '2016/02/20', '2016/03/05', '2016/04/05']
 opponentsAway = ['Newbury College', 'Roger Williams University', 'Emerson College', 'Babson College', 'Brandeis University', 'Springfield College']
-dates2 = ['2015/11/20', '2015/11/27', '2015/12/05', '2016/03/20', '2015/10/05']
+dates2 = ['2015/11/20', '2015/11/27', '2015/12/05', '2016/03/20', '2016/05/12']
 
 for o in xrange(len(opponentsAway)):
 	data2[o] = {'opponent': opponentsAway[o], 'startTime': '17:00', 'endTime': '19:30', 'location': opponentsAway[o], 'date':dates[o]}
