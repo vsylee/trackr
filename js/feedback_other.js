@@ -94,16 +94,24 @@ function setup_player_row(curr_player_data) {
 											"position": "relative",
 											"width": "30%",
 											"height": "100%",
-											"justify-content": "flex-end",
-											"align-content": "center",
+											"flex-flow": "column nowrap",
+											"justify-content": "center",
+											"align-content": "flex-end",
 											"align-items": "center"
 										})
 										.append($('<img>')
 													.attr('src', curr_player_data["img"])
 													.css({
-														"width": "175px",
-														"height": "175px"
-													})),
+														"width": "160px",
+														"height": "160px",
+														"padding": "0px 0px 0px 60px"
+													}),
+													$('<p>')
+														.text(curr_player_data["name"])
+														.css({
+															"padding": "0px 0px 0px 60px"
+														})
+										),
 									$('<div>')
 										.addClass('feedback_data_player')
 										.css({
