@@ -49,78 +49,78 @@ function setup_header_options(id) {
 }
 
 $(document).ready(function() {
-	menu_options = $('.header_button');
-	$('.header_button')
-		.on('click', function(e) {
+	// menu_options = $('.header_button');
+	// $('.header_button')
+	// 	.on('click', function(e) {
 
-			var self = $(this);
-			var hex_color = hexc(self.css("background-color"));
-			// var display = $('.header_expansion').css('display');
-			// var current_color = self.css('background-color');
-			var update_color = hex_color == '#3a87ad' ? '#8cc3dd' : '#3a87ad';
-			var toggle_display = $('.header_expansion').css('display')  == "none" ? "flex" : "none";
+	// 		var self = $(this);
+	// 		var hex_color = hexc(self.css("background-color"));
+	// 		// var display = $('.header_expansion').css('display');
+	// 		// var current_color = self.css('background-color');
+	// 		var update_color = hex_color == '#3a87ad' ? '#8cc3dd' : '#3a87ad';
+	// 		var toggle_display = $('.header_expansion').css('display')  == "none" ? "flex" : "none";
 
-			// if (display == "none") {
-			// 	display = "flex";
-			// 	current_color = "#8cc3dd";
-			// } else {
-			// 	display = "none";
-			// 	current_color = "#3a87ad";
-			// }
+	// 		// if (display == "none") {
+	// 		// 	display = "flex";
+	// 		// 	current_color = "#8cc3dd";
+	// 		// } else {
+	// 		// 	display = "none";
+	// 		// 	current_color = "#3a87ad";
+	// 		// }
 
-			self.css({
-				'background-color': update_color
-			});
+	// 		self.css({
+	// 			'background-color': update_color
+	// 		});
 
-			if (previous_option && previous_option[0] !== self[0]) {
-				previous_option.css({
-					'background-color': '#3a87ad'
-				});
-				toggle_display = "flex";
-			}
+	// 		if (previous_option && previous_option[0] !== self[0]) {
+	// 			previous_option.css({
+	// 				'background-color': '#3a87ad'
+	// 			});
+	// 			toggle_display = "flex";
+	// 		}
 
-			// var pos_offset = self.offset();
-			// var right_position = $(window).width() - pos_offset.left - self.width();
-			var right_position = 10;
-			var width;
+	// 		// var pos_offset = self.offset();
+	// 		// var right_position = $(window).width() - pos_offset.left - self.width();
+	// 		var right_position = 10;
+	// 		var width;
 
-			// if ($(this).attr('id').indexOf('header_events') != -1 ||
-			// 	$(this).attr('id').indexOf('header_feedback') != -1) {
-			// 	width = 250;
-			// } else {
-			// 	width = 125;
-			// }
-			if ($(this).attr('id') == 'header_events') {
-				width = 250;
-				right_position += 40.22 + 92.53;
-			} else if ($(this).attr('id') == 'header_feedback') {
-				width = 250;
-				right_position += 40.22;
-			} else {
-				width = 125;
-				right_position += 0;
-			}
+	// 		// if ($(this).attr('id').indexOf('header_events') != -1 ||
+	// 		// 	$(this).attr('id').indexOf('header_feedback') != -1) {
+	// 		// 	width = 250;
+	// 		// } else {
+	// 		// 	width = 125;
+	// 		// }
+	// 		if ($(this).attr('id') == 'header_events') {
+	// 			width = 250;
+	// 			right_position += 40.22 + 92.53;
+	// 		} else if ($(this).attr('id') == 'header_feedback') {
+	// 			width = 250;
+	// 			right_position += 40.22;
+	// 		} else {
+	// 			width = 125;
+	// 			right_position += 0;
+	// 		}
 
-			$('.header_expansion').css({
-				'display': toggle_display,
-				'right': right_position,
-				// 'position': right,
-				'width': width + 'px'
-			});
-			previous_option = self;
-			setup_header_options(self.attr('id'));
-		});
+	// 		$('.header_expansion').css({
+	// 			'display': toggle_display,
+	// 			'right': right_position,
+	// 			// 'position': right,
+	// 			'width': width + 'px'
+	// 		});
+	// 		previous_option = self;
+	// 		setup_header_options(self.attr('id'));
+	// 	});
 
-	$(document).click(function (e) {
-		if (!$(e.target).closest(".header_button").length &&
-			!$(e.target).is(".header_button")) {
-			$('.header_button').css( {
-				'background-color': '#3a87ad'
-			});
-			$('.header_expansion').css( {
-				'display': 'none'
-			});
-		}
-	});
+	// $(document).click(function (e) {
+	// 	if (!$(e.target).closest(".header_button").length &&
+	// 		!$(e.target).is(".header_button")) {
+	// 		$('.header_button').css( {
+	// 			'background-color': '#3a87ad'
+	// 		});
+	// 		$('.header_expansion').css( {
+	// 			'display': 'none'
+	// 		});
+	// 	}
+	// });
 
 });
