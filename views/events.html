@@ -122,17 +122,28 @@
 				                		<input type="time" class="form-control col-xs-6 col-sm-6 col-md-6 col-lg-6 time" name="time" id="endTime"/>
 				                	</div>
 				                </div>
-				                <div class="form-group" id="repeat-group">
+				                <div class="form-group" id="repeat-change-group">
 					                <div class="row">
-					                	<div class="checkbox col-xs-6 col-sm-6 col-md-6 col-lg-6" id="repeatUntil">
-											<label for="repeat">
-												<input type="checkbox" name="repeat" id="repeat"/>
-												<div id="repeat-text">Repeat event until:</div>
-											</label>
+					                	<div id="change-group">
+					                		<label class="control-label">This is a repeating event.</label>
+						                	<div class="checkbox">
+												<label for="change">
+													<input type="checkbox" name="change" id="change"/>
+													<div id="change-all">Apply to all future events</div>
+												</label>
+											</div>
 										</div>
-										<input type="text" placeholder="Select Date" id="repeatUntilDate" class="form-control col-xs-6 col-sm-6 col-md-6 col-lg-6" style="width:50%">	
+										<div id="repeat-group">
+						                	<div class="checkbox col-xs-6 col-sm-6 col-md-6 col-lg-6" id="repeatUntil">
+												<label for="repeat">
+													<input type="checkbox" name="repeat" id="repeat"/>
+													<div id="repeat-text">Repeat event until:</div>
+												</label>
+											</div>
+											<input type="text" placeholder="Last Start Date" id="repeatUntilDate" class="form-control col-xs-6 col-sm-6 col-md-6 col-lg-6" style="width:50%">	
+										</div>
 									</div>
-									<div class="checkbox days-of-week-group" disabled>
+									<div class="checkbox days-of-week-group">
 										<label id="days-of-week-label">On these start days:</label>
 										<div class="row days-of-week">
 											<label class="col-xs-3 col-sm-3 col-md-3 col-lg-3" for="day0"><input type="checkbox" name="0" id="day0"/>Su</label>
@@ -177,7 +188,7 @@
 				<!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  data-dismiss="modal" -->
 				<button type="button" class="btn btn-default" data-dismiss="modal" id="delete" align="left">Delete Event</button>
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-				<button type="button" class="btn btn-primary" onclick="javascript:$('#event_submit').click()" form="add_event" id="save_submit">Save changes</button>
+				<button type="button" class="btn btn-primary" onclick="javascript:$('#event_submit').click();" form="add_event" id="save_submit">Save changes</button>
 			</div>
 
 		</div>

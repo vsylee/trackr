@@ -2,27 +2,54 @@ var events = [];
 var fake_comments = [
 	{
 		"name": "Czarina",
-		"img": "../images/extra_credit_one.jpeg",
+		"img": "../images/extra_credit_1.jpeg",
 		"athlete_comment": "I didn't think there was enough recovery time between the weight lifting and the sprints.",
-		"coach_comment": "That's a great point. I'll take that into future consideration."
+		"coach_comment": "I'm really happy with your squat PR today. 225lbs is really amazing! " +
+						"Don't get complacent though. You're capable of much more! " +
+						"I'm sorry you didn't think there wasn't enough recovery time between weight lifting and sprints; " +
+						"I'll take that into consideration for future practices."
 	},
 	{
 		"name": "Veronica",
-		"img": "../images/extra_credit_two.jpeg",
+		"img": "../images/extra_credit_2.jpeg",
 		"athlete_comment": "I can really feel myself improving.",
-		"coach_comment": "That's great Veronica. You have three more years left too!"
+		"coach_comment": "I'm glad to hear you can feel yourself improving, but " +
+						"you seemed really tired today; I'm assuming that's because you're sick. " +
+						"Remember that health always comes first! Make sure to get some rest so that " +
+						"you heal before the next game! The team needs you!"
 	},
 	{
 		"name": "Jing",
-		"img": "../images/extra_credit_three.jpg",
+		"img": "../images/extra_credit_3.jpg",
 		"athlete_comment": "I am really starting to feel the ball as an extension of my body now.",
-		"coach_comment": "That's the way to really understand the sport."
+		"coach_comment": "That's the way to really understand the sport, and I'm glad you're getting more comfortable with the ball. " +
+						"I hope to see continued hard work from you, Jing."
 	},
 	{
 		"name": "Sam",
-		"img": "../images/extra_credit_four.jpg",
+		"img": "../images/extra_credit_4.jpg",
 		"athlete_comment": "My stamina has improved so much by doing the mile test.",
-		"coach_comment": "Sam your legs look amazing.",
+		"coach_comment": "Still, I feel like you've been slacking off a little bit and I feel like you could really " +
+						"improve more if you worked a little harder. " +
+						"I expect to see you well rested and fully energized for our next practice, " +
+						"where I hope to see you pushing yourself harder."
+	},
+	{
+		"name": "Michael",
+		"img": "../images/extra_credit_5.jpg",
+		"athlete_comment": "I hurt my ankle today during practice.",
+		"coach_comment": "I'm so sorry you hurt your ankle today. I told you to be more careful! " +
+						"I know I tell you guys to push yourselves but health is above all else. " +
+						"Stay safe, know your limits. I hope you get some rest and I hope you feel better."
+	},
+	{
+		"name": "Roger",
+		"img": "../images/extra_credit_6.jpg",
+		"athlete_comment": "I skipped practice today, sorry coach. I had a date.",
+		"coach_comment": "Roger, a date is no excuse for missing practice. " +
+						"Your teammates need you to be in your best condition to win the upcoming game. " +
+						"If you keep skipping practices like this, I'm going to have to kick you out of " +
+						"the team."
 	}
 ];
 var curr_selected_card = null;
@@ -174,15 +201,15 @@ function setup_player_row(curr_player_data) {
 									$('<div>')
 										.addClass('feedback_data_player')
 										.css({
-											"backgroundColor": "green",
-											"width": "70%",
+											// "backgroundColor": "green",
+											"width": "85%",
 											"height": "100%"
 										})
 										.append($('<div>')
 													.addClass('feedback_data_player')
 													.css({
 														"width": "100%",
-														"height": "60%",
+														"height": "65%",
 														"display": "block",
 														"overflow-y": "scroll",
 														"word-wrap": "break-word",
@@ -190,8 +217,9 @@ function setup_player_row(curr_player_data) {
 														"outline": "0px solid transparent",
 														"font-family": "Overlock",
 														"font-size": "16px",
-														"margin-top": "12px",
-														"backgroundColor": "orange",
+														"margin-top": "15px",
+														// "backgroundColor": "orange",
+														"border": "1px solid #e3e6e8",
 														"color": "#000000" // 054869
  													})
 													.attr('id', "coach_comment_" + curr_player_data["name"])
@@ -199,17 +227,20 @@ function setup_player_row(curr_player_data) {
 												$('<div>')
 													.addClass('feedback_data_player')
 													.css({
-														'backgroundColor': "purple",
-														'width': "30%",
+														// 'backgroundColor': "purple",
+														'width': "10%",
 														'height': "100%",
 														"justify-content": "flex-start",
-														"align-items": "center"
+														"align-items":  "flex-start", //"center"
+														"margin-top": "20px"
 													})
 													.append($('<img>')
 																.attr('src', '../images/pen.png')
 																.css({
 																	"width": "20px",
-																	"height": "20px"
+																	"height": "20px",
+																	"margin-left": "5px"
+																	// "background-color": "red"
 																})
 																.data('selected', false)
 																.attr('id', curr_player_data["name"])
