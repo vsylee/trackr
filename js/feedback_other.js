@@ -8,7 +8,7 @@ var fake_comments = [
 	},
 	{
 		"name": "Veronica",
-		"img": "../images/extra_credit_two.jpg",
+		"img": "../images/extra_credit_two.jpeg",
 		"athlete_comment": "I can really feel myself improving.",
 		"coach_comment": "That's great Veronica. You have three more years left too!"
 	},
