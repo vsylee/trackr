@@ -54,7 +54,7 @@ p, a {
 	/*background-color: black;*/
 	align-items:center;
 	justify-content:space-between;
-	z-index: 10000000;
+	z-index: 100;
 
 	border-bottom: 3px #054869 solid; /*02364f 054869 0c5a80*/
 }

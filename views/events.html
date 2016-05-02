@@ -137,14 +137,12 @@
 						                	<div class="checkbox col-xs-6 col-sm-6 col-md-6 col-lg-6" id="repeatUntil">
 												<label for="repeat">
 													<input type="checkbox" name="repeat" id="repeat"/>
-													<div id="repeat-text">Repeat event until:</div>
+													<div id="repeat-text">Repeat every:</div>
 												</label>
 											</div>
-											<input type="text" placeholder="Last Start Date" id="repeatUntilDate" class="form-control col-xs-6 col-sm-6 col-md-6 col-lg-6" style="width:50%">	
 										</div>
 									</div>
 									<div class="checkbox days-of-week-group">
-										<label id="days-of-week-label">On these start days:</label>
 										<div class="row days-of-week">
 											<label class="col-xs-3 col-sm-3 col-md-3 col-lg-3" for="day0"><input type="checkbox" name="0" id="day0"/>Su</label>
 											<label class="col-xs-3 col-sm-3 col-md-3 col-lg-3" for="day1"><input type="checkbox" name="1" id="day1"/>Mo</label>
@@ -155,6 +153,10 @@
 											<label class="col-xs-3 col-sm-3 col-md-3 col-lg-3" for="day4"><input type="checkbox" name="4" id="day4"/>Th</label>
 											<label class="col-xs-3 col-sm-3 col-md-3 col-lg-3" for="day5"><input type="checkbox" name="5" id="day5"/>Fr</label>
 											<label class="col-xs-3 col-sm-3 col-md-3 col-lg-3" for="day6"><input type="checkbox" name="6" id="day6"/>Sa</label>
+										</div>
+										<div id="until-row">
+											<label id="repeat-until">until:</label>
+											<input type="text" placeholder="Last Start Date" id="repeatUntilDate" class="form-control col-xs-6 col-sm-6 col-md-6 col-lg-6" style="width:50%">
 										</div>
 									</div>
 								</div>
