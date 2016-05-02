@@ -84,30 +84,13 @@ function addEventModal(start, end, view){
 
 		eventLimit: true, //more link shows up when there are too many events
 
-        googleCalendarApiKey: 'AIzaSyCX_A2rKiGZ4wo6LXNyJZ7WCK64SSqVSqU',
-        eventSources: [
-            	{
-            		editable: true,
-            		googleCalendarId: 'mfj0nf3n8jfn92mklam206a4nk@group.calendar.google.com', //MIT calendar
-            	},
-        ],
-
-        events: [
-        	{
-        		title: 'Practice',
-        		className: 'soccer practice',
-        		start: practiceData['start'],
-        		end: practiceData['end'],
-        		dow: practiceData['dow'],
-                location: 'Briggs Field',
-        	},
-
-		],
+        events: $('#calendar').fullCalendar('clientEvents'),
 
 		defaultView: 'agendaDay',
         
     });
 
+    $('#event_day_timeline').fullCalendar('refetchEvents');
     $('#event_day_timeline').fullCalendar('gotoDate', start);
     $('#event_day_timeline').fullCalendar('option', 'height', $('.addEvent-dialog').outerHeight());
 
@@ -417,11 +400,11 @@ function setModalState(state,eventId) {
 
             // repeating events + changes
             if ($('#calendar').fullCalendar('clientEvents', eventId)[0].repeat) {
-                $('#repeat-change-group').css({'display':'initial'});
-                $('#change-group').css({'display':'block'});
+                $('#change-group').css({'display':'initial'});
             } else {
-                $('#repeat-change-group').css({'display':'none'});
+                $('#change-group').css({'display':'none'});
             }
+            $('#repeat-change-group').css({'display':'none'});
             $('#repeat-group').css({'display':'none'});
             $('.days-of-week-group').css({'display':'none'});
 
