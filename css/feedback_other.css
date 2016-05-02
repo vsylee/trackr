@@ -46,11 +46,13 @@ html, body {
 .feedback_data {
 	display: flex;
 	flex-flow: column nowrap;
-	width: 100%;
-	height: calc(100% - 50px);
+	/*width: calc(75% - 3px);*/
+	/*height: 100%;*/
 	/*background-color: #af1323;*/
 	justify-content: flex-start;
-	/*border-left: 2px solid #879ba3;*/
+	/*border-left: 3px solid #879ba3;*/
+	width: 100%;
+	height: calc(100% - 50px);
 	overflow-y: scroll;
 }
 
@@ -67,10 +69,10 @@ html, body {
 .feedback_data_title {	
 	position: relative;
 	height: 50px; /*12%;*/
-	border-bottom: 1px solid #b8c3c8;
+	border-bottom: 2px solid #b8c3c8;
 	font-size: 20px;
 	color: black;
-	padding-right: 10px;
+	padding-right: 20px;
 	text-align: right;
 	line-height: 50px;
 }
@@ -82,7 +84,7 @@ html, body {
 	justify-content: flex-start; /*center*/
 	width: 100%;
 	height: 30%;
-	/*background-color: blue;*/
+	/*background-color: #e3e6e8;*/
 	flex-shrink: 0;
 }
 
