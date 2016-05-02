@@ -469,7 +469,7 @@ $(document).ready(function() {
 	first_event.trigger('click');
 
 	$("#search-bar").click( function (e) {
-		if ($(this).val().indexOf("🔍 Search by team, location, or date") > -1) {
+		if ($(this).val().indexOf("🔍 Search by event name or location") > -1) {
 			$(this).val("");
 		}
 	});
@@ -477,7 +477,7 @@ $(document).ready(function() {
 		if (!$(e.target).closest("#search-bar").length &&
 			!$(e.target).is("#search-bar")) {
 			if ($("#search-bar").val() == "") {
-				$("#search-bar").val("🔍 Search by team, location, or date")
+				$("#search-bar").val("🔍 Search by event name or location")
 			}
 		}
 	});
