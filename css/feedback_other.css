@@ -126,6 +126,11 @@ html, body {
 	height: 75px;
 	justify-content: center;
 	border-bottom: 1px solid #b8c3c8; /*ffac4d*/
+
+	-webkit-user-select: none;  
+	-moz-user-select: none;    
+	-ms-user-select: none;      
+	user-select: none;
 }
 
 .empty_div {
