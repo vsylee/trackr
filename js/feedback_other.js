@@ -204,7 +204,7 @@ function setup_player_row(curr_player_data) {
 														"outline": "0px solid transparent",
 														"font-family": "Overlock",
 														"font-size": "16px",
-														"margin-top": "5px", // 15px
+														"margin-top": "7px", // 15px
 														"margin-right": "2px",
 														// "backgroundColor": "orange",
 														"border": "1px solid #e3e6e8",
