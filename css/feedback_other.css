@@ -19,7 +19,6 @@ html, body {
 	display: flex;
 	flex-flow: row wrap;
 	justify-content: flex-start;
-	align-content: flex-start;
 
 	border: 1px solid #627e8b;
 }
@@ -27,27 +26,34 @@ html, body {
 .feedback {
 	display: flex;
 	flex-flow: row wrap;
-	align-content:flex-start;
+	width: 100%;
+	height: 90%;
+	overflow: scroll;
+}
+
+.feedback_container {
 	width: 25%;
 	height: 100%;
-	overflow: scroll;
+	border-right: 3px solid #879ba3;
+}
+
+.feedback_data_container {
+	width: calc(75% - 3px);
+	height: 100%;
+
 }
 
 .feedback_data {
 	display: flex;
 	flex-flow: column nowrap;
-	width: calc(75% - 2px);
-	height: 100%;
-	background-color: #af1323;
+	/*width: calc(75% - 3px);*/
+	/*height: 100%;*/
+	/*background-color: #af1323;*/
 	justify-content: flex-start;
-	border-left: 2px solid #879ba3;
-	overflow: scroll;
-}
-
-.feedback_data_title {
-	justify-content: center;
-	align-content: center;
-	align-items: center;
+	/*border-left: 3px solid #879ba3;*/
+	width: 100%;
+	height: calc(100% - 50px);
+	overflow-y: scroll;
 }
 
 .feedback_data_remove {
@@ -60,27 +66,26 @@ html, body {
 	height: 100%;
 }
 
-.feedback_data_title {
-	display: flex;
-	flex-flow: row wrap;
-	justify-content:flex-end;
-	width: 100%;
+.feedback_data_title {	
+	position: relative;
 	height: 50px; /*12%;*/
-	border-bottom: 1px solid #b8c3c8;
+	border-bottom: 2px solid #b8c3c8;
 	font-size: 20px;
 	color: black;
-	/*padding-right: 10px;*/
-	/*text-align: right;*/
-	/*background-color: orange;*/
+	padding-right: 20px;
+	text-align: right;
+	line-height: 50px;
 }
 
 .feedback_data_row {
 	display: flex;
+	position: relative;
 	flex-flow: row nowrap;
-	justify-content: center;
+	justify-content: flex-start; /*center*/
 	width: 100%;
-	height: 30%;
-	background-color: orange;
+	height: 25%;
+	/*background-color: #e3e6e8;*/
+	flex-shrink: 0;
 }
 
 .feedback_card {
@@ -93,8 +98,10 @@ html, body {
 	border-bottom: 1px solid #b8c3c8; /*ffac4d*/
 }
 
-.feedback_card:first-of-type {
-	border-top: 1px solid #b8c3c8;
+.empty_div {
+	height: 100%;
+	width: 10px;
+	float: right;
 }
 
 .feedback_card_row {
@@ -156,20 +163,20 @@ html, body {
 	font-family: 'Overlock', serif;
 }
 
-
 #search-bar {
-	width:100%;
-	height:32px;
-	font-size:14px;
-	color:#617F8B;
-	border-radius:5px;
+	width: calc(100% - 20px);
+	height: 32px;
+	font-size: 14px;
+	color: #617F8B;
+	border-radius: 5px;
 	border: 0px;
 	/*margin-bottom:10px;*/
-	padding-left:5px;
-	margin:8px;
+	padding-left: 5px;
+	margin: 8px;
 	font-family: 'Overlock', serif;
 	background-color: #E3E6E8;
 }
 
-
-
+.search_container {
+	border-bottom: 2px solid #b8c3c8;
+}

@@ -1,8 +1,3 @@
-var tennis = ['Tennis A', 'Tennis B', 'Tennis C', 'Tennis D', 'Tennis E', 'Tennis F', 'Tennis G', 'Tennis H', 'Tennis I', 'Tennis J', 'Tennis K', 'Tennis L', 'Tennis M', 'Tennis N', 'Tennis O', 'Tennis P', 'Tennis Q', 'Tennis R', 'Tennis S', 'Tennis T', 'Tennis U', 'Tennis V', 'Tennis W', 'Tennis X', 'Tennis Y', 'Tennis Z'];
-var gymnastics = ['Gymnastics A', 'Gymnastics B', 'Gymnastics C', 'Gymnastics D'];
-var soccer = ['Czarina', 'Veronica', 'Jing', 'Sam', 'Michael', 'Roger', 'Richard', 'Paul', 'Chris', 'Josh', 'Mira', 'Miri'];
-var teams = {"gymnastics":gymnastics, "tennis":tennis, "soccer":soccer};
-
 var navigation_elements = {
 	"header_events": ["Event A", "Event B", "Event C", "Event D"],
 	"header_feedback": ["Feedback A", "Feedback B", "Feedback C", "Feedback D"],
@@ -53,147 +48,79 @@ function setup_header_options(id) {
 	}
 }
 
-var right_panel_width = 300;
-var animation_time = 400;
-
-function toggleRightPanel(animationTime) {
-	if ($("#right-panel-button").hasClass('right-panel-open')) {
-		$("#right-panel").animate({
-			right: "-=" + right_panel_width
-		}, animation_time, function(){
-			// animation complete
-		});
-
-		$(".content").animate({
-			right: "-=" + right_panel_width
-		}, animation_time, function(){
-			// animation complete
-		});
-		$(".container").animate({
-			right: "-=" + right_panel_width
-		}, animation_time, function(){
-			// animation complete
-		});
-		$("#right-panel-button").html("◀").removeClass('right-panel-open').addClass('right-panel-closed');
-	} else {
-		$("#right-panel").animate({
-			right: "+=" + right_panel_width
-		}, animation_time, function(){
-			// animation complete
-		});
-
-		$(".content").animate({
-			right: "+=" + right_panel_width
-		}, animation_time, function(){
-			// animation complete
-		});
-		$(".container").animate({
-			right: "+=" + right_panel_width
-		}, animation_time, function(){
-			// animation complete
-		});
-		$("#right-panel-button").html("▶").removeClass('right-panel-closed').addClass('right-panel-open');
-	}
-}
-
 $(document).ready(function() {
-	menu_options = $('.header_button');
-	$('.header_button')
-		.on('click', function(e) {
+	// menu_options = $('.header_button');
+	// $('.header_button')
+	// 	.on('click', function(e) {
 
-			var self = $(this);
-			var hex_color = hexc(self.css("background-color"));
-			// var display = $('.header_expansion').css('display');
-			// var current_color = self.css('background-color');
-			var update_color = hex_color == '#3a87ad' ? '#8cc3dd' : '#3a87ad';
-			var toggle_display = $('.header_expansion').css('display')  == "none" ? "flex" : "none";
+	// 		var self = $(this);
+	// 		var hex_color = hexc(self.css("background-color"));
+	// 		// var display = $('.header_expansion').css('display');
+	// 		// var current_color = self.css('background-color');
+	// 		var update_color = hex_color == '#3a87ad' ? '#8cc3dd' : '#3a87ad';
+	// 		var toggle_display = $('.header_expansion').css('display')  == "none" ? "flex" : "none";
 
-			// if (display == "none") {
-			// 	display = "flex";
-			// 	current_color = "#8cc3dd";
-			// } else {
-			// 	display = "none";
-			// 	current_color = "#3a87ad";
-			// }
+	// 		// if (display == "none") {
+	// 		// 	display = "flex";
+	// 		// 	current_color = "#8cc3dd";
+	// 		// } else {
+	// 		// 	display = "none";
+	// 		// 	current_color = "#3a87ad";
+	// 		// }
 
-			self.css({
-				'background-color': update_color
-			});
+	// 		self.css({
+	// 			'background-color': update_color
+	// 		});
 
-			if (previous_option && previous_option[0] !== self[0]) {
-				previous_option.css({
-					'background-color': '#3a87ad'
-				});
-				toggle_display = "flex";
-			}
+	// 		if (previous_option && previous_option[0] !== self[0]) {
+	// 			previous_option.css({
+	// 				'background-color': '#3a87ad'
+	// 			});
+	// 			toggle_display = "flex";
+	// 		}
 
-			// var pos_offset = self.offset();
-			// var right_position = $(window).width() - pos_offset.left - self.width();
-			var right_position = 10;
-			var width;
+	// 		// var pos_offset = self.offset();
+	// 		// var right_position = $(window).width() - pos_offset.left - self.width();
+	// 		var right_position = 10;
+	// 		var width;
 
-			// if ($(this).attr('id').indexOf('header_events') != -1 ||
-			// 	$(this).attr('id').indexOf('header_feedback') != -1) {
-			// 	width = 250;
-			// } else {
-			// 	width = 125;
-			// }
-			if ($(this).attr('id') == 'header_events') {
-				width = 250;
-				right_position += 40.22 + 92.53;
-			} else if ($(this).attr('id') == 'header_feedback') {
-				width = 250;
-				right_position += 40.22;
-			} else {
-				width = 125;
-				right_position += 0;
-			}
+	// 		// if ($(this).attr('id').indexOf('header_events') != -1 ||
+	// 		// 	$(this).attr('id').indexOf('header_feedback') != -1) {
+	// 		// 	width = 250;
+	// 		// } else {
+	// 		// 	width = 125;
+	// 		// }
+	// 		if ($(this).attr('id') == 'header_events') {
+	// 			width = 250;
+	// 			right_position += 40.22 + 92.53;
+	// 		} else if ($(this).attr('id') == 'header_feedback') {
+	// 			width = 250;
+	// 			right_position += 40.22;
+	// 		} else {
+	// 			width = 125;
+	// 			right_position += 0;
+	// 		}
 
-			$('.header_expansion').css({
-				'display': toggle_display,
-				'right': right_position,
-				// 'position': right,
-				'width': width + 'px'
-			});
-			previous_option = self;
-			setup_header_options(self.attr('id'));
-		});
+	// 		$('.header_expansion').css({
+	// 			'display': toggle_display,
+	// 			'right': right_position,
+	// 			// 'position': right,
+	// 			'width': width + 'px'
+	// 		});
+	// 		previous_option = self;
+	// 		setup_header_options(self.attr('id'));
+	// 	});
 
-
-	// populate team dropdown menu
-	for (var i=0; i < Object.keys(teams).length; i++) {
-		var team = Object.keys(teams)[i];
-		$("#team-select").append(
-			"<option value='" + team + "'>" +
-			team.substr(0,1).toUpperCase() + team.substr(1).toLowerCase() +
-			"</option>");
-	}
-
-	// populate team member list
-	var populateTeamList = function() {
-		var selected_team = $("#team-select").val();
-		var team_members = teams[selected_team];
-		$("#team-members").empty();
-		for (var i=0; i < team_members.length; i++) {
-			if (i != 0) {
-				$("#team-members").append("<hr>");
-			}
-			$("#team-members").append(
-				"<li>" + team_members[i] + "</li>");
-		}
-	};
-
-	$("#team-select").on('change', function (e) {
-		populateTeamList();
-	});
-
-	$("#right-panel-triangle").html("▶");
-	$("#right-panel-button").click(function (e) {
-		toggleRightPanel(animation_time);
-	});
-
-
-
-
+	// $(document).click(function (e) {
+	// 	if (!$(e.target).closest(".header_button").length &&
+	// 		!$(e.target).is(".header_button")) {
+	// 		$('.header_button').css( {
+	// 			'background-color': '#3a87ad'
+	// 		});
+	// 		$('.header_expansion').css( {
+	// 			'display': 'none'
+	// 		});
+	// 	}
+	// });
 
 });

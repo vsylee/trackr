@@ -2,29 +2,77 @@ var events = [];
 var fake_comments = [
 	{
 		"name": "Czarina",
-		"img": "../images/extra_credit_one.jpeg",
+		"img": "../images/extra_credit_1.jpeg",
 		"athlete_comment": "I didn't think there was enough recovery time between the weight lifting and the sprints.",
-		"coach_comment": "That's a great point. I'll take that into future consideration."
+		"coach_comment": "I'm really happy with your squat PR today. 225lbs is really amazing! " +
+						"Don't get complacent though. You're capable of much more! " +
+						"I'm sorry you didn't think there wasn't enough recovery time between weight lifting and sprints; " +
+						"I'll take that into consideration for future practices."
 	},
 	{
 		"name": "Veronica",
-		"img": "../images/extra_credit_two.jpg",
+		"img": "../images/extra_credit_2.jpeg",
 		"athlete_comment": "I can really feel myself improving.",
-		"coach_comment": "That's great Veronica. You have three more years left too!"
+		"coach_comment": "I'm glad to hear you can feel yourself improving, but " +
+						"you seemed really tired today; I'm assuming that's because you're sick. " +
+						"Remember that health always comes first! Make sure to get some rest so that " +
+						"you heal before the next game! The team needs you!"
 	},
 	{
 		"name": "Jing",
-		"img": "../images/extra_credit_three.jpg",
+		"img": "../images/extra_credit_3.jpg",
 		"athlete_comment": "I am really starting to feel the ball as an extension of my body now.",
-		"coach_comment": "That's the way to really understand the sport."
+		"coach_comment": "That's the way to really understand the sport, and I'm glad you're getting more comfortable with the ball. " +
+						"I hope to see continued hard work from you, Jing."
 	},
 	{
 		"name": "Sam",
-		"img": "../images/extra_credit_four.jpg",
+		"img": "../images/extra_credit_4.jpg",
 		"athlete_comment": "My stamina has improved so much by doing the mile test.",
-		"coach_comment": "Sam your legs look amazing.",
+		"coach_comment": "Still, I feel like you've been slacking off a little bit and I feel like you could really " +
+						"improve more if you worked a little harder. " +
+						"I expect to see you well rested and fully energized for our next practice, " +
+						"where I hope to see you pushing yourself harder."
+	},
+	{
+		"name": "Michael",
+		"img": "../images/extra_credit_5.jpg",
+		"athlete_comment": "I hurt my ankle today during practice.",
+		"coach_comment": "I'm so sorry you hurt your ankle today. I told you to be more careful! " +
+						"I know I tell you guys to push yourselves but health is above all else. " +
+						"Stay safe, know your limits. I hope you get some rest and I hope you feel better."
+	},
+	{
+		"name": "Roger",
+		"img": "../images/extra_credit_6.jpg",
+		"athlete_comment": "I skipped practice today, sorry coach. I had a date.",
+		"coach_comment": "Roger, a date is no excuse for missing practice. " +
+						"Your teammates need you to be in your best condition to win the upcoming game. " +
+						"If you keep skipping practices like this, I'm going to have to kick you out of " +
+						"the team."
 	}
 ];
+var curr_selected_card = null;
+var first_event = null;
+
+// Function to place caret at end of div from 
+// http://stackoverflow.com/questions/4233265/contenteditable-set-caret-at-the-end-of-the-text-cross-browser
+function placeCaretAtEnd(el) {
+    el.focus();
+    if (typeof window.getSelection != "undefined" && typeof document.createRange != "undefined") {
+        var range = document.createRange();
+        range.selectNodeContents(el);
+        range.collapse(false);
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+    } else if (typeof document.body.createTextRange != "undefined") {
+        var textRange = document.body.createTextRange();
+        textRange.moveToElementText(el);
+        textRange.collapse(true);
+        textRange.select();
+    }
+}
 
 function convert_data() {
 	var eventData = storedEvents;
@@ -71,39 +119,95 @@ function setup_player_row(curr_player_data) {
 							.append($('<div>')
 										.addClass('feedback_data_player')
 										.css({
-											"backgroundColor": "cyan",
 											"position": "relative",
-											"width": "30%",
+											"width": "15%",
 											"height": "100%",
-											"justify-content": "flex-end",
-											"align-content": "center",
+											"flex-flow": "column nowrap",
+											"align-content": "flex-end",
 											"align-items": "center"
 										})
 										.append($('<img>')
 													.attr('src', curr_player_data["img"])
 													.css({
-														"width": "175px",
-														"height": "175px"
-													})),
-							// ,
+														"width": "80px",
+														"height": "80px",
+														"margin-left": "20px",
+														"margin-top": "20px",
+														"border-radius": "40px"
+													}),
+													$('<p>')
+														.text(curr_player_data["name"])
+														.css({
+															"padding": "0px 0px 0px 20px",
+															"color": "#054869",
+															"font-size": "16px",
+															"font-family": "Amaranth",
+															"font-weight": "lighter"
+														})
+										),
 									$('<div>')
 										.addClass('feedback_data_player')
 										.css({
-											"backgroundColor": "green",
-											"width": "70%",
+											// "backgroundColor": "green",
+											"width": "85%",
 											"height": "100%"
 										})
 										.append($('<div>')
 													.addClass('feedback_data_player')
 													.css({
-														"width": "50%",
-														"height": "100%",
+														"width": "100%",
+														"height": "65%",
+														"display": "block",
+														"overflow-y": "scroll",
+														"word-wrap": "break-word",
+														"padding": "10px",
+														"outline": "0px solid transparent",
+														"font-family": "Overlock",
+														"font-size": "16px",
+														"margin-top": "15px",
+														// "backgroundColor": "orange",
+														"border": "1px solid #e3e6e8",
+														"color": "#000000" // 054869
+ 													})
+													.attr('id', "coach_comment_" + curr_player_data["name"])
+													.text(curr_player_data["coach_comment"]),
+												$('<div>')
+													.addClass('feedback_data_player')
+													.css({
+														// 'backgroundColor': "purple",
+														'width': "10%",
+														'height': "100%",
 														"justify-content": "flex-start",
-														"padding": "0px 0px 0px 10px",
-														"align-items": "center",
-														"align-content": "center"
+														"align-items":  "flex-start", //"center"
+														"margin-top": "20px"
 													})
-													.text(curr_player_data["coach_comment"])
+													.append($('<img>')
+																.attr('src', '../images/pen.png')
+																.css({
+																	"width": "20px",
+																	"height": "20px",
+																	"margin-left": "5px"
+																	// "background-color": "red"
+																})
+																.data('selected', false)
+																.attr('id', curr_player_data["name"])
+																.on('click', function(e) {
+																	var editable_id = "#coach_comment_" + $(this).attr('id');
+																	var curr_element = $(editable_id);
+																	var selected = $(this).data('selected');
+
+																	console.log("What's the selected field " + selected);
+																	if (!selected) {
+																		curr_element.attr('contenteditable', true);
+																		placeCaretAtEnd($(editable_id).get(0));
+																		$(this).attr('src', '../images/check.png')
+																	} else {
+																		curr_element.attr('contenteditable', false);
+																		$(this).attr('src', '../images/pen.png');
+																	}
+																	$(this).data('selected', !selected);
+																})
+													)
 										)
 							);
 
@@ -114,6 +218,43 @@ function setup_card(name, location, start_time, end_time) {
 	var card_to_add = $('<div>')
 							.addClass('feedback_card')
 							.on('click', function(e) {
+								if (curr_selected_card) {
+									console.log("entered if");
+									curr_selected_card.css({
+										"background-color": "#ffffff",
+										"font-weight": "normal"
+									});
+
+									var card_row = $(curr_selected_card.context.childNodes[0]);
+									var card_body = $(curr_selected_card.context.childNodes[1]);
+									$(card_row.context.childNodes[0]).css("color", "#000000");
+									$(card_row.context.childNodes[1]).css("color", "#617F8B");
+									$(card_body.context.childNodes[0]).css("color", "#3a87ad");
+									$(card_body.context.childNodes[1]).css("color", "#3a87ad");
+								}
+
+								var target_class = $(e.target).context.className;
+								var card;
+								if (target_class == "feedback_card") {
+									card = $(e.target);
+								} else if (target_class == "feedback_card_row" || target_class == "feedback_card_body") {
+									card = $($(e.target).context.parentNode);
+								} else if (target_class == "feedback_card_element") {
+									card = $($(e.target).context.parentNode.parentNode);
+								}
+								card.css({
+									"background-color": "#ffbd71", // ffbd71 fcab4e
+									"font-weight": "bolder"
+								});
+								
+								var card_row = $(card.context.childNodes[0]);
+								var card_body = $(card.context.childNodes[1]);
+								$(card_row.context.childNodes[0]).css("color", "#054869");
+								$(card_row.context.childNodes[1]).css("color", "#054869");
+								$(card_body.context.childNodes[0]).css("color", "#054869");
+								$(card_body.context.childNodes[1]).css("color", "#054869");
+
+								curr_selected_card = card;
 								
 								var curr_name = jQuery.data(card_to_add, "name");
 								var curr_location = jQuery.data(card_to_add, "location");
@@ -231,7 +372,9 @@ function searchKeyPress() {
 								   current_event['start_time'],
 								   current_event['end_time']);
 		curr_card.appendTo(events_col);
+
 	}
+
 }
 
 $(document).ready(function() {
@@ -244,10 +387,13 @@ $(document).ready(function() {
 								   current_event['start_time'],
 								   current_event['end_time']);
 		
-		// jQuery.data(curr_card, "event_index", i);
-
 		curr_card.appendTo(events_col);
+		if (i == 0) {
+			first_event = curr_card
+		}
 	}
+
+	first_event.trigger('click');
 
 	$("#search-bar").click( function (e) {
 		if ($(this).val().indexOf("🔍 Search by team, location, or date") > -1) {

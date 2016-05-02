@@ -41,26 +41,22 @@
 				<img src="./../images/settings_white.png" class="small-button-icon">
 			</a>
 		</div>
-
-		<div class="dropdown_container header_button" id="header_events">
- 			Event<br>Updates
- 		</div>
- 		<div class="dropdown_container header_button" id="header_feedback">
-			Feedback<br>Updates
-		</div>
-		<div class="dropdown_container header_button" id="header_account">
-			<!-- Triangle Down -->
-			&#9662;
-		</div>
 	</div>
 </div>
 
 <div class="container">
-	<div class="feedback" id="feedback_events">
-		<input type="text" id="search-bar" value="🔍 Search by team, location, or date" onKeyPress="searchKeyPress()" onKeyUp="searchKeyPress()"></input>
+	<div class="feedback_container">
+		<div class="search_container">
+			<input class="feedback_search" type="text" id="search-bar" value="🔍 Search by team, location, or date" onKeyPress="searchKeyPress()" onKeyUp="searchKeyPress()"></input>
+		</div>
+		<div class="feedback" id="feedback_events">
+		</div>
 	</div>
-	<div class="feedback_data" id="feedback_data_cols">
-		<div class="feedback_data_title feedback_data_title" id="body_title">
+	<div class="feedback_data_container">
+		<div class="feedback_data_title" id="body_title">
+			<div class="empty_div">Bye</div>
+		</div>
+		<div class="feedback_data" id="feedback_data_cols">
 		</div>
 	</div>
 </div>
