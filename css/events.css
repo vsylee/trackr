@@ -156,21 +156,25 @@ label, input {
 .days-of-week label {
 	/*padding-left: 2px;*/
 	/*margin-right: 25px;*/
-	cursor: not-allowed;
+/*	cursor: not-allowed;*/
 }
 
 #days-of-week-label {
 	padding-left: 0px;
-	cursor: auto;
+	/*cursor: auto;*/
 }
 
 .days-of-week-group {
-	display: none;
+	/*display: none;*/
 }
 
-#repeat-text {
+#repeat-text, #change-all {
 	font-family: 'Overlock', serif;
 	color: black;
 	font-size: 15px;
 	/*font-weight: 700;*/
 }
+/*
+#change-all {
+	display: none;
+}*/

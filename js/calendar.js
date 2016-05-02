@@ -32,6 +32,9 @@ $(document).ready(function() {
                 event.feedback = value.feedback;
                 event.shareWith = value.shareWith;
                 event.location = value.location;
+                event.repeat = value.repeat;
+                event.dowCustom = value.dowCustom;
+                event.repeatUntilDate = value.repeatUntilDate;
                 eventsCopy.push(event);
             }
         })

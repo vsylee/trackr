@@ -10,6 +10,13 @@ function createTooltip(event, element, calendarId) {
     var moreThanADay = startDay !== endDay;
     
     var time = event.allDay || moreThanADay ? '' : event.start.format("h:mm A") + ' - ' + event.end.format("h:mm A") + '<br>';
+    if (event.allDay) {
+        time = '';
+    } else if (moreThanADay) {
+        time = event.start.format("MMM D, h:mm A") + ' - ' + event.end.format("MMM D, h:mm A") + '<br>';
+    } else {
+        time = event.start.format("h:mm A") + ' - ' + event.end.format("h:mm A") + '<br>';
+    }
     var location = event.location ? '<br>' + event.location : '';
 
     $(element).attr("data-html", "true"); //allow parsing of newline <br> in tooltip
@@ -32,9 +39,13 @@ function setFormFields(start, end, view) {
     $('#endDate').datepicker( "refresh" );
     $('#startDate').datepicker( "setDate", start.format('LL') ); // LL gives the format MonthFullName D, YYYY
     $('#endDate').datepicker( "setDate", end.format('LL') );
+    $( "#endDate" ).datepicker( "option", "minDate", $('#startDate').datepicker('getDate') );
 
     $('#startTime').val(start.format('HH:mm')); //military time (needed format for value input)
     $('#endTime').val(end.format('HH:mm'));
+    if ($('#startDate').val() === $('#endDate').val()) {
+        $('#endTime')[0].min = $('#startTime').val();
+    }
 }
 
 /**
@@ -101,6 +112,7 @@ function addEventModal(start, end, view){
     });
 
     $('#event_day_timeline').fullCalendar('gotoDate', start);
+    $('#event_day_timeline').fullCalendar('option', 'height', $('.addEvent-dialog').outerHeight());
 
 }
 
@@ -116,28 +128,38 @@ function customDateTime() {
         $('#repeat').change(function (){
             if (this.checked) {
                 $('#repeatUntilDate').prop('required',true);
-                $('#repeatUntilDate').focus();
-                $('.days-of-week label').css({'cursor':'pointer'});
-                $('.days-of-week-group').css({'display':'block'});
-
                 var startDayOfWeek = moment(new Date($('#startDate').val())).day();
                 $('#day'+startDayOfWeek).prop('checked', true);
             } else {
                 $('#repeatUntilDate').prop('required',false);
                 $('#repeatUntilDate').val('');
-                $('.days-of-week label').css({'cursor':'not-allowed'});
-                $('.days-of-week-group').css({'display':'none'});
-                //TODO: uncheck all days of week
+                // uncheck all days of week
                 $('.days-of-week input').prop('checked', false);
             }
         })
+
+        $('.days-of-week input').change(function () {
+            if (this.checked) {
+                $('#repeat').prop('checked', true);
+                // fires repeat checkbox change event to handle constraints of repeatUntilDate
+            }
+        });
+
+        $('#change').change(function () {
+            if (this.checked) {
+                $('#delete').text('Delete All');
+            } else {
+                $('#delete').text('Delete Event');
+            }
+        })
+
         $('#repeatUntilDate').datepicker({
             // TODO: minDate is startDate
             dateFormat: "MM d, yy",
             onSelect: function() {
                 $('#repeat').prop('checked', true);
-                $('.days-of-week label').css({'cursor':'pointer'});
-                $('.days-of-week-group').css({'display':'block'});
+                // $('.days-of-week label').css({'cursor':'pointer'});
+                // $('.days-of-week-group').css({'display':'block'});
             },
             onClose: function(selectedDate) {
                 var momentDate = moment(new Date(selectedDate));
@@ -149,7 +171,7 @@ function customDateTime() {
                     $("#repeat-group").addClass('has-error');
                 }
             }
-        })
+        });
 
         $( "#startDate" ).datepicker({
             dateFormat: "MM d, yy",
@@ -158,10 +180,13 @@ function customDateTime() {
                 // TODO: uncheck all days of week, check selectedDay
                 var momentDate = moment(new Date(selectedDate));
                 if (selectedDate || momentDate.isValid()) {
+                    $( "#repeatUntilDate" ).datepicker( "option", "minDate", selectedDate );
                     $( "#endDate" ).datepicker( "option", "minDate", selectedDate );
                     if ($( "#endDate" ).val() === $( "#startDate" ).val()) {
                         $('#endTime')[0].min = $('#startTime').val();
-                        $('#startTime')[0].max = $('#endTime').val();
+                        // $('#startTime')[0].max = $('#endTime').val();
+                    } else {
+                        $('#endTime')[0].min = '';
                     }
                     $('#startTime').focus();
                 } else {
@@ -179,7 +204,9 @@ function customDateTime() {
                 if (selectedDate || moment(new Date(selectedDate)).isValid()) {
                     if ($( "#endDate" ).val() === $( "#startDate" ).val()) {
                         $('#endTime')[0].min = $('#startTime').val();
-                        $('#startTime')[0].max = $('#endTime').val();
+                        // $('#startTime')[0].max = $('#endTime').val();
+                    } else {
+                        $('#endTime')[0].min = '';
                     }
                     $('#endTime').focus();
                 } else {
@@ -190,12 +217,14 @@ function customDateTime() {
     });
 
     $('#startTime').on('focusout', function() {        
-        if ($('#endTime').val() === '' && $('#startTime').val() !== '') {
+        if ($('#endTime').val() && !$('#startTime').val()) {
             $('#endTime').val($('#startTime').val())[0].stepUp(60);
         }
-
-        if ($( "#endDate" ).val() === $( "#startDate" ).val()) {
+        // make sure start and end date aren't both blank, then check if they're equal
+        if ($( "#endDate" ).val() && $( "#startDate" ).val() && $( "#endDate" ).val() === $( "#startDate" ).val()) {
             $('#endTime')[0].min = $('#startTime').val();
+        } else {
+            $('#endTime')[0].min = '';
         }
     });
 }
@@ -205,16 +234,11 @@ function customDateTime() {
 * Closes the modal.
 */
 function updateEvent(eventId) {
-    if ($('#repeat').prop('checked')) {
-        var dow = [];
-        $('.days-of-week input:checked').each(function() {
-            dow.push(parseInt($(this).attr('name')));
-        });
-        var eventClass = $('#calendar').fullCalendar('clientEvents', eventId)[0].className;
-        updateRepeatingEvents($('#repeatUntilDate').val(), dow, eventClass);
+    if ($('#change').prop('checked')) {
+        updateRepeatingEvents(eventId);
     } else {
         var event = $('#calendar').fullCalendar('clientEvents', eventId)[0];
-        event = formToEventDetails(event);  
+        event = formToEventDetails(event);
 
         $('#calendar').fullCalendar('updateEvent', event);
     }
@@ -294,8 +318,8 @@ function createRepeatingEvents(lastDate, dow) {
     while (eventDate < end) {
         if (dow.includes(eventDate.day()))  { // constraint for days of week (dow) of events
             event.id = 'event'+eventIndex;
-            event.start = eventDate.clone();
-            event.end = moment(event.start).add(eventLength, 'ms');
+            event.start = eventDate.clone().toISOString();
+            event.end = moment(event.start).add(eventLength, 'ms').toISOString();
             event.dowCustom = dow;
             event.repeatUntilDate = end;
             event.className = className;
@@ -307,28 +331,72 @@ function createRepeatingEvents(lastDate, dow) {
     }
 }
 
-function updateRepeatingEvents(lastDate, dow, eventClass) {
-    var end = moment(new Date(lastDate)).add(1,'d');
+function updateRepeatingEvents(eventId) {
+    var originalEvent = $('#calendar').fullCalendar('clientEvents', eventId)[0]
+    var eventClass = originalEvent.className[0];
+
+    var originalStart = moment(originalEvent.start).clone();
+    var originalEnd = moment(originalEvent.end).clone();
+    // console.log(originalStart.format());
+    // console.log(originalEnd.format());
+
+    var newEvent = formToEventDetails(originalEvent);
+    var startDiff = moment(newEvent.start).diff(originalStart);
+    var endDiff = moment(newEvent.end).diff(originalEnd);
+    $('#calendar').fullCalendar('updateEvent', newEvent);
+    // console.log(startDiff);
+    // console.log(endDiff);
 
     var eventsInRepeat = $('#calendar').fullCalendar('clientEvents', function(event) {
-        return eventClass.length > 0 && event.className.includes(eventClass[0]);
+        return eventClass.length > 0 && event.className.includes(eventClass);
     });
 
+    var newClassName = 'repeat'+Math.floor((Math.random() * 1000000) + 1); //random repeat group number from 1 to 1,000,000
+    while ($('.'+newClassName).length > 0) {
+        newClassName = 'repeat'+Math.floor((Math.random() * 1000000) + 1);
+    }
+
     $.each(eventsInRepeat, function(index, event) {
-        event = formToEventDetails(event);  
-        $('#calendar').fullCalendar('updateEvent', event);
+        var prevStart = moment(event.start).clone();
+        if (prevStart > originalStart) { // don't include original event, already updated
+            var prevEnd = moment(event.end).clone();
+            // console.log(prevStart.format());
+            // console.log(prevEnd.format());
+            event = formToEventDetails(event);
+            event.start = prevStart.add(startDiff, 'ms').toISOString();
+            event.end = prevEnd.add(endDiff, 'ms').toISOString();
+            event.className = newClassName;
+            // console.log(event.start);
+            // console.log(event.end);
+            $('#calendar').fullCalendar('updateEvent', event);
+        }
     });
-    // console.log(eventsInRepeat);
 }
 
 /**
 * Associates eventId to the Delete Event button.
 */
 function addDeleteEvent(eventId) {
-    function deleteEvent() {
+    // $('#delete').attr('onclick', '"javascript:deleteEvent('+eventId+');"');
+    $('#delete').click(function() {
+        if ($('#change').prop('checked')) {
+            var originalEvent = $('#calendar').fullCalendar('clientEvents', eventId)[0]
+            var eventClass = originalEvent.className[0];
+            var originalStart = moment(originalEvent.start).clone();
+
+            $('#calendar').fullCalendar( 'removeEvents', function(event) {
+                var eventStart = moment(event.start);
+                return eventStart >= originalStart && eventClass.length > 0 && event.className.includes(eventClass);
+            });
+        }
+
         $('#calendar').fullCalendar( 'removeEvents', eventId );
-    }
-    $('#delete').click(deleteEvent);
+    });
+}
+
+function deleteEvent(eventId) {
+    console.log("here");
+    
 }
 
 /**
@@ -343,20 +411,47 @@ function setModalState(state,eventId) {
             $('#delete').css({'visibility':'hidden'});
             $('#add_event').attr('action','javascript:addEvent(\'event_details\');');
             $('#save_submit').text('Add Event');
-            $('#repeat-text').text('Repeat until:');
+            $('#gridSystemModalLabel').text('Add Event - Event Details');
+            
+            // repeating events + changes
+            $('#repeat-change-group').css({'display':'initial'});
+            $('#repeat-group').css({'display':'initial'});
+            $('#change-group').css({'display':'none'});
+            $('.days-of-week-group').css({'display':'block'});
+
             break;
         case 'update':
+            $('#delete').off( "click" );
+            $('#delete').text('Delete Event');
             $('#delete').css({'visibility':'visible'});
-            $('#add_event').attr('action','javascript:updateEvent(\''+eventId+'\');');
-            $('#save_submit').text('Save Changes');
-            $('#repeat-text').text('Change until:');
             // adds delete event to onclick of delete button
             addDeleteEvent(eventId);
+
+            $('#add_event').attr('action','javascript:updateEvent(\''+eventId+'\');');
+            $('#save_submit').text('Save Changes');
+            $('#gridSystemModalLabel').text('Edit Event Details');
+
+            // repeating events + changes
+            if ($('#calendar').fullCalendar('clientEvents', eventId)[0].repeat) {
+                $('#repeat-change-group').css({'display':'initial'});
+                $('#change-group').css({'display':'block'});
+            } else {
+                $('#repeat-change-group').css({'display':'none'});
+            }
+            $('#repeat-group').css({'display':'none'});
+            $('.days-of-week-group').css({'display':'none'});
+
             break;
         default:
             $('#delete').css({'visibility':'hidden'});
             $('#add_event').attr('action','javascript:addEvent(\'event_details\');');
             $('#save_submit').text('Add Event');
-            $('#repeat-text').text('Repeat until:');
+            $('#gridSystemModalLabel').text('Add Event - Event Details');
+            
+            // repeating events + changes
+            $('#repeat-change-group').css({'display':'initial'});
+            $('#repeat-group').css({'display':'initial'});
+            $('#change-group').css({'display':'none'});
+            $('.days-of-week-group').css({'display':'block'});
     }
 }
