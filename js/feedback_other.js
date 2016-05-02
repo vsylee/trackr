@@ -146,7 +146,7 @@ function setup_table_title() {
 										"color": "#000000",
 										"font-size": "19px",
 									})
-									.text("Players")
+									.text("Your Feedback")
 						);
 
 	return player_row;
