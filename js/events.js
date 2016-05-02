@@ -408,11 +408,11 @@ function setModalState(state,eventId) {
 
             // repeating events + changes
             if ($('#calendar').fullCalendar('clientEvents', eventId)[0].repeat) {
-                $('#repeat-change-group').css({'display':'initial'});
-                $('#change-group').css({'display':'block'});
+                $('#change-group').css({'display':'initial'});
             } else {
-                $('#repeat-change-group').css({'display':'none'});
+                $('#change-group').css({'display':'none'});
             }
+            $('#repeat-change-group').css({'display':'none'});
             $('#repeat-group').css({'display':'none'});
             $('.days-of-week-group').css({'display':'none'});
 
