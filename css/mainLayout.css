@@ -142,3 +142,8 @@ hr {
 	width: 50px;
 }
 
+.small-button-icon:hover {
+    transform: scale(1.1, 1.1);
+}
+
+
