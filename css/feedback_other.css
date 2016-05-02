@@ -41,13 +41,13 @@ html, body {
 }
 
 .feedback_container {
-	width: 350px;
+	width: 310px;
 	height: 100%;
 	border-right: 3px solid #879ba3;
 }
 
 .feedback_data_container {
-	width: calc(100% - 353px);
+	width: calc(100% - 313px);
 	height: 100%;
 }
 
