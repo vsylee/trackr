@@ -25,6 +25,7 @@ var fake_comments = [
 		"coach_comment": "Sam your legs look amazing.",
 	}
 ];
+var curr_selected_card = null;
 
 function convert_data() {
 	var eventData = storedEvents;
@@ -114,10 +115,21 @@ function setup_card(name, location, start_time, end_time) {
 	var card_to_add = $('<div>')
 							.addClass('feedback_card')
 							.on('click', function(e) {
-								console.log($(e.target));
-								// console.log($(e.target).context.className);
-								// console.log($(e.target).context.parentElement.className);
-								// console.log($(e.target).context.parentElement.parentElement.className);
+								if (curr_selected_card) {
+									console.log("entered if");
+									curr_selected_card.css({
+										"background-color": "#ffffff",
+										"font-weight": "normal"
+									});
+
+									var card_row = $(curr_selected_card.context.childNodes[0]);
+									var card_body = $(curr_selected_card.context.childNodes[1]);
+									$(card_row.context.childNodes[0]).css("color", "#000000");
+									$(card_row.context.childNodes[1]).css("color", "#617F8B");
+									$(card_body.context.childNodes[0]).css("color", "#3a87ad");
+									$(card_body.context.childNodes[1]).css("color", "#3a87ad");
+								}
+
 								var target_class = $(e.target).context.className;
 								var card;
 								if (target_class == "feedback_card") {
@@ -127,10 +139,19 @@ function setup_card(name, location, start_time, end_time) {
 								} else if (target_class == "feedback_card_element") {
 									card = $($(e.target).context.parentNode.parentNode);
 								}
-								console.log(card);
 								card.css({
-									"background-color": "orange"
+									"background-color": "#ffbd71", // ffbd71 fcab4e
+									"font-weight": "bolder"
 								});
+								
+								var card_row = $(card.context.childNodes[0]);
+								var card_body = $(card.context.childNodes[1]);
+								$(card_row.context.childNodes[0]).css("color", "#054869");
+								$(card_row.context.childNodes[1]).css("color", "#054869");
+								$(card_body.context.childNodes[0]).css("color", "#054869");
+								$(card_body.context.childNodes[1]).css("color", "#054869");
+
+								curr_selected_card = card;
 								
 								var curr_name = jQuery.data(card_to_add, "name");
 								var curr_location = jQuery.data(card_to_add, "location");
