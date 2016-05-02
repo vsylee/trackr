@@ -111,4 +111,16 @@ $(document).ready(function() {
 			setup_header_options(self.attr('id'));
 		});
 
+	$(document).click(function (e) {
+		if (!$(e.target).closest(".header_button").length &&
+			!$(e.target).is(".header_button")) {
+			$('.header_button').css( {
+				'background-color': '#3a87ad'
+			});
+			$('.header_expansion').css( {
+				'display': 'none'
+			});
+		}
+	});
+
 });
