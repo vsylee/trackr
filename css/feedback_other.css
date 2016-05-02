@@ -41,7 +41,7 @@ html, body {
 	background-color: #af1323;
 	justify-content: flex-start;
 	border-left: 2px solid #879ba3;
-	overflow: scroll;
+	overflow-y: scroll;
 }
 
 .feedback_data_title {
@@ -63,7 +63,7 @@ html, body {
 .feedback_data_title {
 	display: flex;
 	flex-flow: row wrap;
-	justify-content:flex-end;
+	justify-content: center;
 	width: 100%;
 	height: 50px; /*12%;*/
 	border-bottom: 1px solid #b8c3c8;
@@ -71,16 +71,19 @@ html, body {
 	color: black;
 	/*padding-right: 10px;*/
 	/*text-align: right;*/
-	/*background-color: orange;*/
+	background-color: orange;
+	flex-shrink: 0;
 }
 
 .feedback_data_row {
 	display: flex;
+	position: relative;
 	flex-flow: row nowrap;
 	justify-content: center;
 	width: 100%;
-	height: 30%;
-	background-color: orange;
+	height: 50%;
+	background-color: blue;
+	flex-shrink: 0;
 }
 
 .feedback_card {
