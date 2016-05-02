@@ -29,7 +29,7 @@ var fake_comments = [
 		"name": "Sam",
 		"img": "../images/extra_credit_4.jpg",
 		"athlete_comment": "My stamina has improved so much by doing the mile test.",
-		"coach_comment": "Still, I feel like you've been slacking off a little bit and I feel like you could really " +
+		"coach_comment": "I'm glad your stamina has improved, but I feel like you've been slacking off a little bit and I feel like you could really " +
 						"improve more if you worked a little harder. " +
 						"I expect to see you well rested and fully energized for our next practice, " +
 						"where I hope to see you pushing yourself harder."
@@ -337,7 +337,7 @@ function setup_card(name, location, start_time, end_time) {
 														curr_start_time + " to " + 
 														curr_end_time
 								$('#body_title')
-									.text(/*"Your Feedback for " + */curr_name)
+									.text(curr_name+" - "+moment(new Date(curr_start_time)).format('MMM DD'))
 									.css('color', '#3a87ad'); // event_description
 								var div_container = $('#feedback_data_cols');
 
@@ -470,7 +470,7 @@ $(document).ready(function() {
 	first_event.trigger('click');
 
 	$("#search-bar").click( function (e) {
-		if ($(this).val().indexOf("🔍 Search by team, location, or date") > -1) {
+		if ($(this).val().indexOf("🔍 Search by event name or location") > -1) {
 			$(this).val("");
 		}
 	});
@@ -478,7 +478,7 @@ $(document).ready(function() {
 		if (!$(e.target).closest("#search-bar").length &&
 			!$(e.target).is("#search-bar")) {
 			if ($("#search-bar").val() == "") {
-				$("#search-bar").val("🔍 Search by team, location, or date")
+				$("#search-bar").val("🔍 Search by event name or location")
 			}
 		}
 	});

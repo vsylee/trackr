@@ -18,6 +18,10 @@ practiceFirstDay = moment(new Date("2015/09/14"));
 practiceLastDay = moment(new Date("2016/05/12"));
 practiceDate = practiceFirstDay;
 practiceIndex = 0;
+locations = ['Briggs Field', 'Z-Center', 'Briggs Field', 'Z-Center'];
+feedbackOptions = ['true', 'true', 'false', 'false'];
+locIndex = 0;
+feedbackIndex = 0;
 while (practiceDate < practiceLastDay) {
     if (practiceDate.day() >= practiceData['dow'][0] && practiceDate.day() <= practiceData['dow'][practiceData['dow'].length-1])  { // constraints day of week (dow) of practice
         eventData = {
@@ -26,13 +30,15 @@ while (practiceDate < practiceLastDay) {
             className: 'soccer practice',
             start: new Date(practiceDate.format('YYYY/MM/DD')+' '+practiceData['start']).toISOString(),
             end: new Date(practiceDate.format('YYYY/MM/DD')+' '+practiceData['end']).toISOString(),
-            location: 'Briggs Field',
+            location: locations[locIndex],
             shareWith: 'Soccer',
-            feedback: 'True'
+            feedback: feedbackOptions[feedbackIndex],
         }
         $('#calendar').fullCalendar('renderEvent', eventData, true);
+        practiceIndex++;
+	    locIndex = (locIndex + 1)%4;
+	    feedbackIndex = (feedbackIndex+1)%4;
     }
     // to add more practices, get length of objects with class "practice" and use length+1 as next id
     practiceDate.add(1,'d');
-    practiceIndex++;
 }
