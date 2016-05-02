@@ -259,7 +259,7 @@ function setup_player_row(curr_player_data) {
 																	if (previous_comment) {
 																		previous_img.attr('src', '../images/pen.png');
 																		previous_comment.attr('contenteditable', false);
-																		previous_comment.data('selected', false);
+																		previous_img.data('selected', false);
 																	} 
 
 																	if (!selected) {
@@ -483,10 +483,10 @@ $(document).ready(function() {
 	$(document.body).click(function (e) {
 		if (!e.target.classList.contains("feedback_comment_editable") && !e.target.classList.contains("check_mark_image")) {
 			for (var i = 0; i < elements_to_uncheck.length; i++) {
-				// var curr_element = elements_to_uncheck[i];
-				// curr_element.div.attr('contenteditable', false);
-				// curr_element.checker.attr('src', '../images/pen.png');
-				// curr_element.checker.data('selected', false)
+				var curr_element = elements_to_uncheck[i];
+				curr_element.div.attr('contenteditable', false);
+				curr_element.checker.attr('src', '../images/pen.png');
+				curr_element.checker.data('selected', false)
 			}
 
 			elements_to_uncheck = [];
