@@ -26,6 +26,7 @@ var fake_comments = [
 	}
 ];
 var curr_selected_card = null;
+var first_event = null;
 
 // Function to place caret at end of div from 
 // http://stackoverflow.com/questions/4233265/contenteditable-set-caret-at-the-end-of-the-text-cross-browser
@@ -106,7 +107,8 @@ function setup_player_row(curr_player_data) {
 														"width": "80px",
 														"height": "80px",
 														"margin-left": "20px",
-														"border-radius": "40px"
+														"border-radius": "40px",
+														"margin-top": "10px"
 													}),
 													$('<p>')
 														.text(curr_player_data["name"])
@@ -333,7 +335,9 @@ function searchKeyPress() {
 								   current_event['start_time'],
 								   current_event['end_time']);
 		curr_card.appendTo(events_col);
+
 	}
+
 }
 
 $(document).ready(function() {
@@ -347,7 +351,12 @@ $(document).ready(function() {
 								   current_event['end_time']);
 		
 		curr_card.appendTo(events_col);
+		if (i == 0) {
+			first_event = curr_card
+		}
 	}
+
+	first_event.trigger('click');
 
 	$("#search-bar").click( function (e) {
 		if ($(this).val().indexOf("🔍 Search by team, location, or date") > -1) {
