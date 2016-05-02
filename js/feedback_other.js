@@ -26,6 +26,25 @@ var fake_comments = [
 	}
 ];
 
+// Function to place caret at end of div from 
+// http://stackoverflow.com/questions/4233265/contenteditable-set-caret-at-the-end-of-the-text-cross-browser
+function placeCaretAtEnd(el) {
+    el.focus();
+    if (typeof window.getSelection != "undefined" && typeof document.createRange != "undefined") {
+        var range = document.createRange();
+        range.selectNodeContents(el);
+        range.collapse(false);
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+    } else if (typeof document.body.createTextRange != "undefined") {
+        var textRange = document.body.createTextRange();
+        textRange.moveToElementText(el);
+        textRange.collapse(true);
+        textRange.select();
+    }
+}
+
 function convert_data() {
 	var eventData = storedEvents;
 	eventData.sort(function(first_event, second_event) {
@@ -68,44 +87,71 @@ function convert_data() {
 function setup_player_row(curr_player_data) {
 	var player_row = $('<div>')
 							.addClass('feedback_data_row feedback_data_remove')
-	// 						.append($('<div>')
-	// 									.addClass('feedback_data_player')
-	// 									.css({
-	// 										"backgroundColor": "cyan",
-	// 										"position": "relative",
-	// 										"width": "30%",
-	// 										"height": "100%",
-	// 										"justify-content": "flex-end",
-	// 										"align-content": "center",
-	// 										"align-items": "center"
-	// 									})
-	// 									.append($('<img>')
-	// 												.attr('src', curr_player_data["img"])
-	// 												.css({
-	// 													"width": "175px",
-	// 													"height": "175px"
-	// 												})),
-	// 						// ,
-	// 								$('<div>')
-	// 									.addClass('feedback_data_player')
-	// 									.css({
-	// 										"backgroundColor": "green",
-	// 										"width": "70%",
-	// 										"height": "100%"
-	// 									})
-	// 									.append($('<div>')
-	// 												.addClass('feedback_data_player')
-	// 												.css({
-	// 													"width": "50%",
-	// 													"height": "100%",
-	// 													"justify-content": "flex-start",
-	// 													"padding": "0px 0px 0px 10px",
-	// 													"align-items": "center",
-	// 													"align-content": "center"
-	// 												})
-	// 												.text(curr_player_data["coach_comment"])
-	// 									)
-	// 						);
+							.append($('<div>')
+										.addClass('feedback_data_player')
+										.css({
+											"backgroundColor": "cyan",
+											"position": "relative",
+											"width": "30%",
+											"height": "100%",
+											"justify-content": "flex-end",
+											"align-content": "center",
+											"align-items": "center"
+										})
+										.append($('<img>')
+													.attr('src', curr_player_data["img"])
+													.css({
+														"width": "175px",
+														"height": "175px"
+													})),
+									$('<div>')
+										.addClass('feedback_data_player')
+										.css({
+											"backgroundColor": "green",
+											"width": "70%",
+											"height": "100%"
+										})
+										.append($('<div>')
+													.addClass('feedback_data_player')
+													.css({
+														"width": "50%",
+														"height": "100%",
+														"justify-content": "flex-start",
+														"padding": "0px 0px 0px 10px",
+														"align-items": "center",
+														"align-content": "center",
+														"overflow": "scroll",
+														"padding": "10px"
+													})
+													.attr('id', "coach_comment_" + curr_player_data["name"])
+													.attr('contenteditable', true)
+													.text(curr_player_data["coach_comment"]),
+												$('<div>')
+													.addClass('feedback_data_player')
+													.css({
+														'backgroundColor': "purple",
+														'width': "30%",
+														'height': "100%",
+														"justify-content": "flex-start",
+														"align-items": "center"
+													})
+													.append($('<img>')
+																.attr('src', '../images/pen.png')
+																.css({
+																	"width": "20px",
+																	"height": "20px"
+																})
+																.attr('id', curr_player_data["name"])
+																.on('click', function(e) {
+																	var editable_id = "#coach_comment_" + $(this).attr('id');
+																	var curr_element = $(editable_id);
+
+																	curr_element.attr('contenteditable', true);
+																	placeCaretAtEnd(curr_element);
+																})
+													)
+										)
+							);
 
 	return player_row;
 }
@@ -244,8 +290,6 @@ $(document).ready(function() {
 								   current_event['start_time'],
 								   current_event['end_time']);
 		
-		// jQuery.data(curr_card, "event_index", i);
-
 		curr_card.appendTo(events_col);
 	}
 
