@@ -105,7 +105,8 @@ function setup_player_row(curr_player_data) {
 													.css({
 														"width": "160px",
 														"height": "160px",
-														"padding": "0px 0px 0px 60px"
+														"margin-left": "60px",
+														"border-radius": "80px"
 													}),
 													$('<p>')
 														.text(curr_player_data["name"])
