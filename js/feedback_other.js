@@ -68,44 +68,44 @@ function convert_data() {
 function setup_player_row(curr_player_data) {
 	var player_row = $('<div>')
 							.addClass('feedback_data_row feedback_data_remove')
-							.append($('<div>')
-										.addClass('feedback_data_player')
-										.css({
-											"backgroundColor": "cyan",
-											"position": "relative",
-											"width": "30%",
-											"height": "100%",
-											"justify-content": "flex-end",
-											"align-content": "center",
-											"align-items": "center"
-										})
-										.append($('<img>')
-													.attr('src', curr_player_data["img"])
-													.css({
-														"width": "175px",
-														"height": "175px"
-													})),
-							// ,
-									$('<div>')
-										.addClass('feedback_data_player')
-										.css({
-											"backgroundColor": "green",
-											"width": "70%",
-											"height": "100%"
-										})
-										.append($('<div>')
-													.addClass('feedback_data_player')
-													.css({
-														"width": "50%",
-														"height": "100%",
-														"justify-content": "flex-start",
-														"padding": "0px 0px 0px 10px",
-														"align-items": "center",
-														"align-content": "center"
-													})
-													.text(curr_player_data["coach_comment"])
-										)
-							);
+	// 						.append($('<div>')
+	// 									.addClass('feedback_data_player')
+	// 									.css({
+	// 										"backgroundColor": "cyan",
+	// 										"position": "relative",
+	// 										"width": "30%",
+	// 										"height": "100%",
+	// 										"justify-content": "flex-end",
+	// 										"align-content": "center",
+	// 										"align-items": "center"
+	// 									})
+	// 									.append($('<img>')
+	// 												.attr('src', curr_player_data["img"])
+	// 												.css({
+	// 													"width": "175px",
+	// 													"height": "175px"
+	// 												})),
+	// 						// ,
+	// 								$('<div>')
+	// 									.addClass('feedback_data_player')
+	// 									.css({
+	// 										"backgroundColor": "green",
+	// 										"width": "70%",
+	// 										"height": "100%"
+	// 									})
+	// 									.append($('<div>')
+	// 												.addClass('feedback_data_player')
+	// 												.css({
+	// 													"width": "50%",
+	// 													"height": "100%",
+	// 													"justify-content": "flex-start",
+	// 													"padding": "0px 0px 0px 10px",
+	// 													"align-items": "center",
+	// 													"align-content": "center"
+	// 												})
+	// 												.text(curr_player_data["coach_comment"])
+	// 									)
+	// 						);
 
 	return player_row;
 }
@@ -125,7 +125,7 @@ function setup_card(name, location, start_time, end_time) {
 														curr_start_time + " to " + 
 														curr_end_time
 								$('#body_title')
-									.text(curr_name); // event_description
+									.text(event_description); // event_description
 								var div_container = $('#feedback_data_cols');
 
 								// Should be loading real data here
