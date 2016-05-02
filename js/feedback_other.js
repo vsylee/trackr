@@ -93,25 +93,26 @@ function setup_player_row(curr_player_data) {
 										.css({
 											"backgroundColor": "cyan",
 											"position": "relative",
-											"width": "30%",
+											"width": "15%",
 											"height": "100%",
 											"flex-flow": "column nowrap",
-											"justify-content": "center",
+											// "justify-content": "center",
 											"align-content": "flex-end",
 											"align-items": "center"
 										})
 										.append($('<img>')
 													.attr('src', curr_player_data["img"])
 													.css({
-														"width": "160px",
-														"height": "160px",
-														"margin-left": "60px",
-														"border-radius": "80px"
+														"width": "80px",
+														"height": "80px",
+														"margin-left": "20px",
+														"border-radius": "40px"
 													}),
 													$('<p>')
 														.text(curr_player_data["name"])
 														.css({
-															"padding": "0px 0px 0px 60px"
+															"padding": "0px 0px 0px 20px",
+															"color": "#054869"
 														})
 										),
 									$('<div>')

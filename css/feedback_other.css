@@ -55,31 +55,23 @@ html, body {
 }
 
 .feedback_data_title {
-	/*display: flex;*/
-	/*flex-flow: row wrap;*/
-	/*justify-content: flex-end;*/
-	/*align-items: center;*/
-
 	width: 98%;
-	height: 50px; /*12%;*/
+	height: 50px;
 	border-bottom: 1px solid #b8c3c8;
 	font-size: 20px;
 	color: black;
-	/*margin-right: 50px;*/
 	text-align: right;
 	line-height:50px;
-	/*background-color: orange;*/
-	/*flex-shrink: 0;*/
 }
 
 .feedback_data_row {
 	display: flex;
 	position: relative;
 	flex-flow: row nowrap;
-	justify-content: center;
+	justify-content: flex-start; /*center*/
 	width: 100%;
 	height: 30%;
-	background-color: blue;
+	/*background-color: blue;*/
 	flex-shrink: 0;
 }
 
