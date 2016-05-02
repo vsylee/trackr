@@ -25,7 +25,8 @@ html, body {
 
 .feedback {
 	display: flex;
-	flex-flow: row wrap;
+	flex-flow: column wrap;
+	justify-content: flex-start;
 	width: 100%;
 	height: 90%;
 	overflow: scroll;
