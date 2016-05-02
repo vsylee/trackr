@@ -166,8 +166,10 @@ function setup_player_row(curr_player_data) {
 											"align-items": "center"
 										})
 										.append($('<img>')
+													.addClass('disable_select')
 													.attr('src', curr_player_data["img"])
 													.css({
+														"pointer-events": "none",
 														"width": "80px",
 														"height": "80px",
 														"margin-left": "20px",
@@ -286,7 +288,7 @@ function setup_player_row(curr_player_data) {
 
 function setup_card(name, location, start_time, end_time) {
 	var card_to_add = $('<div>')
-							.addClass('feedback_card')
+							.addClass('feedback_card disable_select')
 							.on('click', function(e) {
 								if (curr_selected_card) {
 									curr_selected_card.css({

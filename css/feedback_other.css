@@ -26,10 +26,17 @@ html, body {
 .feedback {
 	display: flex;
 	flex-flow: row wrap;
-	justify-content: flex-start;
+	align-content: flex-start;
 	width: 100%;
 	height: 90%;
 	overflow: scroll;
+}
+
+.disable_select {
+	-webkit-user-select: none;  
+	-moz-user-select: none;    
+	-ms-user-select: none;      
+	user-select: none;
 }
 
 .feedback_container {
