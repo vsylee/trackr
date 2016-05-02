@@ -311,7 +311,7 @@ function createRepeatingEvents(lastDate, dow) {
 }
 
 function updateRepeatingEvents(eventId) {
-    var originalEvent = $('#calendar').fullCalendar('clientEvents', eventId)[0]
+    var originalEvent = $('#calendar').fullCalendar('clientEvents', eventId)[0];
     var eventClass = originalEvent.className[0];
 
     var originalStart = moment(originalEvent.start).clone();
@@ -320,16 +320,19 @@ function updateRepeatingEvents(eventId) {
     var newEvent = formToEventDetails(originalEvent);
     var startDiff = moment(newEvent.start).diff(originalStart);
     var endDiff = moment(newEvent.end).diff(originalEnd);
-    $('#calendar').fullCalendar('updateEvent', newEvent);
-
-    var eventsInRepeat = $('#calendar').fullCalendar('clientEvents', function(event) {
-        return eventClass.length > 0 && event.className.includes(eventClass);
-    });
 
     var newClassName = 'repeat'+Math.floor((Math.random() * 1000000) + 1); //random repeat group number from 1 to 1,000,000
     while ($('.'+newClassName).length > 0) {
         newClassName = 'repeat'+Math.floor((Math.random() * 1000000) + 1);
     }
+
+    newEvent.className = newClassName;
+
+    $('#calendar').fullCalendar('updateEvent', newEvent);
+
+    var eventsInRepeat = $('#calendar').fullCalendar('clientEvents', function(event) {
+        return eventClass.length > 0 && event.className.includes(eventClass);
+    });
 
     $.each(eventsInRepeat, function(index, event) {
         var prevStart = moment(event.start).clone();
