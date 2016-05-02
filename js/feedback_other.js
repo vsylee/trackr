@@ -52,6 +52,9 @@ var fake_comments = [
 						"the team."
 	}
 ];
+var elements_to_uncheck = [];
+var previous_comment = null;
+var previous_img = null;
 var curr_selected_card = null;
 var first_event = null;
 
@@ -115,19 +118,20 @@ function convert_data() {
 
 function setup_table_title() {
 	var player_row = $('<div>')
-						.addClass('feedback_data_title_row')
+						.addClass('feedback_data_title_row feedback_data_remove')
 						.append($('<div>')
 									.addClass('feedback_data_player')
 									.css({
 										"position": "relative",
-										"width": "calc(15% - 20px)",
+										"width": "calc(16% - 20px)",
 										"height": "100%",
 										"flex-flow": "row nowrap",
 										"align-content": "flex-end",
 										"align-items": "center",
 										"justify-content": "center",
-										"backgroundColor": "blue",
-										"padding-left": "20px"
+										"padding-left": "24px",
+										"color": "#000000", // 054869
+										"font-size": "19px",
 									})
 									.text("Players")
 									,
@@ -135,32 +139,14 @@ function setup_table_title() {
 									.addClass('feedback_data_player')
 									.css({
 										"align-items": "center",
-										"backgroundColor": "green",
-										"width": "calc(70% - 10px)",
+										"width": "calc(100% - 10px)",
 										"padding-left": "10px",
-										"justify-content": "center",
-
-										"height": "100%"
+										"justify-content": "flex-start",
+										"height": "100%",
+										"color": "#000000",
+										"font-size": "19px",
 									})
-									.append($('<div>')
-												.addClass('feedback_data_player')
-												.css({
-													"width": "100%",
-													"height": "60%",
-													})
-												.text("Coach Feedback"),
-											$('<div>')
-												.addClass('feedback_data_player')
-												.css({
-													'backgroundColor': "purple",
-													'width': "30%",
-													'height': "100%",
-													"justify-content": "flex-start",
-													"align-items": "center"
-												})
-												.text("Edit")
-												
-									)
+									.text("Your Feedback")
 						);
 
 	return player_row;
@@ -185,14 +171,14 @@ function setup_player_row(curr_player_data) {
 														"width": "80px",
 														"height": "80px",
 														"margin-left": "20px",
-														"margin-top": "20px",
+														"margin-top": "10px",
 														"border-radius": "40px"
 													}),
 													$('<p>')
 														.text(curr_player_data["name"])
 														.css({
 															"padding": "0px 0px 0px 20px",
-															"color": "#054869",
+															"color": "#0c5a80", // 3a87ad
 															"font-size": "16px",
 															"font-family": "Amaranth",
 															"font-weight": "lighter"
@@ -201,12 +187,11 @@ function setup_player_row(curr_player_data) {
 									$('<div>')
 										.addClass('feedback_data_player')
 										.css({
-											// "backgroundColor": "green",
 											"width": "85%",
 											"height": "100%"
 										})
 										.append($('<div>')
-													.addClass('feedback_data_player')
+													.addClass('feedback_data_player feedback_comment_editable')
 													.css({
 														"width": "100%",
 														"height": "65%",
@@ -217,30 +202,32 @@ function setup_player_row(curr_player_data) {
 														"outline": "0px solid transparent",
 														"font-family": "Overlock",
 														"font-size": "16px",
-														"margin-top": "15px",
+														"margin-top": "5px", // 15px
+														"margin-right": "2px",
 														// "backgroundColor": "orange",
 														"border": "1px solid #e3e6e8",
-														"color": "#000000" // 054869
+														"color": "#000000", // 054869
+														"border-radius": "7px 7px 7px 7px"
  													})
 													.attr('id', "coach_comment_" + curr_player_data["name"])
+													.attr('spellcheck', false)
 													.text(curr_player_data["coach_comment"]),
 												$('<div>')
 													.addClass('feedback_data_player')
 													.css({
-														// 'backgroundColor': "purple",
 														'width': "10%",
 														'height': "100%",
 														"justify-content": "flex-start",
 														"align-items":  "flex-start", //"center"
-														"margin-top": "20px"
+														"margin-top": "10px"
 													})
 													.append($('<img>')
+																.addClass('check_mark_image')
 																.attr('src', '../images/pen.png')
 																.css({
 																	"width": "20px",
 																	"height": "20px",
 																	"margin-left": "5px"
-																	// "background-color": "red"
 																})
 																.data('selected', false)
 																.attr('id', curr_player_data["name"])
@@ -249,15 +236,30 @@ function setup_player_row(curr_player_data) {
 																	var curr_element = $(editable_id);
 																	var selected = $(this).data('selected');
 
-																	console.log("What's the selected field " + selected);
+																	var object_to_push = {
+																		div: curr_element,
+																		checker: $(this)
+																	};
+
+																	if (previous_comment) {
+																		previous_img.attr('src', '../images/pen.png');
+																		previous_comment.attr('contenteditable', false);
+																		previous_img.data('selected', false);
+																	} 
+
 																	if (!selected) {
 																		curr_element.attr('contenteditable', true);
 																		placeCaretAtEnd($(editable_id).get(0));
 																		$(this).attr('src', '../images/check.png')
+																		
+																		elements_to_uncheck.push(object_to_push);
 																	} else {
 																		curr_element.attr('contenteditable', false);
 																		$(this).attr('src', '../images/pen.png');
 																	}
+
+																	previous_comment = curr_element;
+																	previous_img = $(this);
 																	$(this).data('selected', !selected);
 																})
 													)
@@ -272,7 +274,6 @@ function setup_card(name, location, start_time, end_time) {
 							.addClass('feedback_card')
 							.on('click', function(e) {
 								if (curr_selected_card) {
-									console.log("entered if");
 									curr_selected_card.css({
 										"background-color": "#ffffff",
 										"font-weight": "normal"
@@ -319,7 +320,8 @@ function setup_card(name, location, start_time, end_time) {
 														curr_start_time + " to " + 
 														curr_end_time
 								$('#body_title')
-									.text(curr_name); // event_description
+									.text(/*"Your Feedback for " + */curr_name)
+									.css('color', '#3a87ad'); // event_description
 								var div_container = $('#feedback_data_cols');
 
 								// Should be loading real data here
@@ -464,6 +466,18 @@ $(document).ready(function() {
 		}
 	});
 
+	$(document.body).click(function (e) {
+		if (!e.target.classList.contains("feedback_comment_editable") && !e.target.classList.contains("check_mark_image")) {
+			for (var i = 0; i < elements_to_uncheck.length; i++) {
+				var curr_element = elements_to_uncheck[i];
+				curr_element.div.attr('contenteditable', false);
+				curr_element.checker.attr('src', '../images/pen.png');
+				curr_element.checker.data('selected', false)
+			}
+
+			elements_to_uncheck = [];
+		}
+	});
 });
 
 
