@@ -194,7 +194,7 @@ function setup_player_row(curr_player_data) {
 													.addClass('feedback_data_player feedback_comment_editable')
 													.css({
 														"width": "100%",
-														"height": "65%",
+														"height": "72%",
 														"display": "block",
 														"overflow-y": "scroll",
 														"word-wrap": "break-word",
