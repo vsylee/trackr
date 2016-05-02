@@ -1,8 +1,3 @@
-var tennis = ['Tennis A', 'Tennis B', 'Tennis C', 'Tennis D', 'Tennis E', 'Tennis F', 'Tennis G', 'Tennis H', 'Tennis I', 'Tennis J', 'Tennis K', 'Tennis L', 'Tennis M', 'Tennis N', 'Tennis O', 'Tennis P', 'Tennis Q', 'Tennis R', 'Tennis S', 'Tennis T', 'Tennis U', 'Tennis V', 'Tennis W', 'Tennis X', 'Tennis Y', 'Tennis Z'];
-var gymnastics = ['Gymnastics A', 'Gymnastics B', 'Gymnastics C', 'Gymnastics D'];
-var soccer = ['Czarina', 'Veronica', 'Jing', 'Sam', 'Michael', 'Roger', 'Richard', 'Paul', 'Chris', 'Josh', 'Mira', 'Miri'];
-var teams = {"gymnastics":gymnastics, "tennis":tennis, "soccer":soccer};
-
 var navigation_elements = {
 	"header_events": ["Event A", "Event B", "Event C", "Event D"],
 	"header_feedback": ["Feedback A", "Feedback B", "Feedback C", "Feedback D"],
@@ -50,49 +45,6 @@ function setup_header_options(id) {
 				}
 			})
 			.text(navigation_elements[id][i]);
-	}
-}
-
-var right_panel_width = 300;
-var animation_time = 400;
-
-function toggleRightPanel(animationTime) {
-	if ($("#right-panel-button").hasClass('right-panel-open')) {
-		$("#right-panel").animate({
-			right: "-=" + right_panel_width
-		}, animation_time, function(){
-			// animation complete
-		});
-
-		$(".content").animate({
-			right: "-=" + right_panel_width
-		}, animation_time, function(){
-			// animation complete
-		});
-		$(".container").animate({
-			right: "-=" + right_panel_width
-		}, animation_time, function(){
-			// animation complete
-		});
-		$("#right-panel-button").html("◀").removeClass('right-panel-open').addClass('right-panel-closed');
-	} else {
-		$("#right-panel").animate({
-			right: "+=" + right_panel_width
-		}, animation_time, function(){
-			// animation complete
-		});
-
-		$(".content").animate({
-			right: "+=" + right_panel_width
-		}, animation_time, function(){
-			// animation complete
-		});
-		$(".container").animate({
-			right: "+=" + right_panel_width
-		}, animation_time, function(){
-			// animation complete
-		});
-		$("#right-panel-button").html("▶").removeClass('right-panel-closed').addClass('right-panel-open');
 	}
 }
 
@@ -158,42 +110,5 @@ $(document).ready(function() {
 			previous_option = self;
 			setup_header_options(self.attr('id'));
 		});
-
-
-	// populate team dropdown menu
-	for (var i=0; i < Object.keys(teams).length; i++) {
-		var team = Object.keys(teams)[i];
-		$("#team-select").append(
-			"<option value='" + team + "'>" +
-			team.substr(0,1).toUpperCase() + team.substr(1).toLowerCase() +
-			"</option>");
-	}
-
-	// populate team member list
-	var populateTeamList = function() {
-		var selected_team = $("#team-select").val();
-		var team_members = teams[selected_team];
-		$("#team-members").empty();
-		for (var i=0; i < team_members.length; i++) {
-			if (i != 0) {
-				$("#team-members").append("<hr>");
-			}
-			$("#team-members").append(
-				"<li>" + team_members[i] + "</li>");
-		}
-	};
-
-	$("#team-select").on('change', function (e) {
-		populateTeamList();
-	});
-
-	$("#right-panel-triangle").html("▶");
-	$("#right-panel-button").click(function (e) {
-		toggleRightPanel(animation_time);
-	});
-
-
-
-
 
 });
