@@ -115,16 +115,14 @@ function setup_player_row(curr_player_data) {
 													.addClass('feedback_data_player')
 													.css({
 														"width": "50%",
-														"height": "100%",
-														"justify-content": "flex-start",
-														"padding": "0px 0px 0px 10px",
-														"align-items": "center",
-														"align-content": "center",
-														"overflow": "scroll",
-														"padding": "10px"
+														"height": "90%",
+														"display": "block",
+														"overflow-y": "scroll",
+														"word-wrap": "break-word",
+														"padding": "10px",
+														"outline": "0px solid transparent"
 													})
 													.attr('id', "coach_comment_" + curr_player_data["name"])
-													.attr('contenteditable', true)
 													.text(curr_player_data["coach_comment"]),
 												$('<div>')
 													.addClass('feedback_data_player')
@@ -141,13 +139,23 @@ function setup_player_row(curr_player_data) {
 																	"width": "20px",
 																	"height": "20px"
 																})
+																.data('selected', false)
 																.attr('id', curr_player_data["name"])
 																.on('click', function(e) {
 																	var editable_id = "#coach_comment_" + $(this).attr('id');
 																	var curr_element = $(editable_id);
+																	var selected = $(this).data('selected');
 
-																	curr_element.attr('contenteditable', true);
-																	placeCaretAtEnd(curr_element);
+																	console.log("What's the selected field " + selected);
+																	if (!selected) {
+																		curr_element.attr('contenteditable', true);
+																		placeCaretAtEnd($(editable_id).get(0));
+																		$(this).attr('src', '../images/check.png')
+																	} else {
+																		curr_element.attr('contenteditable', false);
+																		$(this).attr('src', '../images/pen.png');
+																	}
+																	$(this).data('selected', !selected);
 																})
 													)
 										)
