@@ -335,7 +335,7 @@ function setup_card(name, location, start_time, end_time) {
 														curr_start_time + " to " + 
 														curr_end_time
 								$('#body_title')
-									.text(/*"Your Feedback for " + */curr_name)
+									.text(curr_name+" - "+moment(new Date(curr_start_time)).format('MMM DD'))
 									.css('color', '#3a87ad'); // event_description
 								var div_container = $('#feedback_data_cols');
 
