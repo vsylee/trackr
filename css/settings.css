@@ -1,0 +1,20 @@
+.content {
+	position: absolute;
+	left: 0px;
+	top: 60px;
+	left: 0;
+	right: 0px;
+	bottom: 0;
+	display:flex;
+	flex-flow: row nowrap;
+	align-items: center;
+}
+
+.content > img {
+	height: 400px;
+	margin: 50px;
+}
+.content > div > p{
+	color: black;
+	font-size: 40px;
+}
