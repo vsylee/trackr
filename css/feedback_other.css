@@ -54,14 +54,14 @@ html, body {
 	height: 100%;
 }
 
-.feedback_data_title {
-	width: 98%;
-	height: 50px;
+.feedback_data_title {	
+	height: 50px; /*12%;*/
 	border-bottom: 1px solid #b8c3c8;
 	font-size: 20px;
 	color: black;
+	padding-right: 10px;
 	text-align: right;
-	line-height:50px;
+	line-height: 50px;
 }
 
 .feedback_data_row {
@@ -83,6 +83,12 @@ html, body {
 	height: 75px;
 	justify-content: center;
 	border-bottom: 1px solid #b8c3c8; /*ffac4d*/
+}
+
+.empty_div {
+	height: 100%;
+	width: 10px;
+	float: right;
 }
 
 .feedback_card:first-of-type {
