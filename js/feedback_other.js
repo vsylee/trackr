@@ -113,6 +113,59 @@ function convert_data() {
 	}
 }
 
+function setup_table_title() {
+	var player_row = $('<div>')
+						.addClass('feedback_data_title_row')
+						.append($('<div>')
+									.addClass('feedback_data_player')
+									.css({
+										"position": "relative",
+										"width": "calc(15% - 20px)",
+										"height": "100%",
+										"flex-flow": "row nowrap",
+										"align-content": "flex-end",
+										"align-items": "center",
+										"justify-content": "center",
+										"backgroundColor": "blue",
+										"padding-left": "20px"
+									})
+									.text("Players")
+									,
+								$('<div>')
+									.addClass('feedback_data_player')
+									.css({
+										"align-items": "center",
+										"backgroundColor": "green",
+										"width": "calc(70% - 10px)",
+										"padding-left": "10px",
+										"justify-content": "center",
+
+										"height": "100%"
+									})
+									.append($('<div>')
+												.addClass('feedback_data_player')
+												.css({
+													"width": "100%",
+													"height": "60%",
+													})
+												.text("Coach Feedback"),
+											$('<div>')
+												.addClass('feedback_data_player')
+												.css({
+													'backgroundColor': "purple",
+													'width': "30%",
+													'height': "100%",
+													"justify-content": "flex-start",
+													"align-items": "center"
+												})
+												.text("Edit")
+												
+									)
+						);
+
+	return player_row;
+}
+
 function setup_player_row(curr_player_data) {
 	var player_row = $('<div>')
 							.addClass('feedback_data_row feedback_data_remove')
@@ -160,7 +213,7 @@ function setup_player_row(curr_player_data) {
 														"display": "block",
 														"overflow-y": "scroll",
 														"word-wrap": "break-word",
-														"padding": "10px",
+														"padding": "10px 0px 0px 10px",
 														"outline": "0px solid transparent",
 														"font-family": "Overlock",
 														"font-size": "16px",
@@ -273,6 +326,8 @@ function setup_card(name, location, start_time, end_time) {
 								var curr_player_data = fake_comments;
 								$('.feedback_data_remove').remove();
 
+								div_container
+									.append(setup_table_title());
 								for (var i = 0; i < curr_player_data.length; i++) {
 									div_container
 										.append(setup_player_row(curr_player_data[i]));
