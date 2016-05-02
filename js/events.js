@@ -92,22 +92,13 @@ function addEventModal(start, end, view){
             	},
         ],
 
-        events: [
-        	{
-        		title: 'Practice',
-        		className: 'soccer practice',
-        		start: practiceData['start'],
-        		end: practiceData['end'],
-        		dow: practiceData['dow'],
-                location: 'Briggs Field',
-        	},
-
-		],
+        events: $('#calendar').fullCalendar('clientEvents'),
 
 		defaultView: 'agendaDay',
         
     });
 
+    $('#event_day_timeline').fullCalendar('refetchEvents');
     $('#event_day_timeline').fullCalendar('gotoDate', start);
     $('#event_day_timeline').fullCalendar('option', 'height', $('.addEvent-dialog').outerHeight());
 
