@@ -109,7 +109,6 @@ function setup_player_row(curr_player_data) {
 														"margin-left": "20px",
 														"margin-top": "20px",
 														"border-radius": "40px"
-														// "margin-top": "10px"
 													}),
 													$('<p>')
 														.text(curr_player_data["name"])
@@ -140,7 +139,7 @@ function setup_player_row(curr_player_data) {
 														"outline": "0px solid transparent",
 														"font-family": "Overlock",
 														"font-size": "16px",
-														"margin-top": "12px",
+														"margin-top": "15px",
 														"color": "#000000" // 054869
  													})
 													.attr('id', "coach_comment_" + curr_player_data["name"])
@@ -152,13 +151,15 @@ function setup_player_row(curr_player_data) {
 														'width': "30%",
 														'height': "100%",
 														"justify-content": "flex-start",
-														"align-items": "center"
+														"align-items":  "flex-start", //"center"
+														"margin-top": "20px"
 													})
 													.append($('<img>')
 																.attr('src', '../images/pen.png')
 																.css({
 																	"width": "20px",
-																	"height": "20px"
+																	"height": "20px",
+																	"background-color": "red"
 																})
 																.data('selected', false)
 																.attr('id', curr_player_data["name"])

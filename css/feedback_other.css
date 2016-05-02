@@ -36,11 +36,11 @@ html, body {
 .feedback_container {
 	width: 25%;
 	height: 100%;
-	border-right: 2px solid #879ba3;
+	border-right: 3px solid #879ba3;
 }
 
 .feedback_data_container {
-	width: calc(75% - 2px);
+	width: calc(75% - 3px);
 	height: 100%;
 
 }
