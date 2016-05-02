@@ -82,7 +82,8 @@ $(document).ready(function() {
                 $('#name').val(event.title);
                 $('#location').val(event.location);
                 $('#option'+event.shareWith).prop('selected', true);
-                $('#request').prop('checked', event.feedback);
+                requestCheck = event.feedback==='false' ? false : true;
+                $('#request').prop('checked', requestCheck);
 
                 setModalState('update', event.id);
                 addEventModal(event.start, event.end);
