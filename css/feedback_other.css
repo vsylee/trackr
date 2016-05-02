@@ -32,6 +32,13 @@ html, body {
 	overflow: scroll;
 }
 
+.disable_select {
+	-webkit-user-select: none;  
+	-moz-user-select: none;    
+	-ms-user-select: none;      
+	user-select: none;
+}
+
 .feedback_container {
 	width: 25%;
 	height: 100%;
