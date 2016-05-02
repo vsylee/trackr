@@ -114,6 +114,23 @@ function setup_card(name, location, start_time, end_time) {
 	var card_to_add = $('<div>')
 							.addClass('feedback_card')
 							.on('click', function(e) {
+								console.log($(e.target));
+								// console.log($(e.target).context.className);
+								// console.log($(e.target).context.parentElement.className);
+								// console.log($(e.target).context.parentElement.parentElement.className);
+								var target_class = $(e.target).context.className;
+								var card;
+								if (target_class == "feedback_card") {
+									card = $(e.target);
+								} else if (target_class == "feedback_card_row" || target_class == "feedback_card_body") {
+									card = $($(e.target).context.parentNode);
+								} else if (target_class == "feedback_card_element") {
+									card = $($(e.target).context.parentNode.parentNode);
+								}
+								console.log(card);
+								card.css({
+									"background-color": "orange"
+								});
 								
 								var curr_name = jQuery.data(card_to_add, "name");
 								var curr_location = jQuery.data(card_to_add, "location");
