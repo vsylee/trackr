@@ -3,10 +3,23 @@
 	left: 0px;
 	top: 60px;
 	left: 0;
-	right: 320px;
+	right: 0px;
 	bottom: 0;
+	display:flex;
+	flex-flow: row nowrap;
+	align-items: center;
 }
 
+.content > img {
+	height: 400px;
+	margin: 50px;
+}
+.content > div > p{
+	color: black;
+	font-size: 40px;
+}
+
+/*
 .content p, a, h1 {
 	color:black;
 }
@@ -38,4 +51,4 @@ hr {
 
 #profile-info {
 	flex-grow:10;
-}
+}*/
