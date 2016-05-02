@@ -153,6 +153,10 @@ label, input {
 	padding-right: 0px;
 }
 
+.days-of-week {
+	margin-left: 4px;
+}
+
 .days-of-week label {
 	/*padding-left: 2px;*/
 	/*margin-right: 25px;*/
@@ -174,6 +178,19 @@ label, input {
 	font-size: 15px;
 	/*font-weight: 700;*/
 }
+
+#until-row {
+	display:flex;
+	flex-flow:row nowrap;
+	justify-content:flex-end;
+}
+
+#repeat-until {
+	font-size: 15px;
+	line-height:34px;
+	margin-right:10px;
+}
+
 /*
 #change-all {
 	display: none;
