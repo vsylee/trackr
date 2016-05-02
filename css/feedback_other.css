@@ -83,7 +83,7 @@ html, body {
 	flex-flow: row nowrap;
 	justify-content: flex-start; /*center*/
 	width: 100%;
-	height: 27%;
+	height: 25%;
 	/*background-color: #e3e6e8;*/
 	flex-shrink: 0;
 }
@@ -178,5 +178,5 @@ html, body {
 }
 
 .search_container {
-	border-bottom: 1px solid #879ba3;
+	border-bottom: 2px solid #b8c3c8;
 }

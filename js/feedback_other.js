@@ -121,15 +121,15 @@ function setup_player_row(curr_player_data) {
 									$('<div>')
 										.addClass('feedback_data_player')
 										.css({
-											"backgroundColor": "green",
-											"width": "70%",
+											// "backgroundColor": "green",
+											"width": "85%",
 											"height": "100%"
 										})
 										.append($('<div>')
 													.addClass('feedback_data_player')
 													.css({
 														"width": "100%",
-														"height": "60%",
+														"height": "65%",
 														"display": "block",
 														"overflow-y": "scroll",
 														"word-wrap": "break-word",
@@ -138,7 +138,8 @@ function setup_player_row(curr_player_data) {
 														"font-family": "Overlock",
 														"font-size": "16px",
 														"margin-top": "15px",
-														"backgroundColor": "orange",
+														// "backgroundColor": "orange",
+														"border": "1px solid #e3e6e8",
 														"color": "#000000" // 054869
  													})
 													.attr('id', "coach_comment_" + curr_player_data["name"])
@@ -146,8 +147,8 @@ function setup_player_row(curr_player_data) {
 												$('<div>')
 													.addClass('feedback_data_player')
 													.css({
-														'backgroundColor': "purple",
-														'width': "30%",
+														// 'backgroundColor': "purple",
+														'width': "10%",
 														'height': "100%",
 														"justify-content": "flex-start",
 														"align-items":  "flex-start", //"center"
@@ -158,7 +159,8 @@ function setup_player_row(curr_player_data) {
 																.css({
 																	"width": "20px",
 																	"height": "20px",
-																	"background-color": "red"
+																	"margin-left": "5px"
+																	// "background-color": "red"
 																})
 																.data('selected', false)
 																.attr('id', curr_player_data["name"])
