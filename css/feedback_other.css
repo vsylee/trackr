@@ -68,10 +68,10 @@ html, body {
 	display: flex;
 	position: relative;
 	flex-flow: row nowrap;
-	justify-content: center;
+	justify-content: flex-start; /*center*/
 	width: 100%;
 	height: 30%;
-	background-color: blue;
+	/*background-color: blue;*/
 	flex-shrink: 0;
 }
 
