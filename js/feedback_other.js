@@ -129,11 +129,9 @@ function setup_table_title() {
 										"align-content": "flex-end",
 										"align-items": "center",
 										"justify-content": "center",
-										// "backgroundColor": "blue",
 										"padding-left": "24px",
 										"color": "#000000", // 054869
 										"font-size": "19px",
-										// "border-bottom": "1px solid #bac4ca"
 									})
 									.text("Players")
 									,
@@ -141,34 +139,14 @@ function setup_table_title() {
 									.addClass('feedback_data_player')
 									.css({
 										"align-items": "center",
-										// "backgroundColor": "green",
 										"width": "calc(100% - 10px)",
 										"padding-left": "10px",
-										"justify-content": "center",
+										"justify-content": "flex-start",
 										"height": "100%",
-										// "border-bottom": "1px solid #bac4ca"
+										"color": "#000000",
+										"font-size": "19px",
 									})
-									.append($('<div>')
-												.addClass('feedback_data_player')
-												.css({
-													"width": "100%",
-													"height": "60%",
-													"color": "#000000", // 054869
-													"font-size": "19px"
-													})
-												.text("Your Feedback")//,
-											// $('<div>')
-											// 	.addClass('feedback_data_player')
-											// 	.css({
-											// 		'backgroundColor': "purple",
-											// 		'width': "30%",
-											// 		'height': "100%",
-											// 		"justify-content": "flex-start",
-											// 		"align-items": "center"
-											// 	})
-											// 	.text("Edit")
-												
-									)
+									.text("Players")
 						);
 
 	return player_row;
