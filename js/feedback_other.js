@@ -29,7 +29,7 @@ var fake_comments = [
 		"name": "Sam",
 		"img": "../images/extra_credit_4.jpg",
 		"athlete_comment": "My stamina has improved so much by doing the mile test.",
-		"coach_comment": "Still, I feel like you've been slacking off a little bit and I feel like you could really " +
+		"coach_comment": "I'm glad your stamina has improved, but I feel like you've been slacking off a little bit and I feel like you could really " +
 						"improve more if you worked a little harder. " +
 						"I expect to see you well rested and fully energized for our next practice, " +
 						"where I hope to see you pushing yourself harder."
