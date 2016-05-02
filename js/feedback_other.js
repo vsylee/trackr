@@ -123,14 +123,17 @@ function setup_table_title() {
 									.addClass('feedback_data_player')
 									.css({
 										"position": "relative",
-										"width": "calc(15% - 20px)",
+										"width": "calc(16% - 20px)",
 										"height": "100%",
 										"flex-flow": "row nowrap",
 										"align-content": "flex-end",
 										"align-items": "center",
 										"justify-content": "center",
-										"backgroundColor": "blue",
-										"padding-left": "20px"
+										// "backgroundColor": "blue",
+										"padding-left": "24px",
+										"color": "#000000", // 054869
+										"font-size": "19px",
+										// "border-bottom": "1px solid #bac4ca"
 									})
 									.text("Players")
 									,
@@ -138,30 +141,32 @@ function setup_table_title() {
 									.addClass('feedback_data_player')
 									.css({
 										"align-items": "center",
-										"backgroundColor": "green",
-										"width": "calc(70% - 10px)",
+										// "backgroundColor": "green",
+										"width": "calc(100% - 10px)",
 										"padding-left": "10px",
 										"justify-content": "center",
-
-										"height": "100%"
+										"height": "100%",
+										// "border-bottom": "1px solid #bac4ca"
 									})
 									.append($('<div>')
 												.addClass('feedback_data_player')
 												.css({
 													"width": "100%",
 													"height": "60%",
+													"color": "#000000", // 054869
+													"font-size": "19px"
 													})
-												.text("Coach Feedback"),
-											$('<div>')
-												.addClass('feedback_data_player')
-												.css({
-													'backgroundColor': "purple",
-													'width': "30%",
-													'height': "100%",
-													"justify-content": "flex-start",
-													"align-items": "center"
-												})
-												.text("Edit")
+												.text("Your Feedback")//,
+											// $('<div>')
+											// 	.addClass('feedback_data_player')
+											// 	.css({
+											// 		'backgroundColor': "purple",
+											// 		'width': "30%",
+											// 		'height': "100%",
+											// 		"justify-content": "flex-start",
+											// 		"align-items": "center"
+											// 	})
+											// 	.text("Edit")
 												
 									)
 						);
@@ -188,14 +193,14 @@ function setup_player_row(curr_player_data) {
 														"width": "80px",
 														"height": "80px",
 														"margin-left": "20px",
-														"margin-top": "20px",
+														"margin-top": "10px",
 														"border-radius": "40px"
 													}),
 													$('<p>')
 														.text(curr_player_data["name"])
 														.css({
 															"padding": "0px 0px 0px 20px",
-															"color": "#054869",
+															"color": "#0c5a80", // 3a87ad
 															"font-size": "16px",
 															"font-family": "Amaranth",
 															"font-weight": "lighter"
@@ -219,7 +224,9 @@ function setup_player_row(curr_player_data) {
 														"outline": "0px solid transparent",
 														"font-family": "Overlock",
 														"font-size": "16px",
-														"margin-top": "15px",
+														"margin-top": "5px", // 15px
+														"margin-right": "2px",
+														// "backgroundColor": "orange",
 														"border": "1px solid #e3e6e8",
 														"color": "#000000", // 054869
 														"border-radius": "7px 7px 7px 7px"
@@ -234,7 +241,7 @@ function setup_player_row(curr_player_data) {
 														'height': "100%",
 														"justify-content": "flex-start",
 														"align-items":  "flex-start", //"center"
-														"margin-top": "20px"
+														"margin-top": "10px"
 													})
 													.append($('<img>')
 																.addClass('check_mark_image')
@@ -335,7 +342,8 @@ function setup_card(name, location, start_time, end_time) {
 														curr_start_time + " to " + 
 														curr_end_time
 								$('#body_title')
-									.text(curr_name); // event_description
+									.text(/*"Your Feedback for " + */curr_name)
+									.css('color', '#3a87ad'); // event_description
 								var div_container = $('#feedback_data_cols');
 
 								// Should be loading real data here
