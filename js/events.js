@@ -3,30 +3,30 @@
 * Event detials include time, full event name, and location if it exists.
 */
 function createTooltip(event, element, calendarId) {
-    var allDay= event;
-    var startDay = event.start.day();
-    var endDay = event.end.day();
+    try {
+        var moreThanADay = event.end.diff(event.start, 'd') >= 1;
+        
+        var time = event.allDay || moreThanADay ? '' : event.start.format("h:mm A") + ' - ' + event.end.format("h:mm A") + '<br>';
+        if (event.allDay) {
+            time = '';
+        } else if (moreThanADay) {
+            time = event.start.format("MMM D, h:mm A") + ' - ' + event.end.format("MMM D, h:mm A") + '<br>';
+        } else {
+            time = event.start.format("h:mm A") + ' - ' + event.end.format("h:mm A") + '<br>';
+        }
+        var location = event.location ? '<br>' + event.location : '';
 
-    var moreThanADay = startDay !== endDay;
-    
-    var time = event.allDay || moreThanADay ? '' : event.start.format("h:mm A") + ' - ' + event.end.format("h:mm A") + '<br>';
-    if (event.allDay) {
-        time = '';
-    } else if (moreThanADay) {
-        time = event.start.format("MMM D, h:mm A") + ' - ' + event.end.format("MMM D, h:mm A") + '<br>';
-    } else {
-        time = event.start.format("h:mm A") + ' - ' + event.end.format("h:mm A") + '<br>';
+        $(element).attr("data-html", "true"); //allow parsing of newline <br> in tooltip
+
+        $(element).tooltip({
+            title: time + event.title + location,
+            container: "#"+calendarId,
+            delay: { show: 100, hide: 100 },
+            trigger : 'hover'
+        });
+    } catch (err) {
+        console.log(event);
     }
-    var location = event.location ? '<br>' + event.location : '';
-
-    $(element).attr("data-html", "true"); //allow parsing of newline <br> in tooltip
-
-    $(element).tooltip({
-        title: time + event.title + location,
-        container: "#"+calendarId,
-        delay: { show: 100, hide: 100 },
-        trigger : 'hover'
-    });
 }
 
 /**
@@ -34,9 +34,6 @@ function createTooltip(event, element, calendarId) {
 * Sets the form fields with start and end dates and times based on start, end, and view.
 */
 function setFormFields(start, end, view) {
-    // need to refresh for min and max start and end dates
-    $('#startDate').datepicker( "refresh" );
-    $('#endDate').datepicker( "refresh" );
     $('#startDate').datepicker( "setDate", start.format('LL') ); // LL gives the format MonthFullName D, YYYY
     $('#endDate').datepicker( "setDate", end.format('LL') );
     $( "#endDate" ).datepicker( "option", "minDate", $('#startDate').datepicker('getDate') );
@@ -117,11 +114,13 @@ function addEventModal(start, end, view){
 }
 
 /**
-* Sets startDate and endDate to have jQuery datepickers
-* endDate has a minimum date of startDate
+* Sets repeatUntilDate, startDate and endDate to have jQuery datepickers
+* endDate and repeatUntilDate have a minimum date of startDate
 * endTime has a minimum time of startTime
 *
 * Puts focus on startTime when startDate datepicker closes and the same for endTime
+*
+* Sets behavior for repeat and change checkboxes.
 */
 function customDateTime() {    
     $(function() {
@@ -154,7 +153,6 @@ function customDateTime() {
         })
 
         $('#repeatUntilDate').datepicker({
-            // TODO: minDate is startDate
             dateFormat: "MM d, yy",
             onSelect: function() {
                 $('#repeat').prop('checked', true);
@@ -176,8 +174,6 @@ function customDateTime() {
         $( "#startDate" ).datepicker({
             dateFormat: "MM d, yy",
             onClose: function( selectedDate ) {
-                // TODO: set minDate of startDate
-                // TODO: uncheck all days of week, check selectedDay
                 var momentDate = moment(new Date(selectedDate));
                 if (selectedDate || momentDate.isValid()) {
                     $( "#repeatUntilDate" ).datepicker( "option", "minDate", selectedDate );
@@ -286,11 +282,11 @@ function formToEventDetails(event) {
     event.end = endDateTime.toISOString();
     event.shareWith = $('#shareWith').val();
     event.feedback = $('#request').prop('checked');
-    event.repeat = $('#repeat').prop('checked');
 
-    if (!event.id) {
+    if (!event.id) { // means event is new
         var eventNum = $('#calendar').fullCalendar('clientEvents').length + 1;
         event.id ='event'+eventNum;
+        event.repeat = $('#repeat').prop('checked');
     }
 
     return event;
@@ -337,15 +333,11 @@ function updateRepeatingEvents(eventId) {
 
     var originalStart = moment(originalEvent.start).clone();
     var originalEnd = moment(originalEvent.end).clone();
-    // console.log(originalStart.format());
-    // console.log(originalEnd.format());
 
     var newEvent = formToEventDetails(originalEvent);
     var startDiff = moment(newEvent.start).diff(originalStart);
     var endDiff = moment(newEvent.end).diff(originalEnd);
     $('#calendar').fullCalendar('updateEvent', newEvent);
-    // console.log(startDiff);
-    // console.log(endDiff);
 
     var eventsInRepeat = $('#calendar').fullCalendar('clientEvents', function(event) {
         return eventClass.length > 0 && event.className.includes(eventClass);
@@ -360,14 +352,12 @@ function updateRepeatingEvents(eventId) {
         var prevStart = moment(event.start).clone();
         if (prevStart > originalStart) { // don't include original event, already updated
             var prevEnd = moment(event.end).clone();
-            // console.log(prevStart.format());
-            // console.log(prevEnd.format());
+
             event = formToEventDetails(event);
             event.start = prevStart.add(startDiff, 'ms').toISOString();
             event.end = prevEnd.add(endDiff, 'ms').toISOString();
             event.className = newClassName;
-            // console.log(event.start);
-            // console.log(event.end);
+
             $('#calendar').fullCalendar('updateEvent', event);
         }
     });
@@ -377,7 +367,6 @@ function updateRepeatingEvents(eventId) {
 * Associates eventId to the Delete Event button.
 */
 function addDeleteEvent(eventId) {
-    // $('#delete').attr('onclick', '"javascript:deleteEvent('+eventId+');"');
     $('#delete').click(function() {
         if ($('#change').prop('checked')) {
             var originalEvent = $('#calendar').fullCalendar('clientEvents', eventId)[0]
@@ -392,11 +381,6 @@ function addDeleteEvent(eventId) {
 
         $('#calendar').fullCalendar( 'removeEvents', eventId );
     });
-}
-
-function deleteEvent(eventId) {
-    console.log("here");
-    
 }
 
 /**

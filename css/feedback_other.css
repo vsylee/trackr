@@ -60,6 +60,14 @@ html, body {
 
 }
 
+.feedback_comment_editable {
+
+}
+
+.check_mark_image {
+	
+}
+
 .feedback_data_player {
 	display: flex;
 	flex-flow: row nowrap;
