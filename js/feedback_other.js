@@ -245,6 +245,11 @@ function setup_player_row(curr_player_data) {
 																		previous_img.attr('src', '../images/pen.png');
 																		previous_comment.attr('contenteditable', false);
 																		previous_img.data('selected', false);
+
+																		previous_comment.css({
+																			'backgroundColor': '#ffffff',
+																			'color': '#000000'
+																		});
 																	} 
 
 																	if (!selected) {
@@ -252,10 +257,20 @@ function setup_player_row(curr_player_data) {
 																		placeCaretAtEnd($(editable_id).get(0));
 																		$(this).attr('src', '../images/check.png')
 																		
+																		curr_element.css({
+																			'backgroundColor': '#ffedda',
+																			'color': '#054869'
+																		});
+
 																		elements_to_uncheck.push(object_to_push);
 																	} else {
 																		curr_element.attr('contenteditable', false);
 																		$(this).attr('src', '../images/pen.png');
+
+																		curr_element.css({
+																			'backgroundColor': '#ffffff',
+																			'color': '#000000'
+																		});
 																	}
 
 																	previous_comment = curr_element;
@@ -473,6 +488,11 @@ $(document).ready(function() {
 				curr_element.div.attr('contenteditable', false);
 				curr_element.checker.attr('src', '../images/pen.png');
 				curr_element.checker.data('selected', false)
+
+				curr_element.div.css({
+									'backgroundColor': '#ffffff',
+									'color': '#000000'
+								})
 			}
 
 			elements_to_uncheck = [];
