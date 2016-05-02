@@ -84,14 +84,6 @@ function addEventModal(start, end, view){
 
 		eventLimit: true, //more link shows up when there are too many events
 
-        googleCalendarApiKey: 'AIzaSyCX_A2rKiGZ4wo6LXNyJZ7WCK64SSqVSqU',
-        eventSources: [
-            	{
-            		editable: true,
-            		googleCalendarId: 'mfj0nf3n8jfn92mklam206a4nk@group.calendar.google.com', //MIT calendar
-            	},
-        ],
-
         events: $('#calendar').fullCalendar('clientEvents'),
 
 		defaultView: 'agendaDay',
