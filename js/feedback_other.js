@@ -468,7 +468,7 @@ $(document).ready(function() {
 	first_event.trigger('click');
 
 	$("#search-bar").click( function (e) {
-		if ($(this).val().indexOf("🔍 Search by team, location, or date") > -1) {
+		if ($(this).val().indexOf("🔍 Search by event name or location") > -1) {
 			$(this).val("");
 		}
 	});
